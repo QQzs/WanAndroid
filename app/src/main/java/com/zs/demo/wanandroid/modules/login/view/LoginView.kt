@@ -1,6 +1,7 @@
 package com.zs.demo.wanandroid.modules.login.view
 
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
+import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
 
 /**
  *
@@ -15,7 +16,7 @@ interface LoginView {
 
     fun loginSuccess(userInfo: LoginBean?)
 
-    fun registerSuccess(userInfo: LoginBean?)
+    fun registerSuccess(userInfo: RegisterBean?)
 
     fun requestFail(code: Int? , msg: String?){}
 

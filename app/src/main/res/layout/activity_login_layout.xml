@@ -39,8 +39,7 @@
                 android:layout_height="wrap_content"
                 android:hint="用户名"
                 android:inputType="text"
-                />
-            />
+                android:text="疯狂的兔子333"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -56,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:hint="密码"
                 android:inputType="textPassword"
-                />
+                android:text="147258369"/>
 
         </android.support.design.widget.TextInputLayout>
 

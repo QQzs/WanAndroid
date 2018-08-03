@@ -4,6 +4,7 @@ import android.view.View
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseActivity
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
+import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
 import com.zs.demo.wanandroid.modules.login.presenter.LoginPresenter
 import com.zs.demo.wanandroid.modules.login.presenter.LoginPresenterImpl
 import com.zs.demo.wanandroid.modules.login.view.LoginView
@@ -22,6 +23,7 @@ About:
 class LoginActivity : BaseActivity(), LoginView{
 
     var mPresenter: LoginPresenter? = null
+    var mAction : String = "login"
 
     override fun setLayoutId(): Int {
         return R.layout.activity_login_layout
@@ -43,26 +45,48 @@ class LoginActivity : BaseActivity(), LoginView{
     override fun onClick(view: View?) {
         when(view?.id){
             R.id.tv_login_switch ->{
+                if (mAction == "login"){
+                    mAction = "register"
+                    text_input_password_again?.visibility = View.VISIBLE
+                    tv_login_switch?.text = "登录"
+                    tv_login_view?.text = "注册"
 
+                }else{
+                    mAction = "login"
+                    text_input_password?.editText?.setText("")
+                    text_input_password_again?.editText?.setText("")
+                    text_input_password_again?.visibility = View.GONE
+                    tv_login_switch?.text = "注册"
+                    tv_login_view?.text = "登录"
+                }
             }
             R.id.card_login_view ->{
-                mPresenter?.login(edit_text_name?.text.toString().trim() , edit_text_password?.text.toString().trim())
+                var map = HashMap<String,String>()
+                map["name"] = edit_text_name?.text.toString().trim()
+                map["password"] = edit_text_password?.text.toString().trim()
+                if ("login" == mAction){
+                    mPresenter?.login(map)
+                }else{
+                    map["passwordAgain"] = edit_text_password?.text.toString().trim()
+                    mPresenter?.register(map)
+                }
+
             }
         }
     }
 
     override fun loginSuccess(userInfo: LoginBean?) {
-        toast("yes")
+        toast(userInfo?.id!!)
     }
 
-    override fun registerSuccess(userInfo: LoginBean?) {
-        toast("yes")
+    override fun registerSuccess(userInfo: RegisterBean?) {
+        toast(userInfo?.id!!)
     }
 
-    override fun requestFail(code: Int?, msg: String?) {
-        super.requestFail(code, msg)
-        msg?.let { toast(msg!!) }
-    }
+//    override fun requestFail(code: Int?, msg: String?) {
+//        super.requestFail(code, msg)
+//        msg?.let { toast(msg!!) }
+//    }
 
 
 }

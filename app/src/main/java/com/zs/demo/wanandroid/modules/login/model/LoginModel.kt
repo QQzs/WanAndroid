@@ -1,6 +1,8 @@
 package com.zs.demo.wanandroid.modules.login.model
 
-import com.zs.demo.wanandroid.modules.login.presenter.LoginPresenter
+import com.zs.demo.wanandroid.modules.login.bean.LoginBean
+import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
+import com.zs.demo.wanandroid.mvp.ResultListener
 
 /**
  *
@@ -13,8 +15,8 @@ About:
  */
 interface LoginModel {
 
-    fun login(userName: String , password: String , loginListener: LoginPresenter.LoginListener?)
+    fun login(map: HashMap<String, String> , loginListener: ResultListener<LoginBean>?)
 
-    fun register(userName: String , password: String , passwordAgain: String , loginListener: LoginPresenter.LoginListener?)
+    fun register(map: HashMap<String, String> , loginListener: ResultListener<RegisterBean>?)
 
 }

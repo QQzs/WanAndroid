@@ -2,6 +2,7 @@ package com.zs.demo.wanandroid.request;
 
 
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean;
+import com.zs.demo.wanandroid.modules.login.bean.RegisterBean;
 import com.zs.project.bean.android.ArticleBanner;
 import com.zs.project.bean.android.ArticleList;
 
@@ -48,9 +49,9 @@ public interface RequestService {
      */
     @FormUrlEncoded
     @POST("user/register")
-    Observable<BaseResponse<LoginBean>> registerAndroid(@Field("username") String username,
-                                                               @Field("password") String password,
-                                                               @Field("repassword") String repassword);
+    Observable<BaseResponse<RegisterBean>> registerAndroid(@Field("username") String username,
+                                                           @Field("password") String password,
+                                                           @Field("repassword") String repassword);
 
     /**
      * 玩android 首页banner

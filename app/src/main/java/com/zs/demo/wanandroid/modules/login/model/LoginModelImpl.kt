@@ -1,7 +1,8 @@
 package com.zs.demo.wanandroid.modules.login.model
 
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
-import com.zs.demo.wanandroid.modules.login.presenter.LoginPresenter
+import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
+import com.zs.demo.wanandroid.mvp.ResultListener
 import com.zs.demo.wanandroid.request.BaseResponse
 import com.zs.demo.wanandroid.request.DefaultObserver
 import com.zs.demo.wanandroid.request.RequestApi
@@ -19,41 +20,41 @@ About:
  */
 class LoginModelImpl: LoginModel{
 
-    override fun login(userName: String, password: String, loginListener: LoginPresenter.LoginListener?) {
+    override fun login(map: HashMap<String, String>, loginListener: ResultListener<LoginBean>?) {
         RequestApi.getInstance()
                 .service
-                .loginAndroid(userName,password)
+                .loginAndroid(map["name"], map["password"])
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : DefaultObserver<BaseResponse<LoginBean>>(){
 
                     override fun onSuccess(response: BaseResponse<LoginBean>?) {
-                        loginListener?.loginSuccess(response?.data)
+                        loginListener?.onSuccess(response?.data)
                     }
 
-                    override fun onFail(response: BaseResponse<LoginBean>?) {
-                        super.onFail(response)
-                        loginListener?.requestFail(response?.errorCode , response?.errorMsg)
-                    }
+//                    override fun onFail(response: BaseResponse<LoginBean>?) {
+//                        super.onFail(response)
+//                        loginListener?.onFailed(response?.errorCode , response?.errorMsg)
+//                    }
                 })
     }
 
-    override fun register(userName: String, password: String , passwordAgain: String , loginListener: LoginPresenter.LoginListener?) {
+    override fun register(map: HashMap<String, String> , loginListener: ResultListener<RegisterBean>?) {
         RequestApi.getInstance()
                 .service
-                .registerAndroid(userName,password,passwordAgain)
+                .registerAndroid(map["name"], map["password"], map["passwordAgain"])
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DefaultObserver<BaseResponse<LoginBean>>(){
+                .subscribe(object : DefaultObserver<BaseResponse<RegisterBean>>(){
 
-                    override fun onSuccess(response: BaseResponse<LoginBean>?) {
-                        loginListener?.loginSuccess(response?.data)
+                    override fun onSuccess(response: BaseResponse<RegisterBean>?) {
+                        loginListener?.onSuccess(response?.data)
                     }
 
-                    override fun onFail(response: BaseResponse<LoginBean>?) {
-                        super.onFail(response)
-                        loginListener?.requestFail(response?.errorCode , response?.errorMsg)
-                    }
+//                    override fun onFail(response: BaseResponse<RegisterBean>?) {
+//                        super.onFail(response)
+//                        loginListener?.onFailed(response?.errorCode , response?.errorMsg)
+//                    }
 
                 })
     }

@@ -1,7 +1,5 @@
 package com.zs.demo.wanandroid.modules.login.presenter
 
-import com.zs.demo.wanandroid.modules.login.bean.LoginBean
-
 /**
  *
 Created by zs
@@ -13,18 +11,20 @@ About:
  */
 interface LoginPresenter{
 
-    fun login(userName: String , password: String)
+    fun login(map: HashMap<String, String>)
 
-    fun register(userName: String , password: String , passwordAgain: String)
+    fun register(map: HashMap<String, String>)
 
-    interface LoginListener{
-
-        fun loginSuccess(userInfo: LoginBean?)
-
-        fun registerSuccess(userInfo: LoginBean?)
-
-        fun requestFail(code: Int? ,  msg: String?)
-
-    }
+//    interface LoginListener : ResultListener<LoginBean>{
+//
+////        fun loginSuccess(userInfo: LoginBean?)
+////
+////        fun registerSuccess(userInfo: LoginBean?)
+////
+////        fun requestFail(code: Int? ,  msg: String?)
+//
+//    }
+//
+//    interface RegisterListener : ResultListener<RegisterBean>
 
 }

@@ -84,7 +84,7 @@ public class RequestApi {
                 @Override
                 public void log(String message) {
                     //打印retrofit日志
-                    Log.i("RetrofitLog", "retrofitBack = " + message);
+                    Log.e("RetrofitLog", "retrofitBack = " + message);
                 }
             });
             mLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
