@@ -1,0 +1,68 @@
+package com.zs.demo.wanandroid.modules.login
+
+import android.view.View
+import com.zs.demo.wanandroid.R
+import com.zs.demo.wanandroid.base.BaseActivity
+import com.zs.demo.wanandroid.modules.login.bean.LoginBean
+import com.zs.demo.wanandroid.modules.login.presenter.LoginPresenter
+import com.zs.demo.wanandroid.modules.login.presenter.LoginPresenterImpl
+import com.zs.demo.wanandroid.modules.login.view.LoginView
+import kotlinx.android.synthetic.main.activity_login_layout.*
+import org.jetbrains.anko.toast
+
+/**
+ *
+Created by zs
+Date：2018年 08月 02日
+Time：15:46
+—————————————————————————————————————
+About:
+—————————————————————————————————————
+ */
+class LoginActivity : BaseActivity(), LoginView{
+
+    var mPresenter: LoginPresenter? = null
+
+    override fun setLayoutId(): Int {
+        return R.layout.activity_login_layout
+    }
+
+    override fun initView() {
+
+        tv_login_switch?.setOnClickListener(this)
+
+        card_login_view?.setOnClickListener(this)
+    }
+
+    override fun initData() {
+
+        mPresenter = LoginPresenterImpl(this)
+
+    }
+
+    override fun onClick(view: View?) {
+        when(view?.id){
+            R.id.tv_login_switch ->{
+
+            }
+            R.id.card_login_view ->{
+                mPresenter?.login(edit_text_name?.text.toString().trim() , edit_text_password?.text.toString().trim())
+            }
+        }
+    }
+
+    override fun loginSuccess(userInfo: LoginBean?) {
+        toast("yes")
+    }
+
+    override fun registerSuccess(userInfo: LoginBean?) {
+        toast("yes")
+    }
+
+    override fun requestFail(code: Int?, msg: String?) {
+        super.requestFail(code, msg)
+        msg?.let { toast(msg!!) }
+    }
+
+
+}

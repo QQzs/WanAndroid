@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="fontsize10">10sp</dimen>
+    <dimen name="fontsize11">11sp</dimen>
+    <dimen name="fontsize12">12sp</dimen>
+    <dimen name="fontsize13">13sp</dimen>
+    <dimen name="fontsize14">14sp</dimen>
+    <dimen name="fontsize15">15sp</dimen>
+    <dimen name="fontsize16">16sp</dimen>
+    <dimen name="fontsize17">17sp</dimen>
+
+    <dimen name="title_height">45dp</dimen>
+    <dimen name="padding_size">14dp</dimen>
+    <dimen name="main_tab_size">24dp</dimen>
+
+</resources>
