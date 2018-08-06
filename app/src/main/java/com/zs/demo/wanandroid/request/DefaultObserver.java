@@ -37,9 +37,6 @@ public abstract class DefaultObserver<T extends BaseResponse> implements Observe
      */
     private boolean isShowLoading = false;
 
-    public DefaultObserver() {
-    }
-
     public DefaultObserver(BaseImpl baseImpl) {
         mBaseImpl = baseImpl;
     }

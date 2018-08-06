@@ -5,7 +5,6 @@ import com.zs.demo.wanandroid.modules.login.bean.LoginBean
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
 import com.zs.demo.wanandroid.mvp.BaseModel
 import com.zs.demo.wanandroid.mvp.ResultListener
-import com.zs.demo.wanandroid.request.BaseImpl
 import com.zs.demo.wanandroid.request.BaseResponse
 import com.zs.demo.wanandroid.request.DefaultObserver
 import com.zs.demo.wanandroid.request.RequestApi
@@ -21,11 +20,7 @@ Time：17:58
 About:
 —————————————————————————————————————
  */
-class LoginModelImpl: BaseModel, LoginModel{
-
-    constructor(context: Context){
-        this.mBaseImpl = context as BaseImpl
-    }
+class LoginModelImpl(context: Context): BaseModel(context), LoginModel{
 
     override fun login(map: HashMap<String, String>, loginListener: ResultListener<LoginBean>?) {
         RequestApi.getInstance().service

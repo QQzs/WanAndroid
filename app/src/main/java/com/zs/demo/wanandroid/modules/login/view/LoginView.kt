@@ -2,6 +2,7 @@ package com.zs.demo.wanandroid.modules.login.view
 
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
+import com.zs.demo.wanandroid.mvp.BaseView
 
 /**
  *
@@ -12,12 +13,10 @@ Time：18:01
 About:
 —————————————————————————————————————
  */
-interface LoginView {
+interface LoginView: BaseView {
 
     fun loginSuccess(userInfo: LoginBean?)
 
     fun registerSuccess(userInfo: RegisterBean?)
-
-    fun requestFail(code: Int? , msg: String?){}
 
 }

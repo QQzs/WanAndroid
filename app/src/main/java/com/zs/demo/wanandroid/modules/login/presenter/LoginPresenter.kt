@@ -1,5 +1,7 @@
 package com.zs.demo.wanandroid.modules.login.presenter
 
+import com.zs.demo.wanandroid.mvp.BasePresenter
+
 /**
  *
 Created by zs
@@ -9,11 +11,10 @@ Time：17:37
 About:
 —————————————————————————————————————
  */
-interface LoginPresenter{
+interface LoginPresenter: BasePresenter{
 
     fun login(map: HashMap<String, String>)
 
     fun register(map: HashMap<String, String>)
 
-    fun onDestroy()
 }

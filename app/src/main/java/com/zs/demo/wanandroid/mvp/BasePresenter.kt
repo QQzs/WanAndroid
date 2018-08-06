@@ -1,23 +1,16 @@
 package com.zs.demo.wanandroid.mvp
 
-import android.content.Context
-import com.zs.demo.wanandroid.request.BaseImpl
-
 /**
  *
 Created by zs
 Date：2018年 08月 06日
-Time：15:39
+Time：17:49
 —————————————————————————————————————
 About:
 —————————————————————————————————————
  */
-open class BaseModel{
+interface BasePresenter{
 
-    var mBaseImpl: BaseImpl? = null
-
-    constructor(context: Context?) {
-        this.mBaseImpl = context as BaseImpl
-    }
+    fun onDestroyView()
 
 }

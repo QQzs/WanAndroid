@@ -84,4 +84,9 @@ class LoginActivity : BaseActivity(), LoginView{
         toast(userInfo?.id!!)
     }
 
+    override fun onDestroy() {
+        mPresenter?.onDestroyView()
+        super.onDestroy()
+    }
+
 }

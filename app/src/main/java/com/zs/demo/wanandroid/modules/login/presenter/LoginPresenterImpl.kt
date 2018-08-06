@@ -3,6 +3,7 @@ package com.zs.demo.wanandroid.modules.login.presenter
 import android.content.Context
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
+import com.zs.demo.wanandroid.modules.login.model.LoginModel
 import com.zs.demo.wanandroid.modules.login.model.LoginModelImpl
 import com.zs.demo.wanandroid.modules.login.view.LoginView
 import com.zs.demo.wanandroid.mvp.ResultListener
@@ -19,7 +20,7 @@ About:
 class LoginPresenterImpl: LoginPresenter{
 
     var mLoginView: LoginView? = null
-    var mLoginModel: LoginModelImpl? = null
+    var mLoginModel: LoginModel? = null
 
     constructor(context: Context) {
         this.mLoginView = context as LoginView
@@ -47,7 +48,7 @@ class LoginPresenterImpl: LoginPresenter{
         })
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         mLoginView = null
     }
 
