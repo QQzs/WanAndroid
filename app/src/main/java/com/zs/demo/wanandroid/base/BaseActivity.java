@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.zs.demo.wanandroid.Constant;
 import com.zs.demo.wanandroid.MyActivityManager;
 import com.zs.demo.wanandroid.request.RequestApi;
+import com.zs.demo.wanandroid.request.RequestHelper;
 import com.zs.demo.wanandroid.utils.SpUtil;
 
 import io.reactivex.Observable;
@@ -70,7 +71,7 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
      * @param type
      */
     protected void requestData(Observable request, int type){
-        mObservable = RequestHelper.Companion.getObservable(request);
+        mObservable = RequestHelper.getObservable(request);
     }
 
     @Override

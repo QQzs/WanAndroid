@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.zs.demo.wanandroid.request.BaseImpl;
+import com.zs.demo.wanandroid.utils.LoadingDialog;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -23,6 +24,8 @@ public class BaseRxActivity extends AppCompatActivity implements BaseImpl {
     private CompositeDisposable disposables2Destroy;
 
 
+    private LoadingDialog mLoadingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +33,6 @@ public class BaseRxActivity extends AppCompatActivity implements BaseImpl {
             throw new IllegalStateException("onCreate called multiple times");
         }
         disposables2Destroy = new CompositeDisposable();
-
     }
 
     @Override
@@ -77,12 +79,19 @@ public class BaseRxActivity extends AppCompatActivity implements BaseImpl {
 
     @Override
     public void showLoading() {
-
+        if (mLoadingDialog == null){
+            mLoadingDialog = new LoadingDialog(this);
+        }
+        if (!mLoadingDialog.isShowing()){
+            mLoadingDialog.show();
+        }
     }
 
     @Override
     public void dismissLoading() {
-
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()){
+            mLoadingDialog.dismiss();
+        }
     }
 
     @Override

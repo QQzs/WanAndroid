@@ -1,8 +1,11 @@
 package com.zs.demo.wanandroid.modules.login.model
 
+import android.content.Context
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
+import com.zs.demo.wanandroid.mvp.BaseModel
 import com.zs.demo.wanandroid.mvp.ResultListener
+import com.zs.demo.wanandroid.request.BaseImpl
 import com.zs.demo.wanandroid.request.BaseResponse
 import com.zs.demo.wanandroid.request.DefaultObserver
 import com.zs.demo.wanandroid.request.RequestApi
@@ -18,23 +21,22 @@ Time：17:58
 About:
 —————————————————————————————————————
  */
-class LoginModelImpl: LoginModel{
+class LoginModelImpl: BaseModel, LoginModel{
+
+    constructor(context: Context){
+        this.mBaseImpl = context as BaseImpl
+    }
 
     override fun login(map: HashMap<String, String>, loginListener: ResultListener<LoginBean>?) {
         RequestApi.getInstance().service
                 .loginAndroid(map["name"], map["password"])
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DefaultObserver<BaseResponse<LoginBean>>(){
+                .subscribe(object : DefaultObserver<BaseResponse<LoginBean>>(mBaseImpl,true){
 
                     override fun onSuccess(response: BaseResponse<LoginBean>?) {
                         loginListener?.onSuccess(response?.data)
                     }
-
-//                    override fun onFail(response: BaseResponse<LoginBean>?) {
-//                        super.onFail(response)
-//                        loginListener?.onFailed(response?.errorCode , response?.errorMsg)
-//                    }
                 })
     }
 
@@ -43,7 +45,7 @@ class LoginModelImpl: LoginModel{
                 .registerAndroid(map["name"], map["password"], map["passwordAgain"])
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DefaultObserver<BaseResponse<RegisterBean>>(){
+                .subscribe(object : DefaultObserver<BaseResponse<RegisterBean>>(mBaseImpl){
 
                     override fun onSuccess(response: BaseResponse<RegisterBean>?) {
                         loginListener?.onSuccess(response?.data)

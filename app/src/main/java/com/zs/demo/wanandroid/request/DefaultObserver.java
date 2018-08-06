@@ -32,6 +32,10 @@ public abstract class DefaultObserver<T extends BaseResponse> implements Observe
      * Activity 是否在执行onStop()时取消订阅
      */
     private boolean isAddInStop = false;
+    /**
+     * 是否显示loading
+     */
+    private boolean isShowLoading = false;
 
     public DefaultObserver() {
     }
@@ -40,18 +44,22 @@ public abstract class DefaultObserver<T extends BaseResponse> implements Observe
         mBaseImpl = baseImpl;
     }
 
-    public DefaultObserver(BaseImpl baseImpl, boolean isShowLoading) {
+    public DefaultObserver(BaseImpl baseImpl, boolean loading) {
         mBaseImpl = baseImpl;
+        isShowLoading = loading;
     }
 
     @Override
     public void onSubscribe(Disposable d) {
         //  在onStop中取消订阅
-//        if (isAddInStop) {
-//            mBaseImpl.addRxStop(d);
-//        } else { //  在onDestroy中取消订阅
-//            mBaseImpl.addRxDestroy(d);
-//        }
+        if (isAddInStop) {
+            mBaseImpl.addRxStop(d);
+        } else { //  在onDestroy中取消订阅
+            mBaseImpl.addRxDestroy(d);
+        }
+        if (isShowLoading){
+            mBaseImpl.showLoading();
+        }
     }
 
     @Override
@@ -60,6 +68,7 @@ public abstract class DefaultObserver<T extends BaseResponse> implements Observe
             onSuccess(response);
         } else {
             onFail(response);
+            mBaseImpl.dismissLoading();
         }
     }
 
@@ -80,7 +89,7 @@ public abstract class DefaultObserver<T extends BaseResponse> implements Observe
             onException(ExceptionReason.UNKNOWN_ERROR);
         }
         Log.e("My_Log","error = " + e.toString());
-        //  mBaseImpl.dismissProgress();
+        mBaseImpl.dismissLoading();
     }
 
     @Override

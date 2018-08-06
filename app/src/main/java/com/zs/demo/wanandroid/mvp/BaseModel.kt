@@ -1,19 +1,20 @@
-package com.zs.demo.wanandroid.modules.login.presenter
+package com.zs.demo.wanandroid.mvp
+
+import android.content.Context
+import com.zs.demo.wanandroid.request.BaseImpl
 
 /**
  *
 Created by zs
-Date：2018年 08月 02日
-Time：17:37
+Date：2018年 08月 06日
+Time：15:39
 —————————————————————————————————————
 About:
 —————————————————————————————————————
  */
-interface LoginPresenter{
+open class BaseModel{
 
-    fun login(map: HashMap<String, String>)
+    var mContext: Context? = null
 
-    fun register(map: HashMap<String, String>)
-
-    fun onDestroy()
+    var mBaseImpl: BaseImpl? = null
 }

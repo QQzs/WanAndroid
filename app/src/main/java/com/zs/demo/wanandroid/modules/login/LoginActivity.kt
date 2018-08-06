@@ -77,6 +77,7 @@ class LoginActivity : BaseActivity(), LoginView{
 
     override fun loginSuccess(userInfo: LoginBean?) {
         toast(userInfo?.id!!)
+        dismissLoading()
     }
 
     override fun registerSuccess(userInfo: RegisterBean?) {

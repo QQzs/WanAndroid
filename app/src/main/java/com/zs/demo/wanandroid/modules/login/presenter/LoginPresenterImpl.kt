@@ -1,5 +1,6 @@
 package com.zs.demo.wanandroid.modules.login.presenter
 
+import android.content.Context
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
 import com.zs.demo.wanandroid.modules.login.model.LoginModelImpl
@@ -20,11 +21,10 @@ class LoginPresenterImpl: LoginPresenter{
     var mLoginView: LoginView? = null
     var mLoginModel: LoginModelImpl? = null
 
-    constructor(mLoginView: LoginView?) {
-        this.mLoginView = mLoginView
-        this.mLoginModel = LoginModelImpl()
+    constructor(context: Context) {
+        this.mLoginView = context as LoginView
+        this.mLoginModel = LoginModelImpl(context)
     }
-
 
     override fun login(map: HashMap<String, String>) {
         mLoginModel?.login(map,object : ResultListener<LoginBean>{
@@ -47,8 +47,8 @@ class LoginPresenterImpl: LoginPresenter{
         })
     }
 
-//    override fun cancelRequest() {
-//        mLoginModel?.
-//    }
+    override fun onDestroy() {
+        mLoginView = null
+    }
 
 }

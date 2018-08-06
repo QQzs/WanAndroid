@@ -1,7 +1,5 @@
 package com.zs.demo.wanandroid.request;
 
-import com.zs.demo.wanandroid.modules.login.bean.LoginBean;
-
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -15,19 +13,20 @@ import io.reactivex.schedulers.Schedulers;
  * —————————————————————————————————————
  */
 public class RequestHelper {
+
     public static Observable getObservable(Observable request){
         return request.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
-    public <T> void create(final BaseResponse<T> response){
-
-        RequestApi.getInstance().getService()
-                .loginAndroid("", "")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<response>() {
-
-                });
-
-    }
+//    public <T> void create(final BaseResponse<T> response){
+//
+//        RequestApi.getInstance().getService()
+//                .loginAndroid("", "")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new DefaultObserver<response>() {
+//
+//                });
+//
+//    }
 }
