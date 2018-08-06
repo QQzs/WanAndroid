@@ -83,10 +83,4 @@ class LoginActivity : BaseActivity(), LoginView{
         toast(userInfo?.id!!)
     }
 
-//    override fun requestFail(code: Int?, msg: String?) {
-//        super.requestFail(code, msg)
-//        msg?.let { toast(msg!!) }
-//    }
-
-
 }

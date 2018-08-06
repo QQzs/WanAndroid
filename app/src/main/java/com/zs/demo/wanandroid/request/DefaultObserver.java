@@ -95,7 +95,7 @@ public abstract class DefaultObserver<T extends BaseResponse> implements Observe
     abstract public void onSuccess(T response);
 
     /**
-     * 服务器返回数据，但响应码不为200
+     * 服务器返回数据，但请求出错
      *
      * @param response 服务器返回的数据
      */

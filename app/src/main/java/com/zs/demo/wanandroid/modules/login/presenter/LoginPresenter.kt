@@ -15,16 +15,5 @@ interface LoginPresenter{
 
     fun register(map: HashMap<String, String>)
 
-//    interface LoginListener : ResultListener<LoginBean>{
-//
-////        fun loginSuccess(userInfo: LoginBean?)
-////
-////        fun registerSuccess(userInfo: LoginBean?)
-////
-////        fun requestFail(code: Int? ,  msg: String?)
-//
-//    }
-//
-//    interface RegisterListener : ResultListener<RegisterBean>
-
+//    fun cancelRequest()
 }

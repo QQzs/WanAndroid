@@ -21,8 +21,7 @@ About:
 class LoginModelImpl: LoginModel{
 
     override fun login(map: HashMap<String, String>, loginListener: ResultListener<LoginBean>?) {
-        RequestApi.getInstance()
-                .service
+        RequestApi.getInstance().service
                 .loginAndroid(map["name"], map["password"])
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -40,8 +39,7 @@ class LoginModelImpl: LoginModel{
     }
 
     override fun register(map: HashMap<String, String> , loginListener: ResultListener<RegisterBean>?) {
-        RequestApi.getInstance()
-                .service
+        RequestApi.getInstance().service
                 .registerAndroid(map["name"], map["password"], map["passwordAgain"])
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -50,11 +48,6 @@ class LoginModelImpl: LoginModel{
                     override fun onSuccess(response: BaseResponse<RegisterBean>?) {
                         loginListener?.onSuccess(response?.data)
                     }
-
-//                    override fun onFail(response: BaseResponse<RegisterBean>?) {
-//                        super.onFail(response)
-//                        loginListener?.onFailed(response?.errorCode , response?.errorMsg)
-//                    }
 
                 })
     }

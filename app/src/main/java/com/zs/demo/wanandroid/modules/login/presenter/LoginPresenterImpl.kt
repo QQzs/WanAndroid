@@ -47,4 +47,8 @@ class LoginPresenterImpl: LoginPresenter{
         })
     }
 
+//    override fun cancelRequest() {
+//        mLoginModel?.
+//    }
+
 }
