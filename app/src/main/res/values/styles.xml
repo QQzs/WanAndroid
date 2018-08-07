@@ -1,12 +1,22 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@drawable/splash_launch</item>
+        <!--状态栏透明-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--Navigation栏透明-->
+        <item name="android:windowTranslucentNavigation">false</item>
+    </style>
+
 
     <style name="loading_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
@@ -22,6 +32,15 @@
         <!--  <item name="android:backgroundDimEnabled">true</item>-->
         <item name="android:backgroundDimEnabled">false</item>
         <!-- 模糊 -->
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Toolbar" parent="AppTheme">
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="searchHintIcon">@null</item>
     </style>
 
 </resources>
