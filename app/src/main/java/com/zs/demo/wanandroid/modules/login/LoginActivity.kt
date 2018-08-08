@@ -80,12 +80,14 @@ class LoginActivity : BaseActivity(), LoginView{
         SpUtil.savaData(Constant.APP_USER_ID,userInfo?.id)
         SpUtil.savaData(Constant.APP_USER_NAME,userInfo?.username)
         dismissLoading()
+        finish()
     }
 
     override fun registerSuccess(userInfo: RegisterBean?) {
         SpUtil.savaData(Constant.APP_USER_ID,userInfo?.id)
         SpUtil.savaData(Constant.APP_USER_NAME,userInfo?.username)
         dismissLoading()
+        finish()
     }
 
     override fun onDestroy() {

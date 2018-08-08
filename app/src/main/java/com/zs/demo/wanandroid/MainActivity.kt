@@ -1,12 +1,28 @@
 package com.zs.demo.wanandroid
 
+import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.text.TextUtils
 import android.view.View
 import com.zs.demo.wanandroid.base.BaseActivity
+import com.zs.demo.wanandroid.modules.article.ArticleFragment
+import com.zs.demo.wanandroid.modules.hot.HotFragment
+import com.zs.demo.wanandroid.modules.login.LoginActivity
+import com.zs.demo.wanandroid.modules.type.TypeFragment
+import com.zs.demo.wanandroid.utils.SpUtil
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.nav_header_main.view.*
+import org.jetbrains.anko.startActivity
 
 class MainActivity : BaseActivity() {
 
+    private var fragment1: ArticleFragment = ArticleFragment()
+    private var fragment2: TypeFragment = TypeFragment()
+    private var fragment3: HotFragment = HotFragment()
+    private var lastFragment: Fragment? = null
 
     override fun setLayoutId(): Int {
         return R.layout.activity_main
@@ -18,7 +34,7 @@ class MainActivity : BaseActivity() {
             setSupportActionBar(this)
         }
         bottomNavigation.run {
-//            setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+            setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
             selectedItemId = R.id.navigation_home
         }
         drawerLayout.run {
@@ -32,15 +48,100 @@ class MainActivity : BaseActivity() {
             addDrawerListener(toggle)
             toggle.syncState()
         }
+        navigationView.getHeaderView(0)?.navigationViewUsername?.run{
+            text = if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))){
+                getString(R.string.not_login)
+            }else{
+                SpUtil.getString(Constant.APP_USER_NAME,"")
+            }
+
+        }
+        navigationView.getHeaderView(0).navigationViewLogout?.run {
+            text = if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))) {
+                getString(R.string.goto_login)
+            } else {
+                getString(R.string.logout)
+            }
+            setOnClickListener {
+                if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))) {
+                    this@MainActivity.startActivity<LoginActivity>()
+                } else {
+                    SpUtil.clearAll()
+                    navigationView.getHeaderView(0).navigationViewUsername.text = getString(R.string.not_login)
+                    text = getString(R.string.goto_login)
+                }
+            }
+        }
+
 
     }
 
     override fun initData() {
+        switchContent(fragment1)
+    }
+
+    override fun onClick(view: View?) {
 
     }
 
-    override fun onClick(p0: View?) {
+    private val onDrawerNavigationItemSelectedListener =
+            NavigationView.OnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.nav_like -> {
 
+                    }
+                    R.id.nav_about -> {
+
+                    }
+                }
+                drawerLayout.closeDrawer(GravityCompat.START)
+                true
+            }
+
+    /**
+     * NavigationItemSelect监听
+     */
+    private val onNavigationItemSelectedListener =
+            BottomNavigationView.OnNavigationItemSelectedListener { item ->
+                return@OnNavigationItemSelectedListener when (item.itemId) {
+                    R.id.navigation_home -> {
+                        switchContent(fragment1)
+                        toolbar?.title = getString(R.string.title_home)
+                        true
+                    }
+                    R.id.navigation_type -> {
+                        switchContent(fragment2)
+                        toolbar?.title = getString(R.string.title_type)
+                        true
+                    }
+                    R.id.navigation_hot -> {
+                        switchContent(fragment3)
+                        toolbar?.title = getString(R.string.title_hot)
+                        true
+                    }
+                    else -> {
+                        false
+                    }
+                }
+            }
+
+    private fun switchContent(to: Fragment?) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        if (to != null && lastFragment != to) {
+            if (lastFragment != null) {
+                val transaction = supportFragmentManager?.beginTransaction()
+                transaction?.hide(lastFragment)?.commitAllowingStateLoss()
+            }
+            lastFragment = to
+            val transaction = supportFragmentManager.beginTransaction()
+            if (!to.isAdded) {    // 先判断是否被add过
+                transaction.add(R.id.fragment_container, to).commitAllowingStateLoss() // 隐藏当前的fragment，add下一个到Activity中
+            } else {
+                transaction.show(to).commitAllowingStateLoss() // 隐藏当前的fragment，显示下一个
+            }
+        }
     }
 
 }

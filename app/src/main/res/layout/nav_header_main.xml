@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:padding="10dp"
+        android:textSize="@dimen/fontsize15"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         tools:text="未登录"/>
 
