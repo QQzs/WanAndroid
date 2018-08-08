@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4EEE94</color>  // tab
-    <color name="colorPrimaryDark">#4EEE94</color> // 状态栏
-    <color name="colorAccent">#4EEE94</color> // main
+    <color name="colorPrimary">#CD2626</color>  // tab
+    <color name="colorPrimaryDark">#CD2626</color> // 状态栏
+    <color name="colorAccent">#CD2626</color> // main
 
 
     <color name="white">#ffffff</color>

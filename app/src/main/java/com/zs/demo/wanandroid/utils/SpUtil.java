@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 
+import com.zs.demo.wanandroid.Constant;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -33,7 +35,6 @@ public class SpUtil {
 
     public static void init(Context context, String fileName) {
         prefsUtil = new SpUtil(context, fileName);
-        new SpUtil(context, fileName);
     }
 
     public static String fileName;
@@ -70,7 +71,7 @@ public class SpUtil {
      */
     public static void remove(Context context, String key){
 
-        SharedPreferences sp = context.getSharedPreferences("zs_data", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences(Constant.APP_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(key).commit();
     }
@@ -134,6 +135,52 @@ public class SpUtil {
                     e.printStackTrace();
                 }
             }
+        }
+        return null;
+    }
+
+    public static void savaData(String key, Object object) {
+        SharedPreferences.Editor editor = sPrefs.edit();
+        if (object instanceof String) {
+            editor.putString(key, (String) object);
+        } else if (object instanceof Integer) {
+            editor.putInt(key, (Integer) object);
+        } else if (object instanceof Boolean) {
+            editor.putBoolean(key, (Boolean) object);
+        } else if (object instanceof Float) {
+            editor.putFloat(key, (Float) object);
+        } else if (object instanceof Long) {
+            editor.putLong(key, (Long) object);
+        } else {
+            editor.putString(key, object.toString());
+        }
+        editor.commit();
+
+    }
+
+    /**
+     * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
+     *
+     * @param key
+     * @param defaultObject
+     * @return
+     */
+    public static Object getData(String key, Object defaultObject) {
+        if (defaultObject instanceof String) {
+            String str = sPrefs.getString(key, (String) defaultObject);
+            if (str == null || str.equals("")) {
+                return "";//
+            } else {
+                return str;
+            }
+        } else if (defaultObject instanceof Integer) {
+            return sPrefs.getInt(key, (Integer) defaultObject);
+        } else if (defaultObject instanceof Boolean) {
+            return sPrefs.getBoolean(key, (Boolean) defaultObject);
+        } else if (defaultObject instanceof Float) {
+            return sPrefs.getFloat(key, (Float) defaultObject);
+        } else if (defaultObject instanceof Long) {
+            return sPrefs.getLong(key, (Long) defaultObject);
         }
         return null;
     }

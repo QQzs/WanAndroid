@@ -2,6 +2,8 @@ package com.zs.demo.wanandroid;
 
 import android.app.Application;
 
+import com.zs.demo.wanandroid.utils.SpUtil;
+
 /**
  * Created by zs
  * Date：2018年 01月 02日
@@ -19,6 +21,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
+        SpUtil.init(this,Constant.APP_DATA);
     }
 
     public static MyApp getAppContext(){

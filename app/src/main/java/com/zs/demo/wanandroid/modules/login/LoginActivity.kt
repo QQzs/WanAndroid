@@ -1,6 +1,7 @@
 package com.zs.demo.wanandroid.modules.login
 
 import android.view.View
+import com.zs.demo.wanandroid.Constant
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseActivity
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
@@ -8,8 +9,8 @@ import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
 import com.zs.demo.wanandroid.modules.login.presenter.LoginPresenter
 import com.zs.demo.wanandroid.modules.login.presenter.LoginPresenterImpl
 import com.zs.demo.wanandroid.modules.login.view.LoginView
+import com.zs.demo.wanandroid.utils.SpUtil
 import kotlinx.android.synthetic.main.activity_login_layout.*
-import org.jetbrains.anko.toast
 
 /**
  *
@@ -76,12 +77,15 @@ class LoginActivity : BaseActivity(), LoginView{
     }
 
     override fun loginSuccess(userInfo: LoginBean?) {
-        toast(userInfo?.id!!)
+        SpUtil.savaData(Constant.APP_USER_ID,userInfo?.id)
+        SpUtil.savaData(Constant.APP_USER_NAME,userInfo?.username)
         dismissLoading()
     }
 
     override fun registerSuccess(userInfo: RegisterBean?) {
-        toast(userInfo?.id!!)
+        SpUtil.savaData(Constant.APP_USER_ID,userInfo?.id)
+        SpUtil.savaData(Constant.APP_USER_NAME,userInfo?.username)
+        dismissLoading()
     }
 
     override fun onDestroy() {
