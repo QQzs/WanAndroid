@@ -1,10 +1,10 @@
 package com.zs.demo.wanandroid.modules.login.model
 
-import android.content.Context
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
 import com.zs.demo.wanandroid.mvp.BaseModel
 import com.zs.demo.wanandroid.mvp.ResultListener
+import com.zs.demo.wanandroid.request.BaseImpl
 import com.zs.demo.wanandroid.request.BaseResponse
 import com.zs.demo.wanandroid.request.DefaultObserver
 import com.zs.demo.wanandroid.request.RequestApi
@@ -20,7 +20,7 @@ Time：17:58
 About:
 —————————————————————————————————————
  */
-class LoginModelImpl(context: Context): BaseModel(context), LoginModel{
+class LoginModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl), LoginModel{
 
     override fun login(map: HashMap<String, String>, loginListener: ResultListener<LoginBean>?) {
         RequestApi.getInstance().service

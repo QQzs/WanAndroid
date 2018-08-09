@@ -17,7 +17,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
         android:paddingTop="10dp"
-        app:srcCompat="@drawable/logo"
+        app:srcCompat="@mipmap/ic_default_avatar"
         tools:ignore="ContentDescription"/>
 
     <TextView

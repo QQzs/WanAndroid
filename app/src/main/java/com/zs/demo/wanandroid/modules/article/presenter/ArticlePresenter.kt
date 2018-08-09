@@ -1,22 +1,20 @@
-package com.zs.demo.wanandroid.mvp
+package com.zs.demo.wanandroid.modules.article.presenter
 
-import com.zs.demo.wanandroid.request.BaseImpl
+import com.zs.demo.wanandroid.mvp.BasePresenter
 
 /**
  *
 Created by zs
-Date：2018年 08月 06日
-Time：15:39
+Date：2018年 08月 09日
+Time：11:23
 —————————————————————————————————————
 About:
 —————————————————————————————————————
  */
-open class BaseModel{
+interface ArticlePresenter: BasePresenter {
 
-    var mBaseImpl: BaseImpl? = null
+    fun getBanner()
 
-    constructor(baseImpl: BaseImpl?) {
-        this.mBaseImpl = baseImpl
-    }
+    fun getArticle(page: Int)
 
 }

@@ -1,12 +1,11 @@
 package com.zs.demo.wanandroid.modules.login.presenter
 
-import android.content.Context
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
-import com.zs.demo.wanandroid.modules.login.model.LoginModel
 import com.zs.demo.wanandroid.modules.login.model.LoginModelImpl
 import com.zs.demo.wanandroid.modules.login.view.LoginView
 import com.zs.demo.wanandroid.mvp.ResultListener
+import com.zs.demo.wanandroid.request.BaseImpl
 
 /**
  *
@@ -20,11 +19,11 @@ About:
 class LoginPresenterImpl: LoginPresenter{
 
     var mLoginView: LoginView? = null
-    var mLoginModel: LoginModel? = null
+    var mLoginModel: LoginModelImpl? = null
 
-    constructor(context: Context) {
-        this.mLoginView = context as LoginView
-        this.mLoginModel = LoginModelImpl(context)
+    constructor(view: LoginView , baseImpl: BaseImpl?) {
+        this.mLoginView = view
+        this.mLoginModel = LoginModelImpl(baseImpl)
     }
 
     override fun login(map: HashMap<String, String>) {

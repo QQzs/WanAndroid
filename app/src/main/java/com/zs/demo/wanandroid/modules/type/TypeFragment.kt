@@ -1,6 +1,5 @@
 package com.zs.demo.wanandroid.modules.type
 
-import android.os.Bundle
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseFragment
 
@@ -15,9 +14,15 @@ About:
  */
 class TypeFragment: BaseFragment(){
 
-    override fun onCreateView(savedInstanceState: Bundle?) {
-        super.onCreateView(savedInstanceState)
-        setContentView(R.layout.fragment_type_layout)
+
+    override fun setLayoutId(): Int {
+        return R.layout.fragment_type_layout
+    }
+
+    override fun initView() {
+    }
+
+    override fun initData() {
     }
 
 }

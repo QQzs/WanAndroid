@@ -7,11 +7,7 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.zs.demo.wanandroid.Constant;
 import com.zs.demo.wanandroid.MyActivityManager;
-import com.zs.demo.wanandroid.request.RequestApi;
-import com.zs.demo.wanandroid.request.RequestHelper;
 import com.zs.demo.wanandroid.utils.SpUtil;
-
-import io.reactivex.Observable;
 
 /**
  * Created by zs
@@ -24,10 +20,8 @@ import io.reactivex.Observable;
 public abstract class BaseActivity extends BaseRxActivity implements View.OnClickListener{
 
     protected Activity mActivity;
-    protected RequestApi mRequestApi = null;
     protected Gson mGson = new Gson();
     protected String mUserId , mUserName;
-    protected Observable mObservable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +33,6 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
 
     protected void initContentView(int layoutResID){
         setContentView(layoutResID);
-        mRequestApi = RequestApi.getInstance();
         mActivity = this;
         mUserId = SpUtil.getString(Constant.APP_USER_ID,"");
         mUserName = SpUtil.getString(Constant.APP_USER_NAME,"");
@@ -64,15 +57,6 @@ public abstract class BaseActivity extends BaseRxActivity implements View.OnClic
     public abstract void initView();
 
     public abstract void initData();
-
-    /**
-     * requestData
-     * @param request
-     * @param type
-     */
-    protected void requestData(Observable request, int type){
-        mObservable = RequestHelper.getObservable(request);
-    }
 
     @Override
     public void onDestroy() {

@@ -29,4 +29,6 @@
     // 字体
     <color name="font_light_gray">#999999</color>
 
+    <color name="while_most_color">#e4e4e4</color>
+
 </resources>

@@ -1,6 +1,8 @@
 package com.zs.demo.wanandroid.base;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,21 +10,17 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.zs.demo.wanandroid.Constant;
-import com.zs.demo.wanandroid.request.RequestApi;
 import com.zs.demo.wanandroid.utils.SpUtil;
 
 import java.lang.reflect.Field;
 
-import io.reactivex.Observable;
-
 /**
  * @author Administrator
  */
-public class BaseFragment extends BaseRxFragment {
+public abstract class BaseFragment extends BaseRxFragment {
 	private View contentView;
 	private ViewGroup container;
 	protected LayoutInflater inflater;
-	protected RequestApi mRequestApi = null;
 	protected Gson mGson = new Gson();
 	protected String mUserId , mUserName;
 
@@ -35,7 +33,6 @@ public class BaseFragment extends BaseRxFragment {
 	public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		this.inflater = inflater;
 		this.container = container;
-		mRequestApi = RequestApi.getInstance();
 		mUserId = SpUtil.getString(Constant.APP_USER_ID,"");
 		mUserName = SpUtil.getString(Constant.APP_USER_NAME,"");
 		onCreateView(savedInstanceState);
@@ -45,26 +42,19 @@ public class BaseFragment extends BaseRxFragment {
 	}
 
 	protected void onCreateView(Bundle savedInstanceState) {
-
+		setContentView();
 	}
 
-
-	protected void initView() {
-
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		initView();
+		initData();
 	}
 
-	protected void initData() {
+	public abstract void initView();
 
-	}
-
-	/**
-	 * requestData
-	 * @param request
-	 * @param type
-	 */
-	protected void requestData(Observable request, int type){
-
-	}
+	public abstract void initData();
 
 	@Override
 	public void onDestroyView() {
@@ -74,8 +64,8 @@ public class BaseFragment extends BaseRxFragment {
 		inflater = null;
 	}
 
-	public void setContentView(int layoutResID) {
-		setContentView(inflater.inflate(layoutResID, container, false));
+	public void setContentView() {
+		setContentView(inflater.inflate(setLayoutId(), container, false));
 	}
 
 	public void setContentView(View view) {
@@ -85,6 +75,12 @@ public class BaseFragment extends BaseRxFragment {
 	public View getContentView() {
 		return contentView;
 	}
+
+	/**
+	 *
+	 * @return 返回布局
+	 */
+	protected abstract int setLayoutId();
 
 //	public View findViewById(int id) {
 //		if (contentView != null)

@@ -63,6 +63,9 @@ public abstract class DefaultObserver<T extends BaseResponse> implements Observe
     public void onNext(T response) {
         if (response.getErrorCode() == 0) {
             onSuccess(response);
+            if (isShowLoading){
+                mBaseImpl.dismissLoading();
+            }
         } else {
             onFail(response);
             mBaseImpl.dismissLoading();

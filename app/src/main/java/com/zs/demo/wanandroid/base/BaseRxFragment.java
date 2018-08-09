@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.zs.demo.wanandroid.request.BaseImpl;
+import com.zs.demo.wanandroid.utils.LoadingDialog;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -27,6 +28,8 @@ public class BaseRxFragment extends Fragment implements BaseImpl {
      * 管理Destroy取消订阅者
      */
     private CompositeDisposable disposables2Destroy;
+
+    private LoadingDialog mLoadingDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,12 +85,19 @@ public class BaseRxFragment extends Fragment implements BaseImpl {
 
     @Override
     public void showLoading() {
-
+        if (mLoadingDialog == null){
+            mLoadingDialog = new LoadingDialog(getContext());
+        }
+        if (!mLoadingDialog.isShowing()){
+            mLoadingDialog.show();
+        }
     }
 
     @Override
     public void dismissLoading() {
-
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()){
+            mLoadingDialog.dismiss();
+        }
     }
 
     @Override

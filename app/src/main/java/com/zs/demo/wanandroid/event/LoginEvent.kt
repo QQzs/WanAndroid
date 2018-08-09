@@ -1,22 +1,21 @@
-package com.zs.demo.wanandroid.mvp
-
-import com.zs.demo.wanandroid.request.BaseImpl
+package com.zs.demo.wanandroid.event
 
 /**
  *
 Created by zs
-Date：2018年 08月 06日
-Time：15:39
+Date：2018年 08月 09日
+Time：15:56
 —————————————————————————————————————
 About:
 —————————————————————————————————————
  */
-open class BaseModel{
+class LoginEvent{
 
-    var mBaseImpl: BaseImpl? = null
+    var mFlag: String? = null
+    var mType: String? = null
 
-    constructor(baseImpl: BaseImpl?) {
-        this.mBaseImpl = baseImpl
+    constructor(mFlag: String?, mType: String?) {
+        this.mFlag = mFlag
+        this.mType = mType
     }
-
 }

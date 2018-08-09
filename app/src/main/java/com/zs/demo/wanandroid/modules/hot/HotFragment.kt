@@ -1,6 +1,5 @@
 package com.zs.demo.wanandroid.modules.hot
 
-import android.os.Bundle
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseFragment
 
@@ -14,10 +13,15 @@ import com.zs.demo.wanandroid.base.BaseFragment
  */
 class HotFragment : BaseFragment(){
 
-    override fun onCreateView(savedInstanceState: Bundle?) {
-        super.onCreateView(savedInstanceState)
-        setContentView(R.layout.fragment_hot_layout)
 
+    override fun setLayoutId(): Int {
+        return R.layout.fragment_hot_layout
+    }
+
+    override fun initView() {
+    }
+
+    override fun initData() {
     }
 
 
