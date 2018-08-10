@@ -31,6 +31,7 @@ class ArticlePresenterImpl: ArticlePresenter{
         mModel?.articleBanner(object : ResultListener<MutableList<ArticleBanner>>{
             override fun onSuccess(t: MutableList<ArticleBanner>?) {
                 mView?.getBannerSuccess(t)
+
             }
 
         })

@@ -41,7 +41,7 @@ class LoginActivity : BaseActivity(), LoginView{
 
         card_login_view?.setOnClickListener(this)
 
-        edit_text_name?.filters = arrayOf(emojiFilter)
+        edit_text_name?.filters = arrayOf(emojiFilter,inputFilter)
 
     }
 
@@ -58,6 +58,20 @@ class LoginActivity : BaseActivity(), LoginView{
             return null
         }
     }
+
+    var inputFilter: InputFilter = object : InputFilter {
+        internal var emoji = Pattern.compile("[a-zA-Z0-9/\\u4e00-\\u9fa5]*")
+
+        override fun filter(source: CharSequence, start: Int, end: Int, dest: Spanned, dstart: Int, dend: Int): CharSequence? {
+            val emojiMatcher = emoji.matcher(source)
+            if (!emojiMatcher.matches()) {
+                toast("请输入汉字字母和数字")
+                return ""
+            }
+            return null
+        }
+    }
+
 
     override fun initData() {
 

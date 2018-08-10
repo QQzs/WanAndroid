@@ -3,13 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <com.zs.demo.wanandroid.view.cxrecyclerview.CXRecyclerView
-        android:id="@+id/recycler_article"
+    <com.zs.demo.wanandroid.view.banner.BannerPager
+        android:id="@+id/banner_page"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="180dp">
 
-    </com.zs.demo.wanandroid.view.cxrecyclerview.CXRecyclerView>
+    </com.zs.demo.wanandroid.view.banner.BannerPager>
 
 </RelativeLayout>

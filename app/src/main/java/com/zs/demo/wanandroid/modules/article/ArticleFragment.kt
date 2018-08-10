@@ -3,20 +3,20 @@ package com.zs.demo.wanandroid.modules.article
 import android.view.View
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseFragment
+import com.zs.demo.wanandroid.event.BannerEvent
 import com.zs.demo.wanandroid.modules.article.adapter.ArticleAdapter
-import com.zs.demo.wanandroid.modules.article.bean.ArticleEntry
-import com.zs.demo.wanandroid.modules.article.presenter.ArticlePresenter
 import com.zs.demo.wanandroid.modules.article.presenter.ArticlePresenterImpl
 import com.zs.demo.wanandroid.modules.article.view.ArticleView
 import com.zs.demo.wanandroid.utils.RecyclerViewUtil
-import com.zs.demo.wanandroid.utils.tranform.DepthPageTransformer
-import com.zs.demo.wanandroid.view.banner.BannerEntry
-import com.zs.demo.wanandroid.view.banner.view.BannerView
+import com.zs.demo.wanandroid.view.banner.BannerViewData
 import com.zs.demo.wanandroid.view.cxrecyclerview.CXRecyclerView
 import com.zs.project.bean.android.ArticleBanner
 import com.zs.project.bean.android.ArticleList
 import kotlinx.android.synthetic.main.fragment_article_layout.*
 import kotlinx.android.synthetic.main.header_article_layout.view.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  * Created by zs
@@ -32,7 +32,7 @@ class ArticleFragment : BaseFragment() , ArticleView{
 
     var mHeadView : View?= null
 
-    var mPresenter: ArticlePresenter? = null
+    var mPresenter: ArticlePresenterImpl? = null
     var mArticleAdapter: ArticleAdapter? = null
 
     override fun setLayoutId(): Int {
@@ -59,31 +59,19 @@ class ArticleFragment : BaseFragment() , ArticleView{
     }
 
     override fun initData() {
+        EventBus.getDefault().register(this)
         mPresenter = ArticlePresenterImpl(this,this)
         showLoading()
-//        mPresenter?.getBanner()
+        mPresenter?.getBanner()
         mPresenter?.getArticle(mStartNum)
 
     }
 
-    /**
-     * 获取banner数据
-     */
-    private fun getbannerData(data : MutableList<ArticleBanner>) : MutableList<ArticleEntry>{
-        var items = ArrayList<ArticleEntry>()
-        data.mapTo(items) { ArticleEntry(it.title,it.imagePath,it.url) }
-        return items
-    }
-
     override fun getBannerSuccess(bannerList: MutableList<ArticleBanner>?) {
+        var items = mutableListOf<BannerViewData>()
         bannerList?.run {
-            mHeadView?.banner_view_top?.setPageTransformer(true, DepthPageTransformer())
-            mHeadView?.banner_view_top?.entries = getbannerData(this)
-            mHeadView?.banner_view_top?.setOnPageClickListener(object : BannerView.OnPageClickListener(){
-                override fun onPageClick(entry: BannerEntry<*>?, index: Int) {
-
-                }
-            })
+            bannerList.mapTo(items){BannerViewData(it.title,it.imagePath,it.url)}
+            mHeadView?.banner_page?.initData(items)
         }
     }
 
@@ -102,12 +90,18 @@ class ArticleFragment : BaseFragment() , ArticleView{
             }
         }
 
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun initBanner(event: BannerEvent){
+        if (event.mInit as Boolean){
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
+        mPresenter?.onDestroyView()
+        EventBus.getDefault().unregister(this)
     }
 
 }

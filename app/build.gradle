@@ -6,7 +6,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.zs.demo.wanandroid"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -40,4 +40,5 @@ dependencies {
     implementation "com.android.support:design:$support_version"
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.github.kelinZhou:Banner:2.1.0'
 }
