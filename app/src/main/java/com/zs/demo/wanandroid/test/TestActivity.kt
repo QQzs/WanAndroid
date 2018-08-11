@@ -1,6 +1,7 @@
-package com.zs.demo.wanandroid
+package com.zs.demo.wanandroid.test
 
 import android.view.View
+import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseActivity
 import com.zs.demo.wanandroid.request.BaseResponse
 import com.zs.demo.wanandroid.request.DefaultObserver

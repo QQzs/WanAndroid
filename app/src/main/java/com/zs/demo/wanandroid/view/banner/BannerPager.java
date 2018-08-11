@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zs.demo.wanandroid.R;
+import com.zs.demo.wanandroid.utils.ImageUtil;
 import com.zs.demo.wanandroid.utils.ScreenUtil;
 
 import java.util.ArrayList;
@@ -257,9 +258,7 @@ public class BannerPager extends RelativeLayout {
                     }
                 });
                 String url = banner.getBannerImage();
-                /**
-                 *
-                 */
+                ImageUtil.load(getContext(),url,imageView);
                 viewlist.add(imageView);
             }
             notifyDataSetChanged();

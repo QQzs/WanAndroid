@@ -12,10 +12,16 @@ About:
 class LoginEvent{
 
     var mFlag: String? = null
-    var mType: String? = null
+    var mLogin: Boolean = true
 
-    constructor(mFlag: String?, mType: String?) {
+    constructor(mFlag: String?) {
         this.mFlag = mFlag
-        this.mType = mType
     }
+
+    constructor(mFlag: String?, mLogin: Boolean) {
+        this.mFlag = mFlag
+        this.mLogin = mLogin
+    }
+
+
 }

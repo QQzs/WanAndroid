@@ -8,13 +8,18 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.text.TextUtils
 import android.view.View
 import com.zs.demo.wanandroid.base.BaseActivity
+import com.zs.demo.wanandroid.event.LoginEvent
 import com.zs.demo.wanandroid.modules.article.ArticleFragment
 import com.zs.demo.wanandroid.modules.hot.HotFragment
 import com.zs.demo.wanandroid.modules.login.LoginActivity
 import com.zs.demo.wanandroid.modules.type.TypeFragment
+import com.zs.demo.wanandroid.utils.FieldUtil
 import com.zs.demo.wanandroid.utils.SpUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.startActivity
 
 class MainActivity : BaseActivity() {
@@ -48,6 +53,23 @@ class MainActivity : BaseActivity() {
             addDrawerListener(toggle)
             toggle.syncState()
         }
+        initNavigation()
+        navigationView.getHeaderView(0).navigationViewLogout?.run {
+            setOnClickListener {
+                if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))) {
+                    this@MainActivity.startActivity<LoginActivity>(FieldUtil.LOGIN to FieldUtil.LOGIN)
+                } else {
+                    SpUtil.clearAll()
+//                    navigationView.getHeaderView(0).navigationViewUsername.text = getString(R.string.not_login)
+//                    text = getString(R.string.goto_login)
+                    EventBus.getDefault().post(LoginEvent(FieldUtil.LOGIN,false))
+                }
+            }
+        }
+
+    }
+
+    private fun initNavigation(){
         navigationView.getHeaderView(0)?.navigationViewUsername?.run{
             text = if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))){
                 getString(R.string.not_login)
@@ -62,22 +84,12 @@ class MainActivity : BaseActivity() {
             } else {
                 getString(R.string.logout)
             }
-            setOnClickListener {
-                if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))) {
-                    this@MainActivity.startActivity<LoginActivity>()
-                } else {
-                    SpUtil.clearAll()
-                    navigationView.getHeaderView(0).navigationViewUsername.text = getString(R.string.not_login)
-                    text = getString(R.string.goto_login)
-                }
-            }
         }
-
-
     }
 
     override fun initData() {
         switchContent(fragment1)
+        EventBus.getDefault().register(this)
     }
 
     override fun onClick(view: View?) {
@@ -142,6 +154,19 @@ class MainActivity : BaseActivity() {
                 transaction.show(to).commitAllowingStateLoss() // 隐藏当前的fragment，显示下一个
             }
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun loginRefresh(event: LoginEvent?){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        }
+        initNavigation()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 
 }

@@ -6,13 +6,16 @@ import android.view.View
 import com.zs.demo.wanandroid.Constant
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseActivity
+import com.zs.demo.wanandroid.event.LoginEvent
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean
 import com.zs.demo.wanandroid.modules.login.presenter.LoginPresenter
 import com.zs.demo.wanandroid.modules.login.presenter.LoginPresenterImpl
 import com.zs.demo.wanandroid.modules.login.view.LoginView
+import com.zs.demo.wanandroid.utils.FieldUtil
 import com.zs.demo.wanandroid.utils.SpUtil
 import kotlinx.android.synthetic.main.activity_login_layout.*
+import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.toast
 import java.util.regex.Pattern
 
@@ -29,6 +32,7 @@ About:
 class LoginActivity : BaseActivity(), LoginView{
 
     var mPresenter: LoginPresenter? = null
+    var mFlag: String? = null
     var mAction : String = "login"
 
     override fun setLayoutId(): Int {
@@ -74,7 +78,7 @@ class LoginActivity : BaseActivity(), LoginView{
 
 
     override fun initData() {
-
+        mFlag = intent?.getStringExtra(FieldUtil.LOGIN)
         mPresenter = LoginPresenterImpl(this,this)
 
     }
@@ -115,14 +119,14 @@ class LoginActivity : BaseActivity(), LoginView{
     override fun loginSuccess(userInfo: LoginBean?) {
         SpUtil.savaData(Constant.APP_USER_ID,userInfo?.id)
         SpUtil.savaData(Constant.APP_USER_NAME,userInfo?.username)
-
+        EventBus.getDefault().post(LoginEvent(mFlag))
         finish()
     }
 
     override fun registerSuccess(userInfo: RegisterBean?) {
         SpUtil.savaData(Constant.APP_USER_ID,userInfo?.id)
         SpUtil.savaData(Constant.APP_USER_NAME,userInfo?.username)
-
+        EventBus.getDefault().post(LoginEvent(mFlag))
         finish()
     }
 

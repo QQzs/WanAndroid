@@ -41,4 +41,7 @@ dependencies {
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.github.kelinZhou:Banner:2.1.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
 }
