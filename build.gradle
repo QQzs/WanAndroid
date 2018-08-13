@@ -6,6 +6,7 @@ buildscript {
     ext.kotlin_version = '1.2.21'
     ext.anko_version = '0.10.3'
     ext.retrofit_version = '2.3.0'
+    ext.adapter_version = "2.9.35"
     
     repositories {
         google()

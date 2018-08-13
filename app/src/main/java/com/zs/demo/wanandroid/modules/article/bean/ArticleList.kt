@@ -19,8 +19,6 @@ data class ArticleList(
         var size: Int,
         var total: Int
 
-
-
 ) {
     override fun toString(): String {
         return "ArticleList(curPage=$curPage, datas=$datas, offset=$offset, over=$over, pageCount=$pageCount, size=$size, total=$total)"

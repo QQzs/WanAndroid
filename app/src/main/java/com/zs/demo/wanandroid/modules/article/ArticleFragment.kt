@@ -5,8 +5,8 @@ import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseFragment
 import com.zs.demo.wanandroid.event.BannerEvent
 import com.zs.demo.wanandroid.modules.article.adapter.ArticleAdapter
-import com.zs.demo.wanandroid.modules.article.presenter.ArticlePresenterImpl
 import com.zs.demo.wanandroid.modules.article.view.ArticleView
+import com.zs.demo.wanandroid.modules.mvp.HomePresenter
 import com.zs.demo.wanandroid.utils.RecyclerViewUtil
 import com.zs.demo.wanandroid.view.banner.BannerViewData
 import com.zs.demo.wanandroid.view.cxrecyclerview.CXRecyclerView
@@ -32,7 +32,7 @@ class ArticleFragment : BaseFragment() , ArticleView{
 
     var mHeadView : View?= null
 
-    var mPresenter: ArticlePresenterImpl? = null
+    var mPresenter: HomePresenter? = null
     var mArticleAdapter: ArticleAdapter? = null
 
     override fun setLayoutId(): Int {
@@ -60,7 +60,7 @@ class ArticleFragment : BaseFragment() , ArticleView{
 
     override fun initData() {
         EventBus.getDefault().register(this)
-        mPresenter = ArticlePresenterImpl(this,this)
+        mPresenter = HomePresenter(this,this)
         showLoading()
         mPresenter?.getBanner()
         mPresenter?.getArticle(mStartNum)

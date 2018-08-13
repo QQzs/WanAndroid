@@ -1,20 +1,18 @@
-package com.zs.demo.wanandroid.modules.article.presenter
+package com.zs.demo.wanandroid.modules.hot.model
 
-import com.zs.demo.wanandroid.mvp.BasePresenter
+import com.zs.demo.wanandroid.modules.hot.listener.HotResultListener
 
 /**
  *
 Created by zs
-Date：2018年 08月 09日
-Time：11:23
+Date：2018年 08月 13日
+Time：16:32
 —————————————————————————————————————
 About:
 —————————————————————————————————————
  */
-interface ArticlePresenter: BasePresenter {
+interface HotModel {
 
-    fun getBanner()
-
-    fun getArticle(page: Int)
+    fun getHotList(hotResultListener: HotResultListener)
 
 }

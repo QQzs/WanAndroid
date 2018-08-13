@@ -1,5 +1,6 @@
 package com.zs.demo.wanandroid.utils
 
+import android.text.TextUtils
 import android.util.Log
 
 /**
@@ -18,11 +19,16 @@ class LogUtil{
         val LOG_TAG = "My_Log"
         val LOG_TAG_ERROE = "My_Log_Error"
 
-        fun logShow(content : String){
-            Log.d(LOG_TAG,content)
+        fun logShow(content : String?){
+            if (TextUtils.isEmpty(content)){
+                Log.d(LOG_TAG, "emptyData  $content")
+            }else{
+                Log.d(LOG_TAG,content)
+            }
+
         }
 
-        fun logShowError(content : String){
+        fun logShowError(content : String?){
             Log.e(LOG_TAG_ERROE,content)
         }
 

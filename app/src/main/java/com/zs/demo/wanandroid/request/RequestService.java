@@ -1,8 +1,10 @@
 package com.zs.demo.wanandroid.request;
 
 
+import com.zs.demo.wanandroid.modules.hot.bean.HotBean;
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean;
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean;
+import com.zs.demo.wanandroid.modules.type.bean.TreeBean;
 import com.zs.project.bean.android.ArticleBanner;
 import com.zs.project.bean.android.ArticleList;
 
@@ -95,6 +97,35 @@ public interface RequestService {
     @FormUrlEncoded
     @POST("lg/uncollect/{id}/json")
     Observable<BaseResponse<Object>> unCollectArticleList(@Path("id") int id, @Field("originId") int originId);
+
+    /**
+     * 知识体系
+     * http://www.wanandroid.com/tree/json
+     */
+    @GET("/tree/json")
+    Observable<BaseResponse<List<TreeBean>>> getTypeTreeList();
+
+    /**
+     * 我的常用网址
+     * @return FriendListResponse
+     */
+    @GET("/lg/collect/usertools/json")
+    Observable<BaseResponse<List<HotBean>>> getBookmarkList();
+
+    /**
+     * 大家都在搜
+     * http://www.wanandroid.com/hotkey/json
+     */
+    @GET("/hotkey/json")
+    Observable<BaseResponse<List<HotBean>>> getHotKeyList();
+
+    /**
+     * 常用网站
+     * http://www.wanandroid.com/friend/json
+     */
+    @GET("/friend/json")
+    Observable<BaseResponse<List<HotBean>>> getCommonList();
+
 
 
     /**
