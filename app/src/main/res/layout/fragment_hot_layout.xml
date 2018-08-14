@@ -1,63 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:id="@+id/swipe_refresh_view"
     xmlns:zhy="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/bookmarkTitle"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:background="@drawable/list_item_selector"
-        android:padding="@dimen/dp_10"
-        android:text="@string/my_bookmark"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:visibility="gone" />
+        android:layout_height="match_parent">
 
-    <com.zhy.view.flowlayout.TagFlowLayout
-        android:id="@+id/bookmarkFlowLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_10"
-        android:visibility="gone"
-        zhy:max_select="0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:background="@drawable/list_item_selector"
-        android:padding="@dimen/dp_10"
-        android:text="@string/hot_key"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            <TextView
+                android:id="@+id/bookmarkTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@drawable/list_item_selector"
+                android:padding="@dimen/dp_10"
+                android:text="@string/my_bookmark"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:visibility="gone" />
 
-    <com.zhy.view.flowlayout.TagFlowLayout
-        android:id="@+id/hotFlowLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_10"
-        zhy:max_select="0" />
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/bookmarkFlowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:visibility="gone"
+                zhy:max_select="0" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:background="@drawable/list_item_selector"
-        android:padding="@dimen/dp_10"
-        android:text="@string/common_use"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@drawable/list_item_selector"
+                android:padding="@dimen/dp_10"
+                android:text="@string/hot_key"
+                android:textSize="@dimen/fontsize15"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-    <com.zhy.view.flowlayout.TagFlowLayout
-        android:id="@+id/commonUseFlowLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:paddingLeft="@dimen/dp_10"
-        zhy:max_select="0" />
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/hotFlowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                zhy:max_select="0" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@drawable/list_item_selector"
+                android:padding="@dimen/dp_10"
+                android:text="@string/common_use"
+                android:textSize="@dimen/fontsize15"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-</LinearLayout>
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/commonUseFlowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:textSize="@dimen/fontsize15"
+                zhy:max_select="0" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.v4.widget.SwipeRefreshLayout>
