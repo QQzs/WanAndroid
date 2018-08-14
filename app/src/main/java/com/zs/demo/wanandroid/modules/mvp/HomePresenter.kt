@@ -63,6 +63,24 @@ class HomePresenter: BasePresenter{
         })
     }
 
+    fun collectArticle(id: Int){
+        mModel?.collectArticle(id , object : ResultListener<Any>{
+            override fun onSuccess(t: Any?) {
+                mArticleView?.collectArticleSuccess()
+            }
+
+        })
+    }
+
+    fun unCollectArticle(id: Int){
+        mModel?.unCollectArticle(id , object : ResultListener<Any>{
+            override fun onSuccess(t: Any?) {
+                mArticleView?.unCollectArticleSuccess()
+            }
+
+        })
+    }
+
     fun getTypeTree(){
         mModel?.getTypeTree(object : ResultListener<MutableList<TreeBean>>{
             override fun onSuccess(t: MutableList<TreeBean>?) {

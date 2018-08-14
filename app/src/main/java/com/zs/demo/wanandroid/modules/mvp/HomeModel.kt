@@ -60,6 +60,35 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
                 })
     }
 
+    override fun collectArticle(id: Int, articleListener: ResultListener<Any>?) {
+        RequestApi.getInstance().service
+                .collectArticle(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : DefaultObserver<BaseResponse<Any>>(mBaseImpl){
+
+                    override fun onSuccess(response: BaseResponse<Any>?) {
+                        articleListener?.onSuccess(response?.data)
+                    }
+
+                })
+    }
+
+    override fun unCollectArticle(id: Int, articleListener: ResultListener<Any>?) {
+        RequestApi.getInstance().service
+                .unCollectArticle(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : DefaultObserver<BaseResponse<Any>>(mBaseImpl){
+
+                    override fun onSuccess(response: BaseResponse<Any>?) {
+                        articleListener?.onSuccess(response?.data)
+                    }
+
+                })
+
+    }
+
     override fun getTypeTree(treeListener: ResultListener<MutableList<TreeBean>>?) {
         RequestApi.getInstance().service
                 .typeTreeList
@@ -75,18 +104,12 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
 
     override fun getHotList(hotResultListener: HotResultListener){
 
+        var mRequestService = RequestApi.getInstance().service
         var bookmarkResult: MutableList<HotBean> = mutableListOf()
         var hotResult: MutableList<HotBean> = mutableListOf()
         var commonResult: MutableList<HotBean> = mutableListOf()
 
-        var bookObservable = RequestApi.getInstance().service
-                .bookmarkList
-        var hotObservable = RequestApi.getInstance().service
-                .hotKeyList
-        var commonObservable = RequestApi.getInstance().service
-                .commonList
-
-        Observable.merge(bookObservable,hotObservable,commonObservable)
+        Observable.merge(mRequestService.bookmarkList,mRequestService.hotKeyList,mRequestService.commonList)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : MoreObserver<Any>(mBaseImpl){

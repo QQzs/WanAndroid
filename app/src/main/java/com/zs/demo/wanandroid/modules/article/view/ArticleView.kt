@@ -19,4 +19,8 @@ interface ArticleView: BaseView {
 
     fun getArticleSuccess(articleList: ArticleList?)
 
+    fun collectArticleSuccess()
+
+    fun unCollectArticleSuccess()
+
 }

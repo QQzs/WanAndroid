@@ -19,4 +19,8 @@ interface ArticleModel {
 
     fun articleList(page: Int , articleListener: ResultListener<ArticleList>?)
 
+    fun collectArticle(id: Int , articleListener: ResultListener<Any>?)
+
+    fun unCollectArticle(id: Int , articleListener: ResultListener<Any>?)
+
 }
