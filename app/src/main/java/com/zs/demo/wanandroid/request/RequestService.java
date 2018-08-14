@@ -1,7 +1,9 @@
 package com.zs.demo.wanandroid.request;
 
 
-import com.zs.demo.wanandroid.modules.hot.bean.HotBean;
+import com.zs.demo.wanandroid.modules.hot.bean.BookmarkBean;
+import com.zs.demo.wanandroid.modules.hot.bean.CommonListBean;
+import com.zs.demo.wanandroid.modules.hot.bean.HotListBean;
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean;
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean;
 import com.zs.demo.wanandroid.modules.type.bean.TreeBean;
@@ -110,21 +112,21 @@ public interface RequestService {
      * @return FriendListResponse
      */
     @GET("/lg/collect/usertools/json")
-    Observable<BaseResponse<List<HotBean>>> getBookmarkList();
+    Observable<BookmarkBean> getBookmarkList();
 
     /**
      * 大家都在搜
      * http://www.wanandroid.com/hotkey/json
      */
     @GET("/hotkey/json")
-    Observable<BaseResponse<List<HotBean>>> getHotKeyList();
+    Observable<HotListBean> getHotKeyList();
 
     /**
      * 常用网站
      * http://www.wanandroid.com/friend/json
      */
     @GET("/friend/json")
-    Observable<BaseResponse<List<HotBean>>> getCommonList();
+    Observable<CommonListBean> getCommonList();
 
 
 

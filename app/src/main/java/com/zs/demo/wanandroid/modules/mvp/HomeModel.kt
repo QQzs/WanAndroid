@@ -1,7 +1,10 @@
 package com.zs.demo.wanandroid.modules.mvp
 
 import com.zs.demo.wanandroid.modules.article.model.ArticleModel
+import com.zs.demo.wanandroid.modules.hot.bean.BookmarkBean
+import com.zs.demo.wanandroid.modules.hot.bean.CommonListBean
 import com.zs.demo.wanandroid.modules.hot.bean.HotBean
+import com.zs.demo.wanandroid.modules.hot.bean.HotListBean
 import com.zs.demo.wanandroid.modules.hot.listener.HotResultListener
 import com.zs.demo.wanandroid.modules.hot.model.HotModel
 import com.zs.demo.wanandroid.modules.type.bean.TreeBean
@@ -12,8 +15,10 @@ import com.zs.demo.wanandroid.request.BaseImpl
 import com.zs.demo.wanandroid.request.BaseResponse
 import com.zs.demo.wanandroid.request.DefaultObserver
 import com.zs.demo.wanandroid.request.RequestApi
+import com.zs.demo.wanandroid.request.more.MoreObserver
 import com.zs.project.bean.android.ArticleBanner
 import com.zs.project.bean.android.ArticleList
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -70,49 +75,40 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
 
     override fun getHotList(hotResultListener: HotResultListener){
 
-        var bookmarkResult: MutableList<HotBean>? = null
-        var hotResult: MutableList<HotBean>? = null
-        var commonResult: MutableList<HotBean>? = null
+        var bookmarkResult: MutableList<HotBean> = mutableListOf()
+        var hotResult: MutableList<HotBean> = mutableListOf()
+        var commonResult: MutableList<HotBean> = mutableListOf()
 
-        RequestApi.getInstance().service
+        var bookObservable = RequestApi.getInstance().service
                 .bookmarkList
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-        RequestApi.getInstance().service
-                .bookmarkList
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DefaultObserver<BaseResponse<MutableList<HotBean>>>(mBaseImpl){
-                    override fun onSuccess(response: BaseResponse<MutableList<HotBean>>?) {
-                        bookmarkResult = response?.data
-                    }
-
-                })
-
-        RequestApi.getInstance().service
+        var hotObservable = RequestApi.getInstance().service
                 .hotKeyList
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DefaultObserver<BaseResponse<MutableList<HotBean>>>(mBaseImpl){
-                    override fun onSuccess(response: BaseResponse<MutableList<HotBean>>?) {
-                        hotResult = response?.data
-                    }
-
-                })
-
-        RequestApi.getInstance().service
+        var commonObservable = RequestApi.getInstance().service
                 .commonList
+
+        Observable.merge(bookObservable,hotObservable,commonObservable)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : DefaultObserver<BaseResponse<MutableList<HotBean>>>(mBaseImpl){
-                    override fun onSuccess(response: BaseResponse<MutableList<HotBean>>?) {
-                        commonResult = response?.data
+                .subscribe(object : MoreObserver<Any>(mBaseImpl){
+                    override fun onSuccess(response: Any?) {
+                        if (response is BookmarkBean){
+                            response?.data?.run {
+                                bookmarkResult = response?.data!!
+                            }
+                        }else if (response is HotListBean){
+                            response?.data?.run {
+                                hotResult = response?.data!!
+                            }
+
+                        }else if (response is CommonListBean){
+                            response?.data?.run {
+                                commonResult = response?.data!!
+                            }
+                            hotResultListener?.onSuccess(bookmarkResult,hotResult,commonResult)
+                        }
+
                     }
-
                 })
-
-        hotResultListener?.onSuccess(bookmarkResult,hotResult,commonResult)
 
     }
 
