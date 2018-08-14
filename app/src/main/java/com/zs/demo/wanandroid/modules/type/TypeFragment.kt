@@ -44,6 +44,12 @@ class TypeFragment: BaseFragment(), TypeView{
 
         })
 
+        mAdapter?.setOnItemChildClickListener { adapter, view, position ->
+            var treeBean = adapter.getItem(position)
+//            activity?.toast("")
+
+        }
+
     }
 
     override fun initData() {

@@ -6,5 +6,6 @@ object FieldUtil {
     const val ARTICLE = "article"
     const val TYPE = "type"
     const val HOT = "hot"
+    const val WEB_URL = "web_url"
 
 }

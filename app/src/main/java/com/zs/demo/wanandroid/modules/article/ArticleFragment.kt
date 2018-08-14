@@ -7,6 +7,7 @@ import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseFragment
 import com.zs.demo.wanandroid.event.BannerEvent
 import com.zs.demo.wanandroid.listener.ItemClickListener
+import com.zs.demo.wanandroid.modules.WebViewActivity
 import com.zs.demo.wanandroid.modules.article.adapter.ArticleAdapter
 import com.zs.demo.wanandroid.modules.article.view.ArticleView
 import com.zs.demo.wanandroid.modules.login.LoginActivity
@@ -52,6 +53,7 @@ class ArticleFragment : BaseFragment() , ArticleView , ItemClickListener{
         recycler_article?.setLoadingListener(object : CXRecyclerView.LoadingListener{
             override fun onRefresh() {
                 mStartNum = 0
+                mPresenter?.getBanner()
                 mPresenter?.getArticle(mStartNum)
             }
 
@@ -113,6 +115,9 @@ class ArticleFragment : BaseFragment() , ArticleView , ItemClickListener{
     override fun onItemClick(position: Int, data: Any?, view: View?) {
         var article = data as Article
         when(view?.id){
+            R.id.rl_layout ->{
+                activity?.startActivity<WebViewActivity>(FieldUtil.WEB_URL to article.link)
+            }
             R.id.homeItemLike ->{
                 if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))){
                     activity?.startActivity<LoginActivity>(FieldUtil.LOGIN to FieldUtil.LOGIN)

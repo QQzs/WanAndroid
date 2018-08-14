@@ -60,8 +60,6 @@ class MainActivity : BaseActivity() {
                     this@MainActivity.startActivity<LoginActivity>(FieldUtil.LOGIN to FieldUtil.LOGIN)
                 } else {
                     SpUtil.clearAll()
-//                    navigationView.getHeaderView(0).navigationViewUsername.text = getString(R.string.not_login)
-//                    text = getString(R.string.goto_login)
                     EventBus.getDefault().post(LoginEvent(FieldUtil.LOGIN,false))
                 }
             }
@@ -99,12 +97,12 @@ class MainActivity : BaseActivity() {
     private val onDrawerNavigationItemSelectedListener =
             NavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
-                    R.id.nav_like -> {
-
-                    }
-                    R.id.nav_about -> {
-
-                    }
+//                    R.id.nav_like -> {
+//
+//                    }
+//                    R.id.nav_about -> {
+//
+//                    }
                 }
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true
