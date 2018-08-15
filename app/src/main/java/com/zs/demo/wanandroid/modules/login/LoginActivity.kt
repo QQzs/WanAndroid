@@ -47,6 +47,8 @@ class LoginActivity : BaseActivity(), LoginView{
 
         edit_text_name?.filters = arrayOf(emojiFilter,inputFilter)
 
+        edit_text_name?.setSelection(edit_text_name?.text.toString().length)
+
     }
 
     var emojiFilter: InputFilter = object : InputFilter {
