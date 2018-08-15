@@ -5,7 +5,7 @@ import android.view.View
 import com.zs.demo.wanandroid.Constant
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseFragment
-import com.zs.demo.wanandroid.event.BannerEvent
+import com.zs.demo.wanandroid.event.LoginEvent
 import com.zs.demo.wanandroid.listener.ItemClickListener
 import com.zs.demo.wanandroid.modules.WebViewActivity
 import com.zs.demo.wanandroid.modules.article.adapter.ArticleAdapter
@@ -137,9 +137,9 @@ class ArticleFragment : BaseFragment() , ArticleView , ItemClickListener{
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun initBanner(event: BannerEvent){
-        if (event.mInit as Boolean){
-        }
+    fun loginResult(event: LoginEvent){
+        mStartNum = 0
+        mPresenter?.getArticle(mStartNum)
     }
 
     override fun onDestroy() {

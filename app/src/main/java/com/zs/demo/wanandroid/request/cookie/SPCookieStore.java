@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import com.zs.demo.wanandroid.Constant;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,7 +28,6 @@ import okhttp3.HttpUrl;
  */
 public class SPCookieStore implements CookieStore {
 
-    private static final String COOKIE_PREFS = "zs_data";           //cookie使用prefs保存
     private static final String COOKIE_NAME_PREFIX = "cookie_";         //cookie持久化的统一前缀
 
     /**
@@ -40,7 +41,7 @@ public class SPCookieStore implements CookieStore {
     private final SharedPreferences cookiePrefs;
 
     public SPCookieStore(Context context) {
-        cookiePrefs = context.getSharedPreferences(COOKIE_PREFS, Context.MODE_PRIVATE);
+        cookiePrefs = context.getSharedPreferences(Constant.APP_DATA, Context.MODE_PRIVATE);
         cookies = new HashMap<>();
 
         //将持久化的cookies缓存到内存中,数据结构为 Map<Url.host, Map<CookieToken, Cookie>>

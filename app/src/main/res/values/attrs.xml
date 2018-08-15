@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- 有边框和背景的TextView -->
+    <declare-styleable name="BorderTextView">
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="strokeColor" format="color"/>
+        <attr name="contentBackColor" format="color"/>
+        <attr name="followTextColor" format="boolean"/>
+    </declare-styleable>
 
 </resources>
