@@ -60,6 +60,7 @@
     <!-- navigation -->
     <string name="my_bookmark">我的书签</string>
     <string name="my_like">我喜欢的</string>
+    <string name="my_task">我的任务</string>
     <string name="my_about">关于我们</string>
     <string name="about_content"><![CDATA[
         <h2>网站内容</h2>

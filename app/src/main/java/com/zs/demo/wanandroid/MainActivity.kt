@@ -12,6 +12,7 @@ import com.zs.demo.wanandroid.event.LoginEvent
 import com.zs.demo.wanandroid.modules.article.ArticleFragment
 import com.zs.demo.wanandroid.modules.hot.HotFragment
 import com.zs.demo.wanandroid.modules.login.LoginActivity
+import com.zs.demo.wanandroid.modules.task.TaskActivity
 import com.zs.demo.wanandroid.modules.type.TypeFragment
 import com.zs.demo.wanandroid.utils.FieldUtil
 import com.zs.demo.wanandroid.utils.SpUtil
@@ -54,6 +55,9 @@ class MainActivity : BaseActivity() {
             toggle.syncState()
         }
         initNavigation()
+        navigationView.run {
+            setNavigationItemSelectedListener(onDrawerNavigationItemSelectedListener)
+        }
         navigationView.getHeaderView(0).navigationViewLogout?.run {
             setOnClickListener {
                 if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))) {
@@ -97,12 +101,15 @@ class MainActivity : BaseActivity() {
     private val onDrawerNavigationItemSelectedListener =
             NavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
-//                    R.id.nav_like -> {
-//
-//                    }
-//                    R.id.nav_about -> {
-//
-//                    }
+                    R.id.nav_like -> {
+
+                    }
+                    R.id.nav_task ->{
+                        startActivity<TaskActivity>()
+                    }
+                    R.id.nav_about -> {
+
+                    }
                 }
                 drawerLayout.closeDrawer(GravityCompat.START)
                 true

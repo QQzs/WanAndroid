@@ -3,14 +3,20 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:showIn="navigation_view">
 
-    <!--<item-->
-        <!--android:id="@+id/nav_like"-->
-        <!--android:icon="@drawable/ic_action_my_like"-->
-        <!--android:title="@string/my_like"/>-->
+    <item
+        android:id="@+id/nav_like"
+        android:icon="@drawable/ic_action_my_like"
+        android:title="@string/my_like"/>
 
-    <!--<item-->
-        <!--android:id="@+id/nav_about"-->
-        <!--android:icon="@drawable/ic_action_about"-->
-        <!--android:title="@string/my_about"/>-->
+    <item
+        android:id="@+id/nav_task"
+        android:icon="@mipmap/icon_task"
+        android:title="@string/my_task"/>
+
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/ic_action_about"
+        android:title="@string/my_about"
+        />
 
 </menu>
