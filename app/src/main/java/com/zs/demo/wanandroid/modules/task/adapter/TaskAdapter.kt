@@ -9,6 +9,7 @@ import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.modules.task.bean.TaskItemBean
 import com.zs.demo.wanandroid.view.treeview.Node
 import com.zs.demo.wanandroid.view.treeview.TreeRecyclerAdapter
+import kotlinx.android.synthetic.main.item_task_layout.view.*
 
 /**
  *
@@ -39,7 +40,25 @@ class TaskAdapter : TreeRecyclerAdapter {
 
     inner class TaskHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindData(node: Node<*, *>?){
+        fun bindData(node: Node<*, *>?) = with(itemView){
+
+            node?.run {
+                if (icon == -1){
+                    iv_task_arrow?.visibility = View.GONE
+                }else{
+                    iv_task_arrow?.visibility = View.VISIBLE
+                    iv_task_arrow?.setImageResource(icon)
+                }
+
+                if ("-1" == getpId()){
+                    rl_task_date?.visibility = View.VISIBLE
+                    ll_task_content?.visibility = View.GONE
+
+                }else{
+                    rl_task_date?.visibility = View.GONE
+                    ll_task_content?.visibility = View.VISIBLE
+                }
+            }
 
 
         }

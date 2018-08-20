@@ -1,19 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:minHeight="100dp">
+    >
 
-    <TextView
+    
+    <RelativeLayout
+        android:id="@+id/rl_task_date"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/loading_color"
-        android:text="sss"
-        android:textColor="@color/white"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:background="@color/task_item_color"
+        android:layout_height="36dp">
+
+        <TextView
+            android:id="@+id/tv_task_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018"
+            android:textSize="@dimen/fontsize14"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:id="@+id/iv_task_arrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/tree_ex"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/ll_task_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_task_date">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/tv_task_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2018"
+                android:textSize="@dimen/fontsize15"
+                android:textColor="@color/font_default"
+                android:layout_marginLeft="20dp"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_task_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ddd"
+            android:textSize="@dimen/fontsize15"
+            android:textColor="@color/font_default"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
+            />
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
