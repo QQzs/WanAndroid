@@ -10,30 +10,24 @@ About:
 —————————————————————————————————————
  */
 
+
 data class TaskBean(
-    var doneList: List<DoneData?>?,
-    var todoList: List<TodoData?>?,
-    var type: Int?
+    var curPage: Int?,
+    var datas: List<TaskItemBean?>?,
+    var offset: Int?,
+    var over: Boolean?,
+    var pageCount: Int?,
+    var size: Int?,
+    var total: Int?
 )
 
-data class DoneData(
-    var date: Long?,
-    var todoList: List<Todo?>?
-)
-
-
-data class TodoData(
-    var date: Long?,
-    var todoList: List<Todo?>?
-)
-
-data class Todo(
+data class TaskItemBean(
     var completeDate: Any?,
     var completeDateStr: String?,
     var content: String?,
     var date: Long?,
     var dateStr: String?,
-    var id: Int?,
+    var id: String?,
     var status: Int?,
     var title: String?,
     var type: Int?,

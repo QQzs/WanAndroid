@@ -26,16 +26,6 @@ class TaskPresenter: BasePresenter{
         this.mModel = TaskModelImpl(baseImpl)
     }
 
-    fun getNotDoTask(page: Int){
-
-        mModel?.getNotDoTask(page , object : ResultListener<TaskBean>{
-            override fun onSuccess(t: TaskBean?) {
-                mView?.getTaskNotDoSuccess(t)
-            }
-
-        })
-
-    }
 
     fun getToDoTask(page: Int){
         mModel?.getToDoTask(page , object : ResultListener<TaskBean>{
@@ -43,6 +33,17 @@ class TaskPresenter: BasePresenter{
                 mView?.getTaskToDoSuccess(t)
             }
         })
+    }
+
+    fun getDoneTask(page: Int){
+
+        mModel?.getDoneTask(page , object : ResultListener<TaskBean>{
+            override fun onSuccess(t: TaskBean?) {
+                mView?.getTaskDoneSuccess(t)
+            }
+
+        })
+
     }
 
     override fun onDestroyView() {

@@ -14,8 +14,10 @@ About:
  */
 interface TaskModel{
 
-    fun getNotDoTask(page: Int , taskListener: ResultListener<TaskBean>?)
+    fun addTask(map: HashMap<String, String> , taskListener: ResultListener<Any>?)
 
     fun getToDoTask(page: Int , taskListener: ResultListener<TaskBean>?)
+
+    fun getDoneTask(page: Int , taskListener: ResultListener<TaskBean>?)
 
 }

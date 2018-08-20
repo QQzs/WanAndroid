@@ -39,7 +39,7 @@ public abstract class TreeRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
             OnTreeNodeClickListener onTreeNodeClickListener) {
         this.onTreeNodeClickListener = onTreeNodeClickListener;
     }
-    public TreeRecyclerAdapter(RecyclerView mTree, Context context, List<Node> datas,
+    public TreeRecyclerAdapter(Context context, List<Node> datas,
                                int defaultExpandLevel, int iconExpand, int iconNoExpand) {
 
         this.iconExpand = iconExpand;
@@ -65,15 +65,14 @@ public abstract class TreeRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
 
     /**
      *
-     * @param mTree
      * @param context
      * @param datas
      * @param defaultExpandLevel
      *            默认展开几级树
      */
-    public TreeRecyclerAdapter(RecyclerView mTree, Context context, List<Node> datas,
+    public TreeRecyclerAdapter(Context context, List<Node> datas,
                                int defaultExpandLevel) {
-        this(mTree,context,datas,defaultExpandLevel,-1,-1);
+        this(context,datas,defaultExpandLevel,-1,-1);
     }
 
 

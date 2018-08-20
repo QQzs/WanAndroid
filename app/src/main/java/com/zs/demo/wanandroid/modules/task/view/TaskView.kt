@@ -14,8 +14,8 @@ About:
  */
 interface TaskView : BaseView {
 
-    fun getTaskNotDoSuccess(data: TaskBean?)
-
     fun getTaskToDoSuccess(data: TaskBean?)
+
+    fun getTaskDoneSuccess(data: TaskBean?)
 
 }

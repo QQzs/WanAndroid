@@ -130,12 +130,35 @@ public interface RequestService {
     Observable<CommonListBean> getCommonList();
 
      /**
-     * 玩android 获取任务
+     * 玩android 获取未完成任务
      * http://www.wanandroid.com/lg/todo/listnotdo/0/json/1
      * @param page page
      */
     @POST("/lg/todo/listnotdo/0/json/{page}")
-    Observable<BaseResponse<TaskBean>> getTask(@Path("page") int page);
+    Observable<BaseResponse<TaskBean>> getToDoTask(@Path("page") int page);
+
+    /**
+     * 玩android 获取已完成任务
+     * http://www.wanandroid.com/lg/todo/listdone/0/json/1
+     * @param page page
+     */
+    @POST("/lg/todo/listdone/0/json/{page}")
+    Observable<BaseResponse<TaskBean>> getDoneTask(@Path("page") int page);
+
+    /**
+     * 玩android 新增一条任务
+     * http://www.wanandroid.com/lg/todo/add/json
+     */
+    @FormUrlEncoded
+    @POST("/lg/todo/add/json")
+    Observable<BaseResponse<Object>> addTask(@Field("title") String title,
+                                             @Field("content") String content,
+                                             @Field("date") String date,
+                                             @Field("type") String type);
+
+
+
+
 
     /**
      *

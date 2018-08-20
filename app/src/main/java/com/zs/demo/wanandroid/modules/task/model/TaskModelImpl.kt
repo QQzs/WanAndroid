@@ -21,10 +21,27 @@ About:
  */
 class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
 
-    override fun getNotDoTask(page: Int, taskListener: ResultListener<TaskBean>?) {
+    override fun addTask(map: HashMap<String, String>, taskListener: ResultListener<Any>?) {
+
+    }
+
+    override fun getToDoTask(page: Int, taskListener: ResultListener<TaskBean>?) {
+        RequestApi.getInstance().service
+                .getToDoTask(page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : DefaultObserver<BaseResponse<TaskBean>>(mBaseImpl){
+                    override fun onSuccess(response: BaseResponse<TaskBean>?) {
+                        taskListener?.onSuccess(response?.data)
+                    }
+
+                })
+    }
+
+    override fun getDoneTask(page: Int, taskListener: ResultListener<TaskBean>?) {
 
         RequestApi.getInstance().service
-                .getTask(page)
+                .getDoneTask(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : DefaultObserver<BaseResponse<TaskBean>>(mBaseImpl){
@@ -34,10 +51,6 @@ class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
 
                 })
 
-
-    }
-
-    override fun getToDoTask(page: Int, taskListener: ResultListener<TaskBean>?) {
 
     }
 
