@@ -6,7 +6,29 @@
     <com.zs.demo.wanandroid.view.cxrecyclerview.CXRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_recycler_bottom">
     </com.zs.demo.wanandroid.view.cxrecyclerview.CXRecyclerView>
+
+    <LinearLayout
+        android:id="@+id/ll_recycler_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tv_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="@string/taskAdd"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fontsize15"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
 
 </RelativeLayout>

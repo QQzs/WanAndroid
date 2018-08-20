@@ -6,6 +6,7 @@ import com.zs.demo.wanandroid.modules.hot.bean.CommonListBean;
 import com.zs.demo.wanandroid.modules.hot.bean.HotListBean;
 import com.zs.demo.wanandroid.modules.login.bean.LoginBean;
 import com.zs.demo.wanandroid.modules.login.bean.RegisterBean;
+import com.zs.demo.wanandroid.modules.task.bean.TaskBean;
 import com.zs.demo.wanandroid.modules.type.bean.TreeBean;
 import com.zs.project.bean.android.ArticleBanner;
 import com.zs.project.bean.android.ArticleList;
@@ -128,7 +129,13 @@ public interface RequestService {
     @GET("/friend/json")
     Observable<CommonListBean> getCommonList();
 
-
+     /**
+     * 玩android 获取任务
+     * http://www.wanandroid.com/lg/todo/listnotdo/0/json/1
+     * @param page page
+     */
+    @POST("/lg/todo/listnotdo/0/json/{page}")
+    Observable<BaseResponse<TaskBean>> getTask(@Path("page") int page);
 
     /**
      *

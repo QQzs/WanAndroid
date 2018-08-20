@@ -80,6 +80,12 @@
     <string name="outside_title">归为站外文章</string>
     <string name="type_null">类别为空</string>
 
+    <!-- task -->
+    <string name="taskNotDo">待办任务</string>
+    <string name="taskToDo">已办任务</string>
+    <string name="taskAdd">新建任务</string>
+
+
     <string name="listview_header_hint_normal">下拉刷新</string>
     <string name="listview_header_hint_release">释放立即刷新</string>
     <string name="listview_header_last_time">上次更新时间：</string>
