@@ -46,10 +46,18 @@ class TaskPresenter: BasePresenter{
 
     }
 
-    fun updateTaskStatus(id: String , status: Int){
+    fun updateTaskStatus(id: String? , status: Int){
         mModel?.updateTaskStatus(id, status , object : ResultListener<Any>{
             override fun onSuccess(t: Any?) {
                 mView?.updateTaskStatusSuccess()
+            }
+        })
+    }
+
+    fun deleteTask(id: String?){
+        mModel?.deleteTask(id, object : ResultListener<Any>{
+            override fun onSuccess(t: Any?) {
+                mView?.deleteTaskSuccess()
             }
         })
     }

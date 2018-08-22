@@ -16,10 +16,13 @@ interface TaskModel{
 
     fun addTask(map: HashMap<String, String> , taskListener: ResultListener<Any>?)
 
+    fun deleteTask(id: String? , taskListener: ResultListener<Any>?)
+
     fun getToDoTask(page: Int , taskListener: ResultListener<TaskBean>?)
 
     fun getDoneTask(page: Int , taskListener: ResultListener<TaskBean>?)
 
-    fun updateTaskStatus(id: String , status: Int , taskListener: ResultListener<Any>?)
+    fun updateTaskStatus(id: String? , status: Int , taskListener: ResultListener<Any>?)
+
 
 }

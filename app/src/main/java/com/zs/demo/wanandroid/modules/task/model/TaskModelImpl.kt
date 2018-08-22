@@ -25,6 +25,19 @@ class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
 
     }
 
+    override fun deleteTask(id: String?, taskListener: ResultListener<Any>?) {
+        RequestApi.getInstance().service
+                .deleteTask(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : DefaultObserver<BaseResponse<Any>>(mBaseImpl){
+                    override fun onSuccess(response: BaseResponse<Any>?) {
+                        taskListener?.onSuccess(response?.data)
+                    }
+
+                })
+    }
+
     override fun getToDoTask(page: Int, taskListener: ResultListener<TaskBean>?) {
         RequestApi.getInstance().service
                 .getToDoTask(page)
@@ -53,7 +66,7 @@ class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
 
     }
 
-    override fun updateTaskStatus(id: String , status: Int, taskListener: ResultListener<Any>?) {
+    override fun updateTaskStatus(id: String? , status: Int, taskListener: ResultListener<Any>?) {
 
         RequestApi.getInstance().service
                 .updateTaskStatus(id , status)
@@ -66,5 +79,7 @@ class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
 
                 })
     }
+
+
 
 }

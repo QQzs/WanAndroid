@@ -161,7 +161,6 @@ public interface RequestService {
      * http://www.wanandroid.com/lg/todo/delete/83/json
      * @param id id
      */
-    @FormUrlEncoded
     @POST("/lg/todo/delete/{id}/json")
     Observable<BaseResponse<Object>> deleteTask(@Path("id") String id);
 

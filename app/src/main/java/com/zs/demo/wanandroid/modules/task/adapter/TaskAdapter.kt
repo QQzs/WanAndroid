@@ -65,6 +65,11 @@ class TaskAdapter : TreeRecyclerAdapter{
                     iv_task_arrow?.visibility = View.VISIBLE
                     iv_task_arrow?.setImageResource(icon)
                 }
+                if (mType == 0){
+                    iv_task_action?.setImageResource(R.mipmap.ic_task_over)
+                }else{
+                    iv_task_action?.setImageResource(R.mipmap.ic_task_recall)
+                }
 
                 if ("-1" == getpId()){
                     rl_task_date?.visibility = View.VISIBLE
@@ -82,7 +87,6 @@ class TaskAdapter : TreeRecyclerAdapter{
                         tv_task_content?.visibility = View.VISIBLE
                         tv_task_content?.text = task.content
                     }
-
                 }
             }
 

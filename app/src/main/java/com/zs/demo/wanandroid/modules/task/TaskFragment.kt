@@ -105,6 +105,7 @@ class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
 
     override fun deleteTaskSuccess() {
         super.deleteTaskSuccess()
+        EventBus.getDefault().post(RefreshEvent("task"))
     }
 
     private fun updateData(data: TaskBean?){
@@ -139,13 +140,13 @@ class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
         when(view?.id){
             R.id.iv_task_action ->{
                 if (mType == 0){
-                    mPresenter?.updateTaskStatus(task.id!!,1)
+                    mPresenter?.updateTaskStatus(task.id,1)
                 }else{
-                    mPresenter?.updateTaskStatus(task.id!!,0)
+                    mPresenter?.updateTaskStatus(task.id,0)
                 }
             }
             R.id.iv_task_delete ->{
-
+                mPresenter?.deleteTask(task.id)
             }
         }
 
