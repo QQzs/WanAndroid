@@ -14,8 +14,14 @@ About:
  */
 interface TaskView : BaseView {
 
-    fun getTaskToDoSuccess(data: TaskBean?)
+    fun getTaskToDoSuccess(data: TaskBean?){}
 
-    fun getTaskDoneSuccess(data: TaskBean?)
+    fun getTaskDoneSuccess(data: TaskBean?){}
+
+    fun addTaskSuccess(){}
+
+    fun deleteTaskSuccess(){}
+
+    fun updateTaskStatusSuccess(){}
 
 }

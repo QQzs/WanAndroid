@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseFragment
+import com.zs.demo.wanandroid.event.RefreshEvent
+import com.zs.demo.wanandroid.listener.ItemClickListener
 import com.zs.demo.wanandroid.modules.task.adapter.TaskAdapter
 import com.zs.demo.wanandroid.modules.task.bean.TaskBean
 import com.zs.demo.wanandroid.modules.task.bean.TaskItemBean
@@ -14,6 +16,9 @@ import com.zs.demo.wanandroid.utils.RecyclerViewUtil
 import com.zs.demo.wanandroid.view.cxrecyclerview.CXRecyclerView
 import com.zs.demo.wanandroid.view.treeview.Node
 import kotlinx.android.synthetic.main.recycler_view_layout.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  *
@@ -24,7 +29,7 @@ Time：10:57
 About:
 —————————————————————————————————————
  */
-class TaskFragment: BaseFragment() , TaskView{
+class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
 
     var mType: Int = 0
     var mPage: Int = 1
@@ -47,6 +52,7 @@ class TaskFragment: BaseFragment() , TaskView{
     }
 
     override fun initView() {
+        EventBus.getDefault().register(this)
         arguments?.run {
             mType = getInt(FieldUtil.TASK_TYPE)
         }
@@ -69,7 +75,7 @@ class TaskFragment: BaseFragment() , TaskView{
 
         })
 
-        mAdapter = TaskAdapter(mType,context,mNodes,0,R.mipmap.ic_tree_up,R.mipmap.ic_tree_down)
+        mAdapter = TaskAdapter(mType,context,this,mNodes,0,R.mipmap.ic_tree_up,R.mipmap.ic_tree_down)
         RecyclerViewUtil.initNoDecoration(context,recycler_view,mAdapter)
 
     }
@@ -92,23 +98,29 @@ class TaskFragment: BaseFragment() , TaskView{
         updateData(data)
     }
 
+    override fun updateTaskStatusSuccess() {
+        super.updateTaskStatusSuccess()
+        EventBus.getDefault().post(RefreshEvent("task"))
+    }
+
+    override fun deleteTaskSuccess() {
+        super.deleteTaskSuccess()
+    }
+
     private fun updateData(data: TaskBean?){
         mNodes.clear()
         data?.datas?.apply {
             for(index in indices){
-                var taskItemBean = get(index)
-                var dataStr = taskItemBean?.dateStr
-                if (index == 0){
-                    mNodes?.add(Node<String,TaskItemBean>(dataStr, "-1", dataStr))
-                    mNodes?.add(Node<String,TaskItemBean>(taskItemBean?.id, dataStr, taskItemBean))
+                var currentItem = get(index)
+                var lastItem = if (index == 0) null else get(index -1)
+                var currentDate = if (mType == 0) currentItem?.dateStr else currentItem?.completeDateStr
+                var lastDate = if (mType == 0) lastItem?.dateStr else lastItem?.completeDateStr
+
+                if (index > 0 && currentDate.equals(lastDate)){
+                    mNodes?.add(Node<String,TaskItemBean>(currentItem?.id, currentDate, currentItem))
                 }else{
-                    var lastItem = get(index - 1)
-                    if (lastItem?.dateStr.equals(taskItemBean?.dateStr)){
-                        mNodes?.add(Node<String,TaskItemBean>(taskItemBean?.id, dataStr, taskItemBean))
-                    }else{
-                        mNodes?.add(Node<String,TaskItemBean>(dataStr, "-1", dataStr))
-                        mNodes?.add(Node<String,TaskItemBean>(taskItemBean?.id, dataStr, taskItemBean))
-                    }
+                    mNodes?.add(Node<String,TaskItemBean>(currentDate, "-1", currentDate))
+                    mNodes?.add(Node<String,TaskItemBean>(currentItem?.id, currentDate, currentItem))
                 }
             }
         }
@@ -119,6 +131,37 @@ class TaskFragment: BaseFragment() , TaskView{
             mAdapter?.appendData(mNodes as List<Node<Any, Any>>?)
             recycler_view?.loadMoreComplete()
         }
+    }
+
+    override fun onItemClick(position: Int, data: Any?, view: View?) {
+        var node = data as Node<String, TaskItemBean>
+        var task = node.getBean()
+        when(view?.id){
+            R.id.iv_task_action ->{
+                if (mType == 0){
+                    mPresenter?.updateTaskStatus(task.id!!,1)
+                }else{
+                    mPresenter?.updateTaskStatus(task.id!!,0)
+                }
+            }
+            R.id.iv_task_delete ->{
+
+            }
+        }
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun refreshData(event: RefreshEvent){
+        if ("task" == event.mFlag){
+            initData()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter?.onDestroyView()
+        EventBus.getDefault().unregister(this)
     }
 
 }

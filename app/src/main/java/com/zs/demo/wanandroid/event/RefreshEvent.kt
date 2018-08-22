@@ -9,11 +9,11 @@ Time：13:40
 About:
 —————————————————————————————————————
  */
-class BannerEvent{
+class RefreshEvent{
 
-    var mInit: Boolean? = null
+    var mFlag: String? = null
 
-    constructor(mInit: Boolean?) {
-        this.mInit = mInit
+    constructor(mFlag: String?) {
+        this.mFlag = mFlag
     }
 }

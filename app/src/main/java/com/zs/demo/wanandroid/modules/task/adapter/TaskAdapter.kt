@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.zs.demo.wanandroid.R
+import com.zs.demo.wanandroid.listener.ItemClickListener
 import com.zs.demo.wanandroid.modules.task.bean.TaskItemBean
 import com.zs.demo.wanandroid.view.treeview.Node
 import com.zs.demo.wanandroid.view.treeview.TreeRecyclerAdapter
@@ -21,16 +22,19 @@ Time：16:10
 About:
 —————————————————————————————————————
  */
-class TaskAdapter : TreeRecyclerAdapter {
+class TaskAdapter : TreeRecyclerAdapter{
 
     var mType: Int = 0
+    var mItemClickListener: ItemClickListener? = null
     constructor(type: Int,
                 context: Context?,
+                itemClickListener: ItemClickListener?,
                 datas: List<Node<String, TaskItemBean>>,
                 defaultExpandLevel: Int,
                 iconExpand: Int,
                 iconNoExpand: Int) : super(context, datas, defaultExpandLevel, iconExpand, iconNoExpand){
         this.mType = type
+        this.mItemClickListener = itemClickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -41,6 +45,12 @@ class TaskAdapter : TreeRecyclerAdapter {
     override fun onBindViewHolder(node: Node<*, *>?, holder: RecyclerView.ViewHolder?, position: Int) {
         var taskHolder = holder as TaskHolder
         taskHolder?.bindData(node)
+        taskHolder?.itemView?.iv_task_action?.setOnClickListener {
+            mItemClickListener?.onItemClick(position , node , taskHolder?.itemView?.iv_task_action)
+        }
+        taskHolder?.itemView?.iv_task_delete?.setOnClickListener {
+            mItemClickListener?.onItemClick(position , node , taskHolder?.itemView?.iv_task_delete)
+        }
 
     }
 

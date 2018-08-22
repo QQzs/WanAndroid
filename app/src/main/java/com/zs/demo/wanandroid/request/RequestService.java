@@ -156,6 +156,25 @@ public interface RequestService {
                                              @Field("date") String date,
                                              @Field("type") String type);
 
+    /**
+     * 玩android 删除一条任务
+     * http://www.wanandroid.com/lg/todo/delete/83/json
+     * @param id id
+     */
+    @FormUrlEncoded
+    @POST("/lg/todo/delete/{id}/json")
+    Observable<BaseResponse<Object>> deleteTask(@Path("id") String id);
+
+
+    /**
+     * 玩android 更新任务的状态
+     * http://www.wanandroid.com/lg/todo/done/80/json
+     * @param id id
+     * @param status status
+     */
+    @FormUrlEncoded
+    @POST("/lg/todo/done/{id}/json")
+    Observable<BaseResponse<Object>> updateTaskStatus(@Path("id") String id , @Field("status") int status);
 
 
 

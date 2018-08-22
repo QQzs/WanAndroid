@@ -51,7 +51,20 @@ class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
 
                 })
 
+    }
 
+    override fun updateTaskStatus(id: String , status: Int, taskListener: ResultListener<Any>?) {
+
+        RequestApi.getInstance().service
+                .updateTaskStatus(id , status)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : DefaultObserver<BaseResponse<Any>>(mBaseImpl){
+                    override fun onSuccess(response: BaseResponse<Any>?) {
+                        taskListener?.onSuccess(response?.data)
+                    }
+
+                })
     }
 
 }

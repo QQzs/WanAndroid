@@ -20,4 +20,6 @@ interface TaskModel{
 
     fun getDoneTask(page: Int , taskListener: ResultListener<TaskBean>?)
 
+    fun updateTaskStatus(id: String , status: Int , taskListener: ResultListener<Any>?)
+
 }
