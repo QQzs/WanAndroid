@@ -12,8 +12,16 @@ About:
 class RefreshEvent{
 
     var mFlag: String? = null
+    var mType: String? = null
 
     constructor(mFlag: String?) {
         this.mFlag = mFlag
     }
+
+    constructor(mFlag: String?, mType: String?) {
+        this.mFlag = mFlag
+        this.mType = mType
+    }
+
+
 }

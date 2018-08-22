@@ -6,6 +6,7 @@ import com.zs.demo.wanandroid.modules.task.view.TaskView
 import com.zs.demo.wanandroid.mvp.BasePresenter
 import com.zs.demo.wanandroid.mvp.ResultListener
 import com.zs.demo.wanandroid.request.BaseImpl
+import java.util.*
 
 /**
  *
@@ -53,6 +54,16 @@ class TaskPresenter: BasePresenter{
             }
         })
     }
+
+    fun addTask(map: HashMap<String, String>){
+        mModel?.addTask(map,object : ResultListener<Any>{
+            override fun onSuccess(t: Any?) {
+                mView?.addTaskSuccess()
+            }
+        })
+
+    }
+
 
     fun deleteTask(id: String?){
         mModel?.deleteTask(id, object : ResultListener<Any>{

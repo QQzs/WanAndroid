@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.recycler_view_layout.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import org.jetbrains.anko.startActivity
 
 /**
  *
@@ -58,6 +59,7 @@ class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
         }
         if (mType == 0){
             tv_bottom?.visibility = View.VISIBLE
+            tv_bottom?.setOnClickListener(this)
         }else{
             tv_bottom?.visibility = View.GONE
         }
@@ -100,12 +102,12 @@ class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
 
     override fun updateTaskStatusSuccess() {
         super.updateTaskStatusSuccess()
-        EventBus.getDefault().post(RefreshEvent("task"))
+        EventBus.getDefault().post(RefreshEvent("task","all"))
     }
 
     override fun deleteTaskSuccess() {
         super.deleteTaskSuccess()
-        EventBus.getDefault().post(RefreshEvent("task"))
+        EventBus.getDefault().post(RefreshEvent("task","all"))
     }
 
     private fun updateData(data: TaskBean?){
@@ -152,10 +154,23 @@ class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
 
     }
 
+    override fun onClick(view: View?) {
+        super.onClick(view)
+        when(view?.id){
+            R.id.tv_bottom ->{
+                activity?.startActivity<TaskAddActivity>()
+            }
+        }
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun refreshData(event: RefreshEvent){
         if ("task" == event.mFlag){
-            initData()
+            if ("all" == event.mType){
+                initData()
+            }else if ("todo" == event.mType && mType == 0){
+                mPresenter?.getToDoTask(mPage)
+            }
         }
     }
 

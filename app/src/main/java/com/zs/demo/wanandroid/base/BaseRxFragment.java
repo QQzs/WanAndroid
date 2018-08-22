@@ -2,6 +2,7 @@ package com.zs.demo.wanandroid.base;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.zs.demo.wanandroid.request.BaseImpl;
 import com.zs.demo.wanandroid.utils.LoadingDialog;
@@ -18,7 +19,7 @@ import io.reactivex.disposables.Disposable;
  * —————————————————————————————————————
  */
 
-public class BaseRxFragment extends Fragment implements BaseImpl {
+public class BaseRxFragment extends Fragment implements BaseImpl ,View.OnClickListener {
 
     /**
      * 管理Stop取消订阅者
@@ -119,5 +120,10 @@ public class BaseRxFragment extends Fragment implements BaseImpl {
         }
         disposables2Destroy.dispose();
         disposables2Destroy = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

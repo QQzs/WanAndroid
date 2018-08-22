@@ -8,5 +8,9 @@ object FieldUtil {
     const val HOT = "hot"
     const val WEB_URL = "web_url"
     const val TASK_TYPE = "task_type"
+    const val TASK_TITLE = "task_title"
+    const val TASK_DATE = "task_date"
+    const val TASK_CONTENT = "task_content"
+
 
 }
