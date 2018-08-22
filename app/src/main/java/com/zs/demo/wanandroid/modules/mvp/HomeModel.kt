@@ -89,6 +89,35 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
 
     }
 
+    override fun unCollectArticleList(id: Int , originId : Int, articleListener: ResultListener<Any>?) {
+        RequestApi.getInstance().service
+                .unCollectArticleList(id,originId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : DefaultObserver<BaseResponse<Any>>(mBaseImpl){
+
+                    override fun onSuccess(response: BaseResponse<Any>?) {
+                        articleListener?.onSuccess(response?.data)
+                    }
+
+                })
+
+    }
+
+    override fun collectList(page: Int, articleListener: ResultListener<ArticleList>?) {
+        RequestApi.getInstance().service
+                .getCollectList(page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : DefaultObserver<BaseResponse<ArticleList>>(mBaseImpl){
+
+                    override fun onSuccess(response: BaseResponse<ArticleList>?) {
+                        articleListener?.onSuccess(response?.data)
+                    }
+
+                })
+    }
+
     override fun getTypeTree(treeListener: ResultListener<MutableList<TreeBean>>?) {
         RequestApi.getInstance().service
                 .typeTreeList

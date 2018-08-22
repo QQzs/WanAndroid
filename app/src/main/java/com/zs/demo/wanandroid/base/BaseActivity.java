@@ -2,7 +2,6 @@ package com.zs.demo.wanandroid.base;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.zs.demo.wanandroid.Constant;
@@ -17,7 +16,7 @@ import com.zs.demo.wanandroid.utils.SpUtil;
  * About:
  * —————————————————————————————————————
  */
-public abstract class BaseActivity extends BaseRxActivity implements View.OnClickListener{
+public abstract class BaseActivity extends BaseRxActivity{
 
     protected Activity mActivity;
     protected Gson mGson = new Gson();

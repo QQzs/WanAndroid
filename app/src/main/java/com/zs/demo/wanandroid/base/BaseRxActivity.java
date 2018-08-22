@@ -2,6 +2,7 @@ package com.zs.demo.wanandroid.base;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import com.zs.demo.wanandroid.request.BaseImpl;
 import com.zs.demo.wanandroid.utils.LoadingDialog;
@@ -12,7 +13,7 @@ import io.reactivex.disposables.Disposable;
 /**
  * @author Administrator
  */
-public class BaseRxActivity extends AppCompatActivity implements BaseImpl {
+public class BaseRxActivity extends AppCompatActivity implements BaseImpl ,View.OnClickListener {
 
     /**
      * 管理Stop取消订阅者
@@ -115,4 +116,8 @@ public class BaseRxActivity extends AppCompatActivity implements BaseImpl {
         disposables2Destroy = null;
     }
 
+    @Override
+    public void onClick(View view) {
+
+    }
 }

@@ -63,6 +63,16 @@ class HomePresenter: BasePresenter{
         })
     }
 
+    fun getCollectArticle(page: Int){
+        mModel?.collectList(page , object : ResultListener<ArticleList>{
+            override fun onSuccess(t: ArticleList?) {
+                mArticleView?.getCollectSuccess(t)
+            }
+
+        })
+    }
+
+
     fun collectArticle(id: Int){
         mModel?.collectArticle(id , object : ResultListener<Any>{
             override fun onSuccess(t: Any?) {
@@ -74,6 +84,15 @@ class HomePresenter: BasePresenter{
 
     fun unCollectArticle(id: Int){
         mModel?.unCollectArticle(id , object : ResultListener<Any>{
+            override fun onSuccess(t: Any?) {
+                mArticleView?.unCollectArticleSuccess()
+            }
+
+        })
+    }
+
+    fun unCollectArticleList(id: Int , originId : Int){
+        mModel?.unCollectArticleList(id , originId, object : ResultListener<Any>{
             override fun onSuccess(t: Any?) {
                 mArticleView?.unCollectArticleSuccess()
             }

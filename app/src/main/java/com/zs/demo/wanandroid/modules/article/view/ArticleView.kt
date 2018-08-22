@@ -15,12 +15,14 @@ About:
  */
 interface ArticleView: BaseView {
 
-    fun getBannerSuccess(bannerList: MutableList<ArticleBanner>?)
+    fun getBannerSuccess(bannerList: MutableList<ArticleBanner>?){}
 
-    fun getArticleSuccess(articleList: ArticleList?)
+    fun getArticleSuccess(articleList: ArticleList?){}
 
-    fun collectArticleSuccess()
+    fun getCollectSuccess(articleList: ArticleList?){}
 
-    fun unCollectArticleSuccess()
+    fun collectArticleSuccess(){}
+
+    fun unCollectArticleSuccess(){}
 
 }

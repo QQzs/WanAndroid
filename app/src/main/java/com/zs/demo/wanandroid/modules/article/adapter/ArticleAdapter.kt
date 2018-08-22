@@ -17,9 +17,20 @@ Time：14:27
 About:
 —————————————————————————————————————
  */
-class ArticleAdapter(var mItemclickListener: ItemClickListener?= null): RecyclerView.Adapter<ArticleAdapter.ArticleHolder>(){
+class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleHolder>(){
 
+    var mIsCollect: Boolean = false
+    var mItemclickListener: ItemClickListener?= null
     var mData: MutableList<Article> = mutableListOf()
+
+    constructor(mItemclickListener: ItemClickListener?) : this() {
+        this.mItemclickListener = mItemclickListener
+    }
+
+    constructor(mIsCollect: Boolean, mItemclickListener: ItemClickListener?) : this() {
+        this.mIsCollect = mIsCollect
+        this.mItemclickListener = mItemclickListener
+    }
 
     fun initData(data: MutableList<Article>){
         this.mData = data
@@ -37,6 +48,18 @@ class ArticleAdapter(var mItemclickListener: ItemClickListener?= null): Recycler
             notifyItemChanged(position + 2)
         }
     }
+
+    fun deleteData(article: Article){
+        var position: Int = -1
+        for (index in mData.indices){
+            if (mData[index].id == article.id){
+                position = index
+            }
+        }
+        mData.remove(article)
+        notifyItemRemoved(position + 1)
+    }
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleHolder {
@@ -69,7 +92,7 @@ class ArticleAdapter(var mItemclickListener: ItemClickListener?= null): Recycler
                 homeItemAuthor?.text = author
                 homeItemTitle?.text = title
                 homeItemType?.text = chapterName
-                if (collect){
+                if (mIsCollect || collect){
                     homeItemLike?.setImageResource(R.drawable.ic_action_like)
                 }else{
                     homeItemLike?.setImageResource(R.drawable.ic_action_no_like)

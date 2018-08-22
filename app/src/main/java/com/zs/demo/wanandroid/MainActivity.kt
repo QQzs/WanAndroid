@@ -10,6 +10,7 @@ import android.view.View
 import com.zs.demo.wanandroid.base.BaseActivity
 import com.zs.demo.wanandroid.event.LoginEvent
 import com.zs.demo.wanandroid.modules.article.ArticleFragment
+import com.zs.demo.wanandroid.modules.article.CollectActivity
 import com.zs.demo.wanandroid.modules.hot.HotFragment
 import com.zs.demo.wanandroid.modules.login.LoginActivity
 import com.zs.demo.wanandroid.modules.task.TaskActivity
@@ -102,7 +103,7 @@ class MainActivity : BaseActivity() {
             NavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.nav_like -> {
-
+                        startActivity<CollectActivity>()
                     }
                     R.id.nav_task ->{
                         startActivity<TaskActivity>()
