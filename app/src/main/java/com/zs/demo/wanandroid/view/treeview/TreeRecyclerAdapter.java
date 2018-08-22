@@ -81,7 +81,8 @@ public abstract class TreeRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
         Node node = mNodes.get(position);
 //        convertView = getConvertView(node, position, convertView, parent);
         // 设置内边距
-        holder.itemView.setPadding(node.getLevel() * 30, 3, 3, 3);
+//        holder.itemView.setPadding(node.getLevel() * 30, 3, 3, 3);
+        holder.itemView.setPadding(0, 0, 0, 0);
         /**
          * 设置节点点击时，可以展开以及关闭,将事件继续往外公布
          */
@@ -106,9 +107,18 @@ public abstract class TreeRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     /**
      * 清除掉之前数据并刷新  重新添加
      * @param mlists
+     */
+    public void initData(List<Node> mlists){
+        mAllNodes.clear();
+        addData(-1,mlists);
+    }
+
+    /**
+     * 清除掉之前数据并刷新  重新添加
+     * @param mlists
      * @param defaultExpandLevel 默认展开几级列表
      */
-    public void addDataAll(List<Node> mlists, int defaultExpandLevel){
+    public void initData(List<Node> mlists, int defaultExpandLevel){
         mAllNodes.clear();
         addData(-1,mlists,defaultExpandLevel);
     }
@@ -137,7 +147,7 @@ public abstract class TreeRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
      * 添加数据并刷新
      * @param mlists
      */
-    public void addData(List<Node> mlists){
+    public void appendData(List<Node> mlists){
         addData(mlists,defaultExpandLevel);
     }
 

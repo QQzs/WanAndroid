@@ -14,7 +14,7 @@
     <color name="loading_color">#5b52b5</color>
     <color name="loading_textColor">#7d74d4</color>
     <color name="loading_bg_color">#00000000</color>
-    <color name="task_item_color">#FF7076</color>
+    <color name="task_item_color">#88e86060</color>
 
     <color name="tran_bg_color">#77000000</color>
 

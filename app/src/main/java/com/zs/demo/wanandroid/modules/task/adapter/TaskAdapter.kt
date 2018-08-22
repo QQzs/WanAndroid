@@ -2,6 +2,7 @@ package com.zs.demo.wanandroid.modules.task.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +24,12 @@ About:
 class TaskAdapter : TreeRecyclerAdapter {
 
     var mType: Int = 0
-    constructor(type: Int, context: Context?, datas: List<Node<String, TaskItemBean>>, defaultExpandLevel: Int, iconExpand: Int, iconNoExpand: Int) : super(context, datas, defaultExpandLevel, iconExpand, iconNoExpand){
+    constructor(type: Int,
+                context: Context?,
+                datas: List<Node<String, TaskItemBean>>,
+                defaultExpandLevel: Int,
+                iconExpand: Int,
+                iconNoExpand: Int) : super(context, datas, defaultExpandLevel, iconExpand, iconNoExpand){
         this.mType = type
     }
 
@@ -52,11 +58,21 @@ class TaskAdapter : TreeRecyclerAdapter {
 
                 if ("-1" == getpId()){
                     rl_task_date?.visibility = View.VISIBLE
-                    ll_task_content?.visibility = View.GONE
+                    cl_task_item?.visibility = View.GONE
+                    tv_task_date?.text = name
 
                 }else{
                     rl_task_date?.visibility = View.GONE
-                    ll_task_content?.visibility = View.VISIBLE
+                    cl_task_item?.visibility = View.VISIBLE
+                    var task = node.getBean() as TaskItemBean
+                    tv_task_title?.text = task.title
+                    if (TextUtils.isEmpty(task.content)){
+                        tv_task_content?.visibility = View.GONE
+                    }else{
+                        tv_task_content?.visibility = View.VISIBLE
+                        tv_task_content?.text = task.content
+                    }
+
                 }
             }
 

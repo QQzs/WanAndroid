@@ -11,9 +11,9 @@ import com.zs.demo.wanandroid.modules.task.presenter.TaskPresenter
 import com.zs.demo.wanandroid.modules.task.view.TaskView
 import com.zs.demo.wanandroid.utils.FieldUtil
 import com.zs.demo.wanandroid.utils.RecyclerViewUtil
+import com.zs.demo.wanandroid.view.cxrecyclerview.CXRecyclerView
 import com.zs.demo.wanandroid.view.treeview.Node
 import kotlinx.android.synthetic.main.recycler_view_layout.*
-import org.jetbrains.anko.toast
 
 /**
  *
@@ -55,11 +55,26 @@ class TaskFragment: BaseFragment() , TaskView{
         }else{
             tv_bottom?.visibility = View.GONE
         }
+        mPresenter = TaskPresenter(this,this)
+        recycler_view?.setLoadingListener(object : CXRecyclerView.LoadingListener{
+            override fun onRefresh() {
+                mPage = 1
+                initData()
+            }
+
+            override fun onLoadMore() {
+                mPage += 1
+                initData()
+            }
+
+        })
+
+        mAdapter = TaskAdapter(mType,context,mNodes,0,R.mipmap.ic_tree_up,R.mipmap.ic_tree_down)
+        RecyclerViewUtil.initNoDecoration(context,recycler_view,mAdapter)
 
     }
 
     override fun initData() {
-        mPresenter = TaskPresenter(this,this)
 
         if (mType == 0){
             mPresenter?.getToDoTask(mPage)
@@ -70,6 +85,15 @@ class TaskFragment: BaseFragment() , TaskView{
     }
 
     override fun getTaskToDoSuccess(data: TaskBean?) {
+        updateData(data)
+    }
+
+    override fun getTaskDoneSuccess(data: TaskBean?){
+        updateData(data)
+    }
+
+    private fun updateData(data: TaskBean?){
+        mNodes.clear()
         data?.datas?.apply {
             for(index in indices){
                 var taskItemBean = get(index)
@@ -87,20 +111,14 @@ class TaskFragment: BaseFragment() , TaskView{
                     }
                 }
             }
-            mAdapter = TaskAdapter(mType,context,mNodes,0,R.mipmap.tree_ex,R.mipmap.tree_ec)
-            RecyclerViewUtil.init(context,recycler_view,mAdapter)
-
+        }
+        if (mPage == 1){
+            mAdapter?.initData(mNodes as List<Node<Any, Any>>?)
+            recycler_view?.refreshComplete()
+        }else{
+            mAdapter?.appendData(mNodes as List<Node<Any, Any>>?)
+            recycler_view?.loadMoreComplete()
         }
     }
-
-    override fun getTaskDoneSuccess(data: TaskBean?){
-
-        data?.datas?.apply {
-            activity?.toast("done size = $size")
-        }
-
-    }
-
-
 
 }

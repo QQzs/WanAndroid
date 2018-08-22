@@ -51,4 +51,14 @@
 
     <style name="ToolBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- 虚线 -->
+    <style name="dash_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="com.zs.demo.wanandroid:dashWidth">2dp</item>
+        <item name="com.zs.demo.wanandroid:lineColor">#CD2626</item>
+        <item name="com.zs.demo.wanandroid:lineHeight">1dp</item>
+        <item name="com.zs.demo.wanandroid:lineWidth">2dp</item>
+    </style>
+
 </resources>
