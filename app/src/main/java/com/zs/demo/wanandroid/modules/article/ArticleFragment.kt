@@ -33,7 +33,7 @@ import org.jetbrains.anko.toast
  * Date：2018年 08月 08日
  * Time：17:01
  * —————————————————————————————————————
- * About:
+ * About:文章列表
  * —————————————————————————————————————
  */
 class ArticleFragment : BaseFragment() , ArticleView , ItemClickListener{
