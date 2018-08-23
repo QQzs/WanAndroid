@@ -77,7 +77,7 @@ class CollectActivity: BaseActivity(), ArticleView , ItemClickListener {
                 if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))){
                     startActivity<LoginActivity>(FieldUtil.LOGIN to FieldUtil.LOGIN)
                 }else{
-                    mArticleAdapter?.deleteData(article)
+                    mArticleAdapter?.deleteData(position,article)
                     mPresenter?.unCollectArticleList(article.id,article.originId)
                 }
             }

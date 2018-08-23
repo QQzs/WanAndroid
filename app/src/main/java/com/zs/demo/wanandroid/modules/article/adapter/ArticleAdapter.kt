@@ -49,15 +49,13 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleHolder>(){
         }
     }
 
-    fun deleteData(article: Article){
-        var position: Int = -1
-        for (index in mData.indices){
-            if (mData[index].id == article.id){
-                position = index
-            }
-        }
+    fun deleteData(position: Int,article: Article){
         mData.remove(article)
-        notifyItemRemoved(position + 1)
+        var index = position + 1
+        notifyItemRemoved(index)
+        if (position != mData.size) {
+            notifyItemRangeChanged(index, mData.size - position)
+        }
     }
 
 
@@ -78,7 +76,9 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleHolder>(){
             mItemclickListener?.onItemClick(position,mData[position],holder?.itemView?.rl_layout)
         }
 
+
         holder?.itemView?.homeItemLike?.setOnClickListener {
+
             mItemclickListener?.onItemClick(position,mData[position],holder?.itemView?.homeItemLike)
         }
 
