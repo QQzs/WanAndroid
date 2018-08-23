@@ -152,6 +152,14 @@ public abstract class TreeRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     /**
+     * 添加数据并刷新
+     * @param mlists
+     */
+    public void appendData(List<Node> mlists , int defaultExpandLevel){
+        addData(mlists,defaultExpandLevel);
+    }
+
+    /**
      * 添加数据并刷新 可指定刷新后显示层级
      * @param mlists
      * @param defaultExpandLevel

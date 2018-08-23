@@ -77,7 +77,7 @@ class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
 
         })
 
-        mAdapter = TaskAdapter(mType,context,this,mNodes,0,R.mipmap.ic_tree_up,R.mipmap.ic_tree_down)
+        mAdapter = TaskAdapter(mType,context,this,mNodes,1,R.mipmap.ic_tree_up,R.mipmap.ic_tree_down)
         RecyclerViewUtil.initNoDecoration(context,recycler_view,mAdapter)
 
     }
@@ -128,10 +128,10 @@ class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
             }
         }
         if (mPage == 1){
-            mAdapter?.initData(mNodes as List<Node<Any, Any>>?)
+            mAdapter?.initData(mNodes as List<Node<Any, Any>>? , 1)
             recycler_view?.refreshComplete()
         }else{
-            mAdapter?.appendData(mNodes as List<Node<Any, Any>>?)
+            mAdapter?.appendData(mNodes as List<Node<Any, Any>>?,1)
             recycler_view?.loadMoreComplete()
         }
     }
