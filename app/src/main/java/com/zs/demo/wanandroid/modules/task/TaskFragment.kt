@@ -79,6 +79,7 @@ class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
 
         mAdapter = TaskAdapter(mType,context,this,mNodes,1,R.mipmap.ic_tree_up,R.mipmap.ic_tree_down)
         RecyclerViewUtil.initNoDecoration(context,recycler_view,mAdapter)
+        showLoading()
 
     }
 
@@ -93,10 +94,12 @@ class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
     }
 
     override fun getTaskToDoSuccess(data: TaskBean?) {
+        dismissLoading()
         updateData(data)
     }
 
     override fun getTaskDoneSuccess(data: TaskBean?){
+        dismissLoading()
         updateData(data)
     }
 
@@ -149,6 +152,9 @@ class TaskFragment: BaseFragment() , TaskView , ItemClickListener{
             }
             R.id.iv_task_delete ->{
                 mPresenter?.deleteTask(task.id)
+            }
+            R.id.cl_task_item ->{
+
             }
         }
 

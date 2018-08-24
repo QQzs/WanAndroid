@@ -51,6 +51,9 @@ class TaskAdapter : TreeRecyclerAdapter{
         taskHolder?.itemView?.iv_task_delete?.setOnClickListener {
             mItemClickListener?.onItemClick(position , node , taskHolder?.itemView?.iv_task_delete)
         }
+        taskHolder?.itemView?.cl_task_item?.setOnClickListener {
+            mItemClickListener?.onItemClick(position , node , taskHolder?.itemView?.cl_task_item)
+        }
 
     }
 

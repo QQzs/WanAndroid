@@ -5,6 +5,7 @@ import android.view.View
 import com.zs.demo.wanandroid.Constant
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseActivity
+import com.zs.demo.wanandroid.event.LoginEvent
 import com.zs.demo.wanandroid.listener.ItemClickListener
 import com.zs.demo.wanandroid.modules.WebViewActivity
 import com.zs.demo.wanandroid.modules.article.adapter.ArticleAdapter
@@ -18,6 +19,7 @@ import com.zs.demo.wanandroid.view.cxrecyclerview.CXRecyclerView
 import com.zs.project.bean.android.Article
 import com.zs.project.bean.android.ArticleList
 import kotlinx.android.synthetic.main.activity_recycler_layout.*
+import org.greenrobot.eventbus.EventBus
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -33,6 +35,7 @@ About:
 class CollectActivity: BaseActivity(), ArticleView , ItemClickListener {
 
     var mStartNum: Int = 0
+    var mIsAction: Boolean = false
     var mPresenter: HomePresenter? = null
     var mArticleAdapter: ArticleAdapter? = null
 
@@ -107,5 +110,15 @@ class CollectActivity: BaseActivity(), ArticleView , ItemClickListener {
     override fun unCollectArticleSuccess() {
         super.unCollectArticleSuccess()
         toast("取消收藏")
+        mIsAction = true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // 如果有取消收藏操作，页面关闭通知文章列表刷新
+        if (mIsAction){
+            EventBus.getDefault().post(LoginEvent("login"))
+        }
+
     }
 }
