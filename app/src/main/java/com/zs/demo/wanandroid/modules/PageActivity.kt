@@ -44,7 +44,7 @@ class PageActivity: BaseActivity() {
         mTitles = intent?.getSerializableExtra(FieldUtil.TITLE_DATE) as MutableList<TreeBean.Children>
 
         if ("type" == mType){
-            tool_bar_view?.title = getString(R.string.app_name)
+            tool_bar_view?.title = intent?.getStringExtra(FieldUtil.TITLE)
             tab_layout?.tabMode = TabLayout.MODE_SCROLLABLE
         }else{
             tool_bar_view?.title = getString(R.string.my_task)

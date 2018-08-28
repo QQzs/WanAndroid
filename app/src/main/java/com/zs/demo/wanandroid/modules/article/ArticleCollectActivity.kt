@@ -32,7 +32,7 @@ Time：17:02
 About:
 —————————————————————————————————————
  */
-class CollectActivity: BaseActivity(), ArticleView , ItemClickListener {
+class ArticleCollectActivity: BaseActivity(), ArticleView , ItemClickListener {
 
     var mStartNum: Int = 0
     var mIsAction: Boolean = false

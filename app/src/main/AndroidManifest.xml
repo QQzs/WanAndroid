@@ -35,7 +35,7 @@
         </activity>
         <activity android:name=".modules.PageActivity"></activity>
         <activity android:name=".modules.task.TaskAddActivity"></activity>
-        <activity android:name=".modules.article.CollectActivity"></activity>
+        <activity android:name=".modules.article.ArticleCollectActivity"></activity>
     </application>
 
 </manifest>

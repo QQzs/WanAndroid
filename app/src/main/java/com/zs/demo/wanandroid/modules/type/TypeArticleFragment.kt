@@ -137,7 +137,7 @@ class TypeArticleFragment : BaseFragment() , ArticleView , ItemClickListener{
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun loginResult(event: LoginEvent){
         mStartNum = 0
-        mPresenter?.getArticle(mStartNum)
+        mPresenter?.getTypeArticleList(mStartNum,mCid)
     }
 
     override fun onDestroy() {
