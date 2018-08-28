@@ -5,6 +5,8 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.PagerAdapter
 import com.zs.demo.wanandroid.modules.task.TaskFragment
+import com.zs.demo.wanandroid.modules.type.TypeArticleFragment
+import com.zs.demo.wanandroid.modules.type.bean.TreeBean
 
 /**
  *
@@ -15,18 +17,30 @@ Time：13:38
 About:
 —————————————————————————————————————
  */
-class TaskPageAdapter(var taskTitles: MutableList<String>, fm: FragmentManager): FragmentStatePagerAdapter(fm){
+class TaskPageAdapter(fm: FragmentManager?): FragmentStatePagerAdapter(fm) {
+
+    var mType: String? = null
+    var mTitles = mutableListOf<TreeBean.Children>()
+
+    constructor(fm: FragmentManager?, mType: String?, mTitles: MutableList<TreeBean.Children>) : this(fm) {
+        this.mType = mType
+        this.mTitles = mTitles
+    }
 
     override fun getItem(position: Int): Fragment {
-        return TaskFragment.newInstance(position)
+        if ("type" == mType){
+            return TypeArticleFragment.newInstance(mTitles[position].id)
+        }else{
+            return TaskFragment.newInstance(position)
+        }
     }
 
     override fun getCount(): Int {
-        return taskTitles.size
+        return mTitles.size
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return taskTitles[position]
+        return mTitles[position].name
     }
 
     override fun getItemPosition(`object`: Any): Int {

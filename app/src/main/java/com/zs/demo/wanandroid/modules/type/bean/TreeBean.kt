@@ -18,17 +18,16 @@ data class TreeBean(
         var parentChapterId: Int,
         var order: Int,
         var visible: Int,
-        var children: List<Children>?
+        var children: MutableList<Children>?
 ): Serializable{
 
     data class Children(
             var id: Int,
             var name: String,
-            var courseId: Int,
-            var parentChapterId: Int,
-            var order: Int,
-            var visible: Int,
-            var children: List<Children>?
+            var courseId: Int = 0,
+            var parentChapterId: Int = 0,
+            var order: Int = 0,
+            var visible: Int = 0
     ) : Serializable
 
 }

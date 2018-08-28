@@ -3,12 +3,15 @@ package com.zs.demo.wanandroid.modules.type
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseFragment
 import com.zs.demo.wanandroid.modules.mvp.HomePresenter
+import com.zs.demo.wanandroid.modules.task.TaskActivity
 import com.zs.demo.wanandroid.modules.type.adapter.TypeAdapter
 import com.zs.demo.wanandroid.modules.type.bean.TreeBean
 import com.zs.demo.wanandroid.modules.type.view.TypeView
+import com.zs.demo.wanandroid.utils.FieldUtil
 import com.zs.demo.wanandroid.utils.RecyclerViewUtil
 import com.zs.demo.wanandroid.view.cxrecyclerview.CXRecyclerView
 import kotlinx.android.synthetic.main.fragment_type_layout.*
+import org.jetbrains.anko.startActivity
 
 /**
  *
@@ -44,10 +47,9 @@ class TypeFragment: BaseFragment(), TypeView{
 
         })
 
-        mAdapter?.setOnItemChildClickListener { adapter, view, position ->
-            var treeBean = adapter.getItem(position)
-//            activity?.toast("")
-
+        mAdapter?.setOnItemClickListener { adapter, view, position ->
+            var treeBean = adapter.getItem(position - 1) as TreeBean
+            activity?.startActivity<TaskActivity>(FieldUtil.TYPE to "type" , FieldUtil.TITLE_DATE to treeBean.children)
         }
 
     }

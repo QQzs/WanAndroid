@@ -21,6 +21,8 @@ interface ArticleView: BaseView {
 
     fun getCollectSuccess(articleList: ArticleList?){}
 
+    fun getTypeArticleSuccess(articleList: ArticleList?){}
+
     fun collectArticleSuccess(){}
 
     fun unCollectArticleSuccess(){}

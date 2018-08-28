@@ -27,4 +27,6 @@ interface ArticleModel {
 
     fun collectList(page: Int , articleListener: ResultListener<ArticleList>?)
 
+    fun typeArticleList(page: Int , cid: Int , articleListener: ResultListener<ArticleList>?)
+
 }

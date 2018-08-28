@@ -43,7 +43,6 @@ class HomePresenter: BasePresenter{
         this.mModel = HomeModel(baseImpl)
     }
 
-
     fun getBanner(){
         mModel?.articleBanner(object : ResultListener<MutableList<ArticleBanner>>{
             override fun onSuccess(t: MutableList<ArticleBanner>?) {
@@ -99,6 +98,16 @@ class HomePresenter: BasePresenter{
 
         })
     }
+
+    fun getTypeArticleList(page: Int, cid: Int){
+        mModel?.typeArticleList(page , cid , object : ResultListener<ArticleList>{
+            override fun onSuccess(t: ArticleList?) {
+                mArticleView?.getTypeArticleSuccess(t)
+            }
+
+        })
+    }
+
 
     fun getTypeTree(){
         mModel?.getTypeTree(object : ResultListener<MutableList<TreeBean>>{

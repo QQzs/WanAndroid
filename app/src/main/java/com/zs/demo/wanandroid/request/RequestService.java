@@ -109,6 +109,15 @@ public interface RequestService {
     Observable<BaseResponse<List<TreeBean>>> getTypeTreeList();
 
     /**
+     * 知识体系下的文章
+     * http://www.wanandroid.com/article/list/0/json?cid=168
+     * @param page page
+     * @param cid cid
+     */
+    @GET("/article/list/{page}/json")
+    Observable<BaseResponse<ArticleList>> getTypeArticleList(@Path("page") int page, @Query("cid") int cid);
+
+    /**
      * 我的常用网址
      * @return FriendListResponse
      */

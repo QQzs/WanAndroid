@@ -42,10 +42,23 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleHolder>(){
         notifyDataSetChanged()
     }
 
+    /**
+     * 知识列表刷新
+     */
     fun updateData(position: Int , article: Article){
         if (position < mData.size){
             mData[position] = article
             notifyItemChanged(position + 2)
+        }
+    }
+
+    /**
+     * 体系列表刷新
+     */
+    fun updateDataType(position: Int , article: Article){
+        if (position < mData.size){
+            mData[position] = article
+            notifyItemChanged(position + 1)
         }
     }
 
@@ -58,16 +71,12 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleHolder>(){
         }
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleHolder {
         return ArticleHolder(View.inflate(parent?.context, R.layout.home_list_item,null))
     }
 
     override fun getItemCount(): Int {
-
         return mData.size
-
     }
 
     override fun onBindViewHolder(holder: ArticleHolder, position: Int) {
@@ -75,7 +84,6 @@ class ArticleAdapter(): RecyclerView.Adapter<ArticleAdapter.ArticleHolder>(){
         holder?.itemView?.setOnClickListener {
             mItemclickListener?.onItemClick(position,mData[position],holder?.itemView?.rl_layout)
         }
-
 
         holder?.itemView?.homeItemLike?.setOnClickListener {
 
