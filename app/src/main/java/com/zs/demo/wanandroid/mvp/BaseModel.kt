@@ -1,6 +1,7 @@
 package com.zs.demo.wanandroid.mvp
 
 import com.zs.demo.wanandroid.request.BaseImpl
+import com.zs.demo.wanandroid.request.RequestApi
 
 /**
  *
@@ -13,10 +14,12 @@ About:
  */
 open class BaseModel{
 
+    var mRequestApi: RequestApi
     var mBaseImpl: BaseImpl? = null
 
     constructor(baseImpl: BaseImpl?) {
         this.mBaseImpl = baseImpl
+        mRequestApi = RequestApi.getInstance()
     }
 
 }

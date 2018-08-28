@@ -14,7 +14,6 @@ import com.zs.demo.wanandroid.mvp.ResultListener
 import com.zs.demo.wanandroid.request.BaseImpl
 import com.zs.demo.wanandroid.request.BaseResponse
 import com.zs.demo.wanandroid.request.DefaultObserver
-import com.zs.demo.wanandroid.request.RequestApi
 import com.zs.demo.wanandroid.request.more.MoreObserver
 import com.zs.project.bean.android.ArticleBanner
 import com.zs.project.bean.android.ArticleList
@@ -34,7 +33,7 @@ About:
 class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeModel, HotModel {
 
     override fun articleBanner(bannerListener: ResultListener<MutableList<ArticleBanner>>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .articleBanner
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -47,7 +46,7 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
     }
 
     override fun articleList(page: Int, articleListener: ResultListener<ArticleList>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .getArticleList(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -61,7 +60,7 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
     }
 
     override fun collectArticle(id: Int, articleListener: ResultListener<Any>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .collectArticle(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -75,7 +74,7 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
     }
 
     override fun unCollectArticle(id: Int, articleListener: ResultListener<Any>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .unCollectArticle(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -90,7 +89,7 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
     }
 
     override fun unCollectArticleList(id: Int , originId : Int, articleListener: ResultListener<Any>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .unCollectArticleList(id,originId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -105,7 +104,7 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
     }
 
     override fun collectList(page: Int, articleListener: ResultListener<ArticleList>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .getCollectList(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -119,7 +118,7 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
     }
 
     override fun typeArticleList(page: Int, cid: Int, articleListener: ResultListener<ArticleList>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .getTypeArticleList(page,cid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -133,7 +132,7 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
     }
 
     override fun getTypeTree(treeListener: ResultListener<MutableList<TreeBean>>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .typeTreeList
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -147,7 +146,7 @@ class HomeModel(baseImpl: BaseImpl?): BaseModel(baseImpl), ArticleModel,TypeMode
 
     override fun getHotList(hotResultListener: HotResultListener){
 
-        var mRequestService = RequestApi.getInstance().service
+        var mRequestService = mRequestApi.service
         var bookmarkResult: MutableList<HotBean> = mutableListOf()
         var hotResult: MutableList<HotBean> = mutableListOf()
         var commonResult: MutableList<HotBean> = mutableListOf()

@@ -7,7 +7,6 @@ import com.zs.demo.wanandroid.mvp.ResultListener
 import com.zs.demo.wanandroid.request.BaseImpl
 import com.zs.demo.wanandroid.request.BaseResponse
 import com.zs.demo.wanandroid.request.DefaultObserver
-import com.zs.demo.wanandroid.request.RequestApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -23,7 +22,7 @@ About:
 class LoginModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl), LoginModel{
 
     override fun login(map: HashMap<String, String>, loginListener: ResultListener<LoginBean>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .loginAndroid(map["name"], map["password"])
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -36,7 +35,7 @@ class LoginModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl), LoginModel{
     }
 
     override fun register(map: HashMap<String, String> , loginListener: ResultListener<RegisterBean>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .registerAndroid(map["name"], map["password"], map["passwordAgain"])
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

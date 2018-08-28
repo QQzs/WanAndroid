@@ -3,7 +3,7 @@ package com.zs.demo.wanandroid.modules.type
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseFragment
 import com.zs.demo.wanandroid.modules.mvp.HomePresenter
-import com.zs.demo.wanandroid.modules.task.TaskActivity
+import com.zs.demo.wanandroid.modules.PageActivity
 import com.zs.demo.wanandroid.modules.type.adapter.TypeAdapter
 import com.zs.demo.wanandroid.modules.type.bean.TreeBean
 import com.zs.demo.wanandroid.modules.type.view.TypeView
@@ -49,7 +49,7 @@ class TypeFragment: BaseFragment(), TypeView{
 
         mAdapter?.setOnItemClickListener { adapter, view, position ->
             var treeBean = adapter.getItem(position - 1) as TreeBean
-            activity?.startActivity<TaskActivity>(FieldUtil.TYPE to "type" , FieldUtil.TITLE_DATE to treeBean.children)
+            activity?.startActivity<PageActivity>(FieldUtil.TYPE to "type" , FieldUtil.TITLE_DATE to treeBean.children)
         }
 
     }

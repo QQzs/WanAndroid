@@ -1,4 +1,4 @@
-package com.zs.demo.wanandroid.modules.task
+package com.zs.demo.wanandroid.modules
 
 import android.support.design.widget.TabLayout
 import com.zs.demo.wanandroid.R
@@ -17,10 +17,10 @@ Time：16:41
 About:
 —————————————————————————————————————
  */
-class TaskActivity: BaseActivity() {
+class PageActivity: BaseActivity() {
 
     var mType: String? = null
-    var mTaskAdapter: TaskPageAdapter? = null
+    var mPageAdapter: TaskPageAdapter? = null
     var mTitles = mutableListOf<TreeBean.Children>()
 
     override fun setLayoutId(): Int {
@@ -53,8 +53,8 @@ class TaskActivity: BaseActivity() {
 //        tab_layout?.addTab(tab_layout.newTab().setText("ddd"))
 //        tab_layout?.addTab(tab_layout.newTab().setText("ddddd"))
 
-        mTaskAdapter = TaskPageAdapter(supportFragmentManager, mType , mTitles)
-        view_pager_task?.adapter = mTaskAdapter
+        mPageAdapter = TaskPageAdapter(supportFragmentManager, mType , mTitles)
+        view_pager_task?.adapter = mPageAdapter
         tab_layout?.setupWithViewPager(view_pager_task)
         view_pager_task?.offscreenPageLimit = 3
 

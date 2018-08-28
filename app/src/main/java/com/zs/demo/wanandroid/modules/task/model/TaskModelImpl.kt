@@ -6,7 +6,6 @@ import com.zs.demo.wanandroid.mvp.ResultListener
 import com.zs.demo.wanandroid.request.BaseImpl
 import com.zs.demo.wanandroid.request.BaseResponse
 import com.zs.demo.wanandroid.request.DefaultObserver
-import com.zs.demo.wanandroid.request.RequestApi
 import com.zs.demo.wanandroid.utils.FieldUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -23,7 +22,7 @@ About:
 class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
 
     override fun addTask(map: HashMap<String, String>, taskListener: ResultListener<Any>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .addTask(map[FieldUtil.TASK_TITLE] , map[FieldUtil.TASK_CONTENT] ,map[FieldUtil.TASK_DATE] , "0")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -36,7 +35,7 @@ class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
     }
 
     override fun deleteTask(id: String?, taskListener: ResultListener<Any>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .deleteTask(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -49,7 +48,7 @@ class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
     }
 
     override fun getToDoTask(page: Int, taskListener: ResultListener<TaskBean>?) {
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .getToDoTask(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -63,7 +62,7 @@ class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
 
     override fun getDoneTask(page: Int, taskListener: ResultListener<TaskBean>?) {
 
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .getDoneTask(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -78,7 +77,7 @@ class TaskModelImpl(baseImpl: BaseImpl?): BaseModel(baseImpl) , TaskModel{
 
     override fun updateTaskStatus(id: String? , status: Int, taskListener: ResultListener<Any>?) {
 
-        RequestApi.getInstance().service
+        mRequestApi.service
                 .updateTaskStatus(id , status)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

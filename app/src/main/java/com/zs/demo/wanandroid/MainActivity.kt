@@ -13,7 +13,7 @@ import com.zs.demo.wanandroid.modules.article.ArticleFragment
 import com.zs.demo.wanandroid.modules.article.CollectActivity
 import com.zs.demo.wanandroid.modules.hot.HotFragment
 import com.zs.demo.wanandroid.modules.login.LoginActivity
-import com.zs.demo.wanandroid.modules.task.TaskActivity
+import com.zs.demo.wanandroid.modules.PageActivity
 import com.zs.demo.wanandroid.modules.type.TypeFragment
 import com.zs.demo.wanandroid.modules.type.bean.TreeBean
 import com.zs.demo.wanandroid.utils.FieldUtil
@@ -110,7 +110,7 @@ class MainActivity : BaseActivity() {
                         var titles = mutableListOf<TreeBean.Children>()
                         titles.add(TreeBean.Children(0,getString(R.string.taskNotDo)))
                         titles.add(TreeBean.Children(1,getString(R.string.taskToDo)))
-                        startActivity<TaskActivity>(FieldUtil.TYPE to "task" ,  FieldUtil.TITLE_DATE to titles)
+                        startActivity<PageActivity>(FieldUtil.TYPE to "task" ,  FieldUtil.TITLE_DATE to titles)
                     }
                     R.id.nav_about -> {
 
