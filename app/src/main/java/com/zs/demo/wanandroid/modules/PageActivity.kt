@@ -1,6 +1,7 @@
 package com.zs.demo.wanandroid.modules
 
 import android.support.design.widget.TabLayout
+import android.view.View
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.base.BaseActivity
 import com.zs.demo.wanandroid.modules.task.adapter.TaskPageAdapter
@@ -20,6 +21,7 @@ About:
 class PageActivity: BaseActivity() {
 
     var mType: String? = null
+    var mPosition: Int? = null
     var mPageAdapter: TaskPageAdapter? = null
     var mTitles = mutableListOf<TreeBean.Children>()
 
@@ -42,6 +44,10 @@ class PageActivity: BaseActivity() {
 
         mType = intent?.getStringExtra(FieldUtil.TYPE)
         mTitles = intent?.getSerializableExtra(FieldUtil.TITLE_DATE) as MutableList<TreeBean.Children>
+        mPosition = intent?.getIntExtra(FieldUtil.POSITION,0)
+        if (mTitles.size == 1){
+            tab_layout?.visibility = View.GONE
+        }
 
         if ("type" == mType){
             tool_bar_view?.title = intent?.getStringExtra(FieldUtil.TITLE)
@@ -60,6 +66,8 @@ class PageActivity: BaseActivity() {
 
         tab_layout?.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(view_pager_task))
         view_pager_task?.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_layout))
+
+        view_pager_task?.currentItem = mPosition?:0
 
     }
 

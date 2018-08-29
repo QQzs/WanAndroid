@@ -22,6 +22,33 @@
 
     </android.support.v7.widget.RecyclerView>
 
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/guide_line">-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/recycler_tree_type"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--&gt;-->
+
+        <!--</android.support.v7.widget.RecyclerView>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_type_title"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="24dp"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="@dimen/fontsize13"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--/>-->
+
+    <!--</RelativeLayout>-->
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_tree_type"
         android:layout_width="0dp"
@@ -30,5 +57,16 @@
         app:layout_constraintLeft_toRightOf="@+id/guide_line">
 
     </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tv_type_title"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:textSize="@dimen/fontsize13"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/guide_line"/>
 
 </android.support.constraint.ConstraintLayout>

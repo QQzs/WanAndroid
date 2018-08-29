@@ -7,6 +7,7 @@ object FieldUtil {
     const val TYPE = "type"
     const val HOT = "hot"
     const val CID = "cid"
+    const val POSITION = "position"
     const val TITLE = "title"
     const val TITLE_DATE = "title_date"
     const val WEB_URL = "web_url"

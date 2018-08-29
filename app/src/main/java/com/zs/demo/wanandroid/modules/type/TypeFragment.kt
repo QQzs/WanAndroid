@@ -23,11 +23,14 @@ About:
  */
 class TypeFragment: BaseFragment(), TypeView{
 
+    var mCurrentPosition = 0
+    var mTitleHeight = 0
     var mPresenter: HomePresenter?= null
     var mAdapter: TypeLeftAdapter? = null
     var mRightAdapter: TypeRightAdapter? = null
     var mLeftLayoutManager: LinearLayoutManager? = null
     var mRightLayoutManager: LinearLayoutManager? = null
+    var mTreeData: MutableList<TreeBean> = mutableListOf()
 
     override fun setLayoutId(): Int {
         return R.layout.fragment_type_layout
@@ -52,17 +55,35 @@ class TypeFragment: BaseFragment(), TypeView{
 
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-
+                mTitleHeight = tv_type_title?.height?:0
             }
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                var position = mRightLayoutManager?.findFirstVisibleItemPosition()?: 0
-                mAdapter?.updateStatus(position)
-                if (position > 5){
-                    mLeftLayoutManager?.scrollToPositionWithOffset(position - 5,0)
+//                var position = mRightLayoutManager?.findFirstVisibleItemPosition()?: 0
+//                mAdapter?.updateStatus(position)
+//                if (position > 5){
+//                    mLeftLayoutManager?.scrollToPositionWithOffset(position - 5,0)
+//                }
+//                recycler_type?.smoothScrollToPosition(position)
+
+                var view = mRightLayoutManager?.findViewByPosition(mCurrentPosition + 1)
+                if (view != null && view.top < mTitleHeight){
+                    tv_type_title?.y = (-(mTitleHeight - view.top)).toFloat()
+                }else{
+                    tv_type_title?.y = 0f
                 }
-                recycler_type?.smoothScrollToPosition(position)
+                if (mCurrentPosition != mRightLayoutManager?.findFirstVisibleItemPosition()){
+                    mCurrentPosition = mRightLayoutManager?.findFirstVisibleItemPosition()?: 0
+                    tv_type_title?.y = 0f
+                    tv_type_title?.text = mTreeData[mCurrentPosition].name
+
+                    mAdapter?.updateStatus(mCurrentPosition)
+                    if (mCurrentPosition > 5){
+                        mLeftLayoutManager?.scrollToPositionWithOffset(mCurrentPosition - 5,0)
+                    }
+                    recycler_type?.smoothScrollToPosition(mCurrentPosition)
+                }
             }
 
         })
@@ -82,10 +103,11 @@ class TypeFragment: BaseFragment(), TypeView{
 
     override fun getTreeSuccess(typeTree: MutableList<TreeBean>?) {
         dismissLoading()
-//        recycler_type?.refreshComplete()
         typeTree?.run {
-            mAdapter?.setNewData(typeTree)
-            mRightAdapter?.setNewData(typeTree)
+            mTreeData = typeTree
+            mAdapter?.setNewData(mTreeData)
+            mRightAdapter?.setNewData(mTreeData)
+            tv_type_title?.text = mTreeData[0].name
         }
 
     }
