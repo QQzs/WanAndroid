@@ -36,7 +36,7 @@ class TypeFragment: BaseFragment(), TypeView{
     override fun initView() {
 
         mAdapter = TypeLeftAdapter(mutableListOf())
-        RecyclerViewUtil.init(activity,recycler_type,mAdapter)
+        RecyclerViewUtil.initNoDecoration(context,recycler_type,mAdapter)
         mLeftLayoutManager = recycler_type?.layoutManager as LinearLayoutManager
         mAdapter?.setOnItemClickListener { adapter, view, position ->
             var treeBean = adapter.getItem(position) as TreeBean
@@ -44,24 +44,32 @@ class TypeFragment: BaseFragment(), TypeView{
             mAdapter?.updateStatus(position)
 //            activity?.startActivity<PageActivity>(FieldUtil.TYPE to "type" , FieldUtil.TITLE_DATE to treeBean.children , FieldUtil.TITLE to treeBean.name)
         }
+
         mRightAdapter = TypeRightAdapter(mutableListOf())
-        RecyclerViewUtil.init(activity,recycler_tree_type,mRightAdapter)
+        RecyclerViewUtil.initNoDecoration(context,recycler_tree_type,mRightAdapter)
         mRightLayoutManager = recycler_tree_type?.layoutManager as LinearLayoutManager
         recycler_tree_type?.addOnScrollListener(object : RecyclerView.OnScrollListener(){
 
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
+
             }
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
+                var position = mRightLayoutManager?.findFirstVisibleItemPosition()?: 0
+                mAdapter?.updateStatus(position)
+                if (position > 5){
+                    mLeftLayoutManager?.scrollToPositionWithOffset(position - 5,0)
+                }
+                recycler_type?.smoothScrollToPosition(position)
             }
 
         })
         mRightAdapter?.setOnItemClickListener { adapter, view, position ->
             var treeBean = adapter.getItem(position) as TreeBean
-            mAdapter?.updateStatus(position)
-            recycler_type?.smoothScrollToPosition(position)
+
+
         }
 
     }

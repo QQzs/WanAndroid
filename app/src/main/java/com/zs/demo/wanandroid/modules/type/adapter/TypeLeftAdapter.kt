@@ -21,15 +21,17 @@ class TypeLeftAdapter(mData: MutableList<TreeBean>):
     private var mIndex: Int? = 0
 
     fun updateStatus(position: Int){
-        mIndex = position
-        notifyDataSetChanged()
+        if(position != mIndex){
+            mIndex = position
+            notifyDataSetChanged()
+        }
     }
 
     override fun convert(helper: BaseViewHolder?, item: TreeBean?) {
         item?.run {
             helper?.setText(R.id.tv_type_name,name)
             if (helper?.adapterPosition  == mIndex){
-                helper?.setTextColor(R.id.tv_type_name , ContextCompat.getColor(mContext,R.color.font_gray))
+                helper?.setTextColor(R.id.tv_type_name , ContextCompat.getColor(mContext,R.color.colorPrimary))
                 helper?.setBackgroundRes(R.id.tv_type_name , R.color.white)
             }else{
                 helper?.setTextColor(R.id.tv_type_name , ContextCompat.getColor(mContext,R.color.font_default))
