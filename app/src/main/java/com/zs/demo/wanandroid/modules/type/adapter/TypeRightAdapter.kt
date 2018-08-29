@@ -2,6 +2,7 @@ package com.zs.demo.wanandroid.modules.type.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.zhy.view.flowlayout.TagFlowLayout
 import com.zs.demo.wanandroid.R
 import com.zs.demo.wanandroid.modules.type.bean.TreeBean
 
@@ -14,18 +15,17 @@ Time：11:35
 About:
 —————————————————————————————————————
  */
-class TypeAdapter(mData: MutableList<TreeBean>):
-        BaseQuickAdapter<TreeBean, BaseViewHolder>(R.layout.item_type_list,mData){
+class TypeRightAdapter(mData: MutableList<TreeBean>):
+        BaseQuickAdapter<TreeBean, BaseViewHolder>(R.layout.item_right_layout,mData){
 
     override fun convert(helper: BaseViewHolder?, item: TreeBean?) {
 
         item?.run {
-            helper?.setText(R.id.tv_type_title,name)
-            children?.run {
-                helper?.setText(R.id.tv_type_content,
-                        joinToString("     ", transform = { child -> child.name
-                }))
-            }
+            helper?.setText(R.id.tv_type_name,name)
+            var adapter = TypeTagAdapter(mContext,children)
+            var flowLayout = helper?.getView(R.id.tag_flow_layout) as TagFlowLayout
+            flowLayout.adapter = adapter
+
         }
 
     }
