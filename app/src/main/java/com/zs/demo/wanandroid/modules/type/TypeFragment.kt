@@ -18,7 +18,7 @@ Created by zs
 Date：2018年 08月 08日
 Time：17:09
 —————————————————————————————————————
-About:
+About: 体系
 —————————————————————————————————————
  */
 class TypeFragment: BaseFragment(), TypeView{
@@ -42,10 +42,8 @@ class TypeFragment: BaseFragment(), TypeView{
         RecyclerViewUtil.initNoDecoration(context,recycler_type,mAdapter)
         mLeftLayoutManager = recycler_type?.layoutManager as LinearLayoutManager
         mAdapter?.setOnItemClickListener { adapter, view, position ->
-            var treeBean = adapter.getItem(position) as TreeBean
             mRightLayoutManager?.scrollToPositionWithOffset(position,0)
             mAdapter?.updateStatus(position)
-//            activity?.startActivity<PageActivity>(FieldUtil.TYPE to "type" , FieldUtil.TITLE_DATE to treeBean.children , FieldUtil.TITLE to treeBean.name)
         }
 
         mRightAdapter = TypeRightAdapter(mutableListOf())
@@ -60,13 +58,6 @@ class TypeFragment: BaseFragment(), TypeView{
 
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-//                var position = mRightLayoutManager?.findFirstVisibleItemPosition()?: 0
-//                mAdapter?.updateStatus(position)
-//                if (position > 5){
-//                    mLeftLayoutManager?.scrollToPositionWithOffset(position - 5,0)
-//                }
-//                recycler_type?.smoothScrollToPosition(position)
-
                 var view = mRightLayoutManager?.findViewByPosition(mCurrentPosition + 1)
                 if (view != null && view.top < mTitleHeight){
                     tv_type_title?.y = (-(mTitleHeight - view.top)).toFloat()
@@ -87,11 +78,6 @@ class TypeFragment: BaseFragment(), TypeView{
             }
 
         })
-        mRightAdapter?.setOnItemClickListener { adapter, view, position ->
-            var treeBean = adapter.getItem(position) as TreeBean
-
-
-        }
 
     }
 
