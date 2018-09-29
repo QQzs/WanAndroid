@@ -9,11 +9,11 @@ import android.text.TextUtils
 import android.view.View
 import com.zs.demo.wanandroid.base.BaseActivity
 import com.zs.demo.wanandroid.event.LoginEvent
-import com.zs.demo.wanandroid.modules.article.ArticleFragment
+import com.zs.demo.wanandroid.modules.PageActivity
 import com.zs.demo.wanandroid.modules.article.ArticleCollectActivity
+import com.zs.demo.wanandroid.modules.article.ArticleFragment
 import com.zs.demo.wanandroid.modules.hot.HotFragment
 import com.zs.demo.wanandroid.modules.login.LoginActivity
-import com.zs.demo.wanandroid.modules.PageActivity
 import com.zs.demo.wanandroid.modules.type.TypeFragment
 import com.zs.demo.wanandroid.modules.type.bean.TreeBean
 import com.zs.demo.wanandroid.utils.FieldUtil
@@ -70,6 +70,8 @@ class MainActivity : BaseActivity() {
                 }
             }
         }
+
+
 
     }
 

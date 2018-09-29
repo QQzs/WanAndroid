@@ -3,7 +3,6 @@ package com.zs.demo.wanandroid.base;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.google.gson.Gson;
 import com.zs.demo.wanandroid.Constant;
 import com.zs.demo.wanandroid.MyActivityManager;
 import com.zs.demo.wanandroid.utils.SpUtil;
@@ -19,7 +18,6 @@ import com.zs.demo.wanandroid.utils.SpUtil;
 public abstract class BaseActivity extends BaseRxActivity{
 
     protected Activity mActivity;
-    protected Gson mGson = new Gson();
     protected String mUserId , mUserName;
 
     @Override
