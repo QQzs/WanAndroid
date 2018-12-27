@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
 import com.zs.demo.wanandroid.Constant;
 import com.zs.demo.wanandroid.utils.SpUtil;
 
@@ -18,10 +17,10 @@ import java.lang.reflect.Field;
  * @author Administrator
  */
 public abstract class BaseFragment extends BaseRxFragment {
+
 	private View contentView;
 	private ViewGroup container;
 	protected LayoutInflater inflater;
-	protected Gson mGson = new Gson();
 	protected String mUserId , mUserName;
 
 	@Override
@@ -56,14 +55,6 @@ public abstract class BaseFragment extends BaseRxFragment {
 
 	public abstract void initData();
 
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		contentView = null;
-		container = null;
-		inflater = null;
-	}
-
 	public void setContentView() {
 		setContentView(inflater.inflate(setLayoutId(), container, false));
 	}
@@ -81,12 +72,6 @@ public abstract class BaseFragment extends BaseRxFragment {
 	 * @return 返回布局
 	 */
 	protected abstract int setLayoutId();
-
-//	public View findViewById(int id) {
-//		if (contentView != null)
-//			return contentView.findViewById(id);
-//		return null;
-//	}
 
 	//获得fragment中的控件
 	public <T extends View> T findViewById(int id) {
@@ -111,13 +96,11 @@ public abstract class BaseFragment extends BaseRxFragment {
 	}
 
 	@Override
-	public void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
+	public void onDestroyView() {
+		super.onDestroyView();
+		contentView = null;
+		container = null;
+		inflater = null;
 	}
 
 }

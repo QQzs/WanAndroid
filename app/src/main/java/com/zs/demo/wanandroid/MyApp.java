@@ -21,7 +21,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-        SpUtil.init(this,Constant.APP_DATA);
+        SpUtil.init(this,SpUtil.APP_DATA);
     }
 
     public static MyApp getAppContext(){

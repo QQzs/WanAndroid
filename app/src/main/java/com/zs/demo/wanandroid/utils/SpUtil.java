@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 
-import com.zs.demo.wanandroid.Constant;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -17,27 +15,25 @@ import java.io.StreamCorruptedException;
  * SharedPreferences管理类
  */
 public class SpUtil {
-    private static SpUtil prefsUtil;
-    private static Context context;
-    private static SharedPreferences sPrefs;
-    private static SharedPreferences.Editor editor;
 
-    public synchronized static SpUtil getInstance() {
-        return prefsUtil;
-    }
+    public static final String APP_DATA = "my_data";
+    private static SpUtil mSpUtil;
+    private static SharedPreferences sPrefs;
 
     private SpUtil(Context context, String fileName) {
-        this.context = context;
         sPrefs = context.getSharedPreferences(
                 fileName, Context.MODE_PRIVATE);
-        editor = this.sPrefs.edit();
     }
 
     public static void init(Context context, String fileName) {
-        prefsUtil = new SpUtil(context, fileName);
+        if (mSpUtil == null){
+            synchronized (SpUtil.class){
+                if (mSpUtil == null){
+                    mSpUtil = new SpUtil(context, fileName);
+                }
+            }
+        }
     }
-
-    public static String fileName;
 
     public static int getInt(String key, int defaultValue) {
         return sPrefs.getInt(key, defaultValue);
@@ -69,11 +65,8 @@ public class SpUtil {
     /**
      * 移除Key对应的value值
      */
-    public static void remove(Context context, String key){
-
-        SharedPreferences sp = context.getSharedPreferences(Constant.APP_DATA, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.remove(key).commit();
+    public static void remove(String key){
+        sPrefs.edit().remove(key).commit();
     }
 
     public static void clearAll() {
@@ -83,6 +76,7 @@ public class SpUtil {
     }
 
     public void putObject(String key, Object object) {
+        SharedPreferences.Editor editor = sPrefs.edit();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream out = null;
         try {
