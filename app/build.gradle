@@ -1,20 +1,27 @@
+// 描述Gradle所引入的插件类型，表示是一个Android Application
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+    // 编译构建工具SDK版本
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.zs.demo.wanandroid"
+        // 支持最小SDK版本，则表示编译完成好的app，在SDK 19以下不能运行。
         minSdkVersion 19
+        // 目标SDK版本(建议版本)
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    // 编译类型，可以在此处，对不同编译类型，如release(正式版)，debug(测试版)进行配置
     buildTypes {
         release {
+            // 是否混淆(false:不混淆)
             minifyEnabled false
+            // 混淆规则的配置文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -25,6 +32,7 @@ android {
 }
 
 dependencies {
+    // 本地依赖声明，包含libs文件下的所有jar文件
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$support_version"
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
