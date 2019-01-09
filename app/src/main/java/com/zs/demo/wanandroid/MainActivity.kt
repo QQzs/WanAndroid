@@ -7,29 +7,29 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.text.TextUtils
 import android.view.View
-import com.zs.demo.wanandroid.base.BaseActivity
-import com.zs.demo.wanandroid.event.LoginEvent
-import com.zs.demo.wanandroid.modules.PageActivity
-import com.zs.demo.wanandroid.modules.article.ArticleCollectActivity
-import com.zs.demo.wanandroid.modules.article.ArticleFragment
-import com.zs.demo.wanandroid.modules.hot.HotFragment
-import com.zs.demo.wanandroid.modules.login.LoginActivity
-import com.zs.demo.wanandroid.modules.type.TypeFragment
-import com.zs.demo.wanandroid.modules.type.bean.TreeBean
-import com.zs.demo.wanandroid.utils.FieldUtil
-import com.zs.demo.wanandroid.utils.SpUtil
+import com.alibaba.android.arouter.launcher.ARouter
+import com.zs.demo.commonlib.app.Constant
+import com.zs.demo.commonlib.app.RouterPath
+import com.zs.demo.commonlib.base.BaseActivity
+import com.zs.demo.commonlib.bean.type.TreeBean
+import com.zs.demo.commonlib.event.LoginEvent
+import com.zs.demo.commonlib.utils.FieldUtil
+import com.zs.demo.commonlib.utils.SpUtil
+import com.zs.demo.modulearticle.ArticleFragment
+import com.zs.demo.modulehot.HotFragment
+import com.zs.demo.moduletype.TypeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import org.jetbrains.anko.startActivity
+import java.io.Serializable
 
 class MainActivity : BaseActivity() {
 
-    private var fragment1: ArticleFragment = ArticleFragment()
-    private var fragment2: TypeFragment = TypeFragment()
-    private var fragment3: HotFragment = HotFragment()
+    private var fragment1: ArticleFragment? = null
+    private var fragment2: TypeFragment? = null
+    private var fragment3: HotFragment? = null
     private var lastFragment: Fragment? = null
 
     override fun setLayoutId(): Int {
@@ -63,7 +63,10 @@ class MainActivity : BaseActivity() {
         navigationView.getHeaderView(0).navigationViewLogout?.run {
             setOnClickListener {
                 if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))) {
-                    this@MainActivity.startActivity<LoginActivity>(FieldUtil.LOGIN to FieldUtil.LOGIN)
+                    ARouter.getInstance().build(RouterPath.LOGIN_ACTIVITY)
+                            .withString(FieldUtil.LOGIN , FieldUtil.LOGIN)
+                            .navigation()
+//                    this@MainActivity.startActivity<LoginActivity>(FieldUtil.LOGIN to FieldUtil.LOGIN)
                 } else {
                     SpUtil.clearAll()
                     EventBus.getDefault().post(LoginEvent(FieldUtil.LOGIN,false))
@@ -94,6 +97,11 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
+
+        fragment1 = ARouter.getInstance().build(RouterPath.ARTICLE_FRAGMENT).navigation() as ArticleFragment?
+        fragment2 = ARouter.getInstance().build(RouterPath.TYPE_FRAGMENT).navigation() as TypeFragment?
+        fragment3 = ARouter.getInstance().build(RouterPath.HOT_FRAGMENT).navigation() as HotFragment?
+
         switchContent(fragment1)
         EventBus.getDefault().register(this)
     }
@@ -106,13 +114,20 @@ class MainActivity : BaseActivity() {
             NavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.nav_like -> {
-                        startActivity<ArticleCollectActivity>()
+                        ARouter.getInstance().build(RouterPath.ARTICLE_COLLECT_ACTIVITY).navigation()
+//                        startActivity<ArticleCollectActivity>()
                     }
                     R.id.nav_task ->{
                         var titles = mutableListOf<TreeBean.Children>()
                         titles.add(TreeBean.Children(0,getString(R.string.taskNotDo)))
                         titles.add(TreeBean.Children(1,getString(R.string.taskToDo)))
-                        startActivity<PageActivity>(FieldUtil.TYPE to "task" ,  FieldUtil.TITLE_DATE to titles)
+
+                        ARouter.getInstance().build(RouterPath.COMMON_PAGE_ACTIVITY)
+                                .withString(FieldUtil.TYPE , "task")
+                                .withSerializable(FieldUtil.TITLE_DATE , titles as Serializable)
+                                .navigation()
+
+//                        startActivity<PageActivity>(FieldUtil.TYPE to "task" ,  FieldUtil.TITLE_DATE to titles)
                     }
                     R.id.nav_about -> {
 

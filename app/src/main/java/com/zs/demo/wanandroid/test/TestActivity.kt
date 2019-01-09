@@ -1,12 +1,12 @@
 package com.zs.demo.wanandroid.test
 
 import android.view.View
+import com.zs.demo.commonlib.base.BaseActivity
+import com.zs.demo.commonlib.request.BaseResponse
+import com.zs.demo.commonlib.request.DefaultObserver
+import com.zs.demo.commonlib.request.RequestApi
+import com.zs.demo.commonlib.view.banner.BannerViewData
 import com.zs.demo.wanandroid.R
-import com.zs.demo.wanandroid.base.BaseActivity
-import com.zs.demo.wanandroid.request.BaseResponse
-import com.zs.demo.wanandroid.request.DefaultObserver
-import com.zs.demo.wanandroid.request.RequestApi
-import com.zs.demo.wanandroid.view.banner.BannerViewData
 import com.zs.project.bean.android.ArticleBanner
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

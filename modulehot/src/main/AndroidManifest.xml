@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zs.demo.modulehot">
+
+    <application android:theme="@style/AppTheme">
+
+    </application>
+
+</manifest>

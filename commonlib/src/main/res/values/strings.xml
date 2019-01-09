@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">CommonLib</string>
+
+    <string name="connect_error">网络连接失败,请检查网络</string>
+    <string name="connect_timeout">连接超时,请稍后再试</string>
+    <string name="bad_network">服务器异常</string>
+    <string name="parse_error">解析服务器响应数据失败</string>
+    <string name="unknown_error">未知错误</string>
+    <string name="response_return_error">服务器返回数据失败</string>
+
+    <string name="listview_header_hint_normal">下拉刷新</string>
+    <string name="listview_header_hint_release">释放立即刷新</string>
+    <string name="listview_header_last_time">上次更新时间：</string>
+    <string name="listview_loading">正在加载...</string>
+    <string name="loading_done">加载完成</string>
+    <string name="nomore_loading">没有了</string>
+    <string name="refresh_done">刷新完成</string>
+    <string name="refreshing">正在刷新...</string>
+
+    <!-- bookmark -->
+    <string name="like_title">收藏</string>
+    <string name="bookmark_time">收藏时间：%1$s</string>
+    <string name="bookmark_success">收藏成功</string>
+    <string name="bookmark_failed">收藏失败：%1$s</string>
+    <string name="bookmark_cancel_success">取消收藏成功</string>
+    <string name="bookmark_cancel_failed">取消收藏失败：%1$s</string>
+
+    <string name="my_task">我的任务</string>
+
+    <!-- task -->
+    <string name="taskNotDo">待办任务</string>
+    <string name="taskToDo">已办任务</string>
+    <string name="taskAdd">新建任务</string>
+    <string name="taskTitle">任务标题</string>
+    <string name="taskDate">任务日期</string>
+    <string name="taskDateHint">选择日期</string>
+    <string name="taskContent">任务内容</string>
+
+    <string name="hintContent">(选填)</string>
+    <string name="comfire_text">完成</string>
+
+</resources>

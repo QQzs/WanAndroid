@@ -1,25 +1,39 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+
+
 buildscript {
 
-    ext.support_version = "27.1.1"
-    ext.kotlin_version = '1.2.21'
-    ext.anko_version = '0.10.3'
-    ext.retrofit_version = '2.3.0'
-    ext.adapter_version = "2.9.35"
-    ext.glide_version = "4.5.0"
-    ext.flowlayout_version = "1.1.2"
-    ext.eventbus_version = "3.0.0"
-    ext.banner_version = "2.1.0"
-    ext.logging_version = "3.4.1"
-    
+    ext {
+
+        compileSdkVersion = 27
+        minSdkVersion = 16
+        targetSdkVersion = 27
+        versionCode = 1
+        versionName = "1.0"
+
+        arouterVersion = '1.4.1'
+        arouterCompilerVersion = '1.2.2'
+
+        supportVersion = "27.1.1"
+        kotlinVersion = '1.2.21'
+        ankoVersion = '0.10.3'
+        retrofitVersion = '2.3.0'
+        adapterVersion = "2.9.35"
+        glideVersion = "4.5.0"
+        flowlayoutVersion = "1.1.2"
+        eventbusVersion = "3.0.0"
+        bannerVersion = "2.1.0"
+        loggingVersion = "3.4.1"
+    }
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

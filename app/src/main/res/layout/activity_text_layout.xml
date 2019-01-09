@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.zs.demo.wanandroid.view.banner.BannerPager
+    <com.zs.demo.commonlib.view.banner.BannerPager
         android:id="@+id/banner_page"
         android:layout_width="match_parent"
         android:layout_height="180dp">
 
-    </com.zs.demo.wanandroid.view.banner.BannerPager>
+    </com.zs.demo.commonlib.view.banner.BannerPager>
 
 </RelativeLayout>

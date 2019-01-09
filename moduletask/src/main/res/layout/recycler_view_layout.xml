@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.zs.demo.commonlib.view.cxrecyclerview.CXRecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_recycler_bottom">
+    </com.zs.demo.commonlib.view.cxrecyclerview.CXRecyclerView>
+
+    <LinearLayout
+        android:id="@+id/ll_recycler_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tv_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="@string/taskAdd"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fontsize15"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

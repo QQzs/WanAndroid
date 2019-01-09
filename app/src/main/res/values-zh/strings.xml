@@ -24,13 +24,6 @@
     <string name="share_type_title">分享专题</string>
     <string name="share_article_url">%1$s分享【%2$s】：%3$s</string>
     <string name="share_type_url">%1$s分享【%2$s】专题：http://www.wanandroid.com/article/list/0?cid=%3$d</string>
-    <!-- bookmark -->
-    <string name="like_title">收藏</string>
-    <string name="bookmark_time">收藏时间：%1$s</string>
-    <string name="bookmark_success">收藏成功</string>
-    <string name="bookmark_failed">收藏失败：%1$s</string>
-    <string name="bookmark_cancel_success">取消收藏成功</string>
-    <string name="bookmark_cancel_failed">取消收藏失败：%1$s</string>
 
     <!-- login -->
     <string name="prompt_username">用户名</string>
@@ -60,46 +53,9 @@
     <!-- navigation -->
     <string name="my_bookmark">我的书签</string>
     <string name="my_like">我喜欢的</string>
-    <string name="my_task">我的任务</string>
     <string name="my_about">关于我们</string>
-    <string name="about_content"><![CDATA[
-        <h2>网站内容</h2>
-        <p>\t\t本网站每天新增20~30篇优质文章，并加入到现有分类中，力求整理出一份优质而又详尽的知识体系，闲暇时间不妨上来学习下知识；除此以外，并为大家提供平时开发过程中常用的工具以及常用的网址导航。</p>
-        <p>\t\t当然这只是我们目前的功能，未来我们将提供更多更加便捷的功能…</p>
-        <p>如果您有任何好的建议：</p>
-            <ul>
-                <li>\t\t关于网站排版</li>
-                <li>\t\t关于新增常用网址以及工具</li>
-                <li>\t\t未来你希望增加的功能等</li>
-            </ul>
-        <p>\t\t可以在 <a href="https://github.com/hongyangAndroid/wanandroid" target="_blank">https://github.com/hongyangAndroid/xueandroid</a> 项目中以issue的形式提出，我将及时跟进。</p>
-        <p>\t\t如果您希望长期关注本站，可以加入我们的QQ群：<b>591683946</b></p>
-        <h2>源码位置</h2>
-        <p>\t\t本软件开源，如果你发现任何错误，不要犹豫，马上点击<a href="https://github.com/wangzailfm/wanandroidclient" target="_blank">GitHub</a>，在上面发起<b>issue</b>或者提交<b>pull request</b>。</p>
-    ]]></string>
     <string name="outside_title">归为站外文章</string>
     <string name="type_null">类别为空</string>
 
-    <!-- task -->
-    <string name="taskNotDo">待办任务</string>
-    <string name="taskToDo">已办任务</string>
-    <string name="taskAdd">新建任务</string>
-    <string name="taskTitle">任务标题</string>
-    <string name="taskDate">任务日期</string>
-    <string name="taskDateHint">选择日期</string>
-    <string name="taskContent">任务内容</string>
-
-    <string name="hintContent">(选填)</string>
-    <string name="comfire_text">完成</string>
-
-
-    <string name="listview_header_hint_normal">下拉刷新</string>
-    <string name="listview_header_hint_release">释放立即刷新</string>
-    <string name="listview_header_last_time">上次更新时间：</string>
-    <string name="listview_loading">正在加载...</string>
-    <string name="loading_done">加载完成</string>
-    <string name="nomore_loading">没有了</string>
-    <string name="refresh_done">刷新完成</string>
-    <string name="refreshing">正在刷新...</string>
 
 </resources>

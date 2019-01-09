@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zs.demo.modulearticle">
+
+    <application android:theme="@style/AppTheme">
+
+        <activity android:name="com.zs.demo.modulearticle.ArticleCollectActivity"></activity>
+
+    </application>
+
+</manifest>

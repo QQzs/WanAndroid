@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <com.zs.demo.commonlib.view.cxrecyclerview.CXRecyclerView
+        android:id="@+id/recycler_article"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    </com.zs.demo.commonlib.view.cxrecyclerview.CXRecyclerView>
+
+</RelativeLayout>
