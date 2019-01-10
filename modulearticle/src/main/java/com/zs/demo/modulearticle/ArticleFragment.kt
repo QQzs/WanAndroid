@@ -1,11 +1,9 @@
 package com.zs.demo.modulearticle
 
-import android.text.TextUtils
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.zs.demo.commonlib.adapter.ArticleAdapter
-import com.zs.demo.commonlib.app.Constant
 import com.zs.demo.commonlib.app.RouterPath
 import com.zs.demo.commonlib.base.BaseFragment
 import com.zs.demo.commonlib.event.LoginEvent
@@ -13,8 +11,8 @@ import com.zs.demo.commonlib.listener.ItemClickListener
 import com.zs.demo.commonlib.mvp.home.HomePresenter
 import com.zs.demo.commonlib.mvp.view.ArticleView
 import com.zs.demo.commonlib.utils.FieldUtil
+import com.zs.demo.commonlib.utils.IntentUtil
 import com.zs.demo.commonlib.utils.RecyclerViewUtil
-import com.zs.demo.commonlib.utils.SpUtil
 import com.zs.demo.commonlib.view.banner.BannerViewData
 import com.zs.demo.commonlib.view.cxrecyclerview.CXRecyclerView
 import com.zs.project.bean.android.Article
@@ -119,15 +117,10 @@ class ArticleFragment : BaseFragment() , ArticleView, ItemClickListener{
                 ARouter.getInstance().build(RouterPath.COMMON_WEBVIEW)
                         .withString(FieldUtil.WEB_URL , article.link)
                         .navigation()
-//                activity?.startActivity<WebViewActivity>(FieldUtil.WEB_URL to article.link)
             }
             R.id.homeItemLike ->{
-                if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))){
-                    ARouter.getInstance().build(RouterPath.LOGIN_ACTIVITY)
-                            .withString(FieldUtil.LOGIN , FieldUtil.LOGIN)
-                            .navigation()
-//                    activity?.startActivity<LoginActivity>(FieldUtil.LOGIN to FieldUtil.LOGIN)
-                }else{
+                
+                if (IntentUtil.isLogin()){
                     var collect = article.collect
                     if (collect){
                         mPresenter?.unCollectArticle(article.id)

@@ -1,12 +1,9 @@
 package com.zs.demo.modulearticle
 
-import android.text.TextUtils
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
-import com.zs.demo.commonlib.activity.WebViewActivity
 import com.zs.demo.commonlib.adapter.ArticleAdapter
-import com.zs.demo.commonlib.app.Constant
 import com.zs.demo.commonlib.app.RouterPath
 import com.zs.demo.commonlib.base.BaseActivity
 import com.zs.demo.commonlib.event.LoginEvent
@@ -15,13 +12,11 @@ import com.zs.demo.commonlib.mvp.home.HomePresenter
 import com.zs.demo.commonlib.mvp.view.ArticleView
 import com.zs.demo.commonlib.utils.FieldUtil
 import com.zs.demo.commonlib.utils.RecyclerViewUtil
-import com.zs.demo.commonlib.utils.SpUtil
 import com.zs.demo.commonlib.view.cxrecyclerview.CXRecyclerView
 import com.zs.project.bean.android.Article
 import com.zs.project.bean.android.ArticleList
 import kotlinx.android.synthetic.main.activity_recycler_layout.*
 import org.greenrobot.eventbus.EventBus
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 /**
@@ -76,18 +71,13 @@ class ArticleCollectActivity: BaseActivity(), ArticleView, ItemClickListener {
         var article = data as Article
         when(view?.id){
             R.id.rl_layout ->{
-                startActivity<WebViewActivity>(FieldUtil.WEB_URL to article.link)
+                ARouter.getInstance().build(RouterPath.COMMON_WEBVIEW)
+                        .withString(FieldUtil.WEB_URL , article.link)
+                        .navigation()
             }
             R.id.homeItemLike ->{
-                if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))){
-                    ARouter.getInstance().build(RouterPath.LOGIN_ACTIVITY)
-                            .withString(FieldUtil.LOGIN , FieldUtil.LOGIN)
-                            .navigation()
-//                    startActivity<LoginActivity>(FieldUtil.LOGIN to FieldUtil.LOGIN)
-                }else{
-                    mArticleAdapter?.deleteData(position,article)
-                    mPresenter?.unCollectArticleList(article.id,article.originId)
-                }
+                mArticleAdapter?.deleteData(position,article)
+                mPresenter?.unCollectArticleList(article.id,article.originId)
             }
         }
 
@@ -122,7 +112,7 @@ class ArticleCollectActivity: BaseActivity(), ArticleView, ItemClickListener {
         super.onDestroy()
         // 如果有取消收藏操作，页面关闭通知文章列表刷新
         if (mIsAction){
-            EventBus.getDefault().post(LoginEvent("login"))
+            EventBus.getDefault().post(LoginEvent())
         }
 
     }

@@ -3,6 +3,7 @@ package com.zs.demo.commonlib.utils
 object FieldUtil {
 
     const val LOGIN = "login"
+    const val FLAG = "flag"
     const val ARTICLE = "article"
     const val TYPE = "type"
     const val HOT = "hot"

@@ -3,6 +3,7 @@ package com.zs.demo.loginlib
 import android.text.InputFilter
 import android.text.Spanned
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.zs.demo.commonlib.app.Constant
@@ -35,6 +36,8 @@ About:
 class LoginActivity : BaseActivity(), LoginView {
 
     var mPresenter: LoginPresenter? = null
+    @JvmField
+    @Autowired(name = FieldUtil.FLAG)
     var mFlag: String? = null
     var mAction : String = "login"
 
@@ -85,7 +88,7 @@ class LoginActivity : BaseActivity(), LoginView {
 
 
     override fun initData() {
-        mFlag = intent?.getStringExtra(FieldUtil.LOGIN)
+//        mFlag = intent?.getStringExtra(FieldUtil.LOGIN)
         mPresenter = LoginPresenterImpl(this, this)
 
     }

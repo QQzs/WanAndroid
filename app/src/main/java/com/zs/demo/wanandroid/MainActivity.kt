@@ -14,6 +14,7 @@ import com.zs.demo.commonlib.base.BaseActivity
 import com.zs.demo.commonlib.bean.type.TreeBean
 import com.zs.demo.commonlib.event.LoginEvent
 import com.zs.demo.commonlib.utils.FieldUtil
+import com.zs.demo.commonlib.utils.IntentUtil
 import com.zs.demo.commonlib.utils.SpUtil
 import com.zs.demo.modulearticle.ArticleFragment
 import com.zs.demo.modulehot.HotFragment
@@ -62,12 +63,7 @@ class MainActivity : BaseActivity() {
         }
         navigationView.getHeaderView(0).navigationViewLogout?.run {
             setOnClickListener {
-                if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))) {
-                    ARouter.getInstance().build(RouterPath.LOGIN_ACTIVITY)
-                            .withString(FieldUtil.LOGIN , FieldUtil.LOGIN)
-                            .navigation()
-//                    this@MainActivity.startActivity<LoginActivity>(FieldUtil.LOGIN to FieldUtil.LOGIN)
-                } else {
+                if (IntentUtil.isLogin()){
                     SpUtil.clearAll()
                     EventBus.getDefault().post(LoginEvent(FieldUtil.LOGIN,false))
                 }
@@ -114,20 +110,20 @@ class MainActivity : BaseActivity() {
             NavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
                     R.id.nav_like -> {
-                        ARouter.getInstance().build(RouterPath.ARTICLE_COLLECT_ACTIVITY).navigation()
-//                        startActivity<ArticleCollectActivity>()
+                        if (IntentUtil.isLogin(RouterPath.ARTICLE_COLLECT_ACTIVITY)){
+                            ARouter.getInstance().build(RouterPath.ARTICLE_COLLECT_ACTIVITY).navigation()
+                        }
                     }
                     R.id.nav_task ->{
-                        var titles = mutableListOf<TreeBean.Children>()
-                        titles.add(TreeBean.Children(0,getString(R.string.taskNotDo)))
-                        titles.add(TreeBean.Children(1,getString(R.string.taskToDo)))
-
-                        ARouter.getInstance().build(RouterPath.COMMON_PAGE_ACTIVITY)
-                                .withString(FieldUtil.TYPE , "task")
-                                .withSerializable(FieldUtil.TITLE_DATE , titles as Serializable)
-                                .navigation()
-
-//                        startActivity<PageActivity>(FieldUtil.TYPE to "task" ,  FieldUtil.TITLE_DATE to titles)
+                        if (IntentUtil.isLogin(RouterPath.COMMON_PAGE_ACTIVITY)){
+                            var titles = mutableListOf<TreeBean.Children>()
+                            titles.add(TreeBean.Children(0,getString(R.string.taskNotDo)))
+                            titles.add(TreeBean.Children(1,getString(R.string.taskToDo)))
+                            ARouter.getInstance().build(RouterPath.COMMON_PAGE_ACTIVITY)
+                                    .withString(FieldUtil.TYPE , "task")
+                                    .withSerializable(FieldUtil.TITLE_DATE , titles as Serializable)
+                                    .navigation()
+                        }
                     }
                     R.id.nav_about -> {
 
@@ -189,6 +185,20 @@ class MainActivity : BaseActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
         initNavigation()
+        when(event?.mFlag){
+            RouterPath.ARTICLE_COLLECT_ACTIVITY ->
+                ARouter.getInstance().build(RouterPath.ARTICLE_COLLECT_ACTIVITY).navigation()
+            RouterPath.COMMON_PAGE_ACTIVITY ->{
+                var titles = mutableListOf<TreeBean.Children>()
+                titles.add(TreeBean.Children(0,getString(R.string.taskNotDo)))
+                titles.add(TreeBean.Children(1,getString(R.string.taskToDo)))
+                ARouter.getInstance().build(RouterPath.COMMON_PAGE_ACTIVITY)
+                        .withString(FieldUtil.TYPE , "task")
+                        .withSerializable(FieldUtil.TITLE_DATE , titles as Serializable)
+                        .navigation()
+            }
+
+        }
     }
 
     override fun onDestroy() {

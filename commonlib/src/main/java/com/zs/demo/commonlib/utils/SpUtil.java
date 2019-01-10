@@ -16,7 +16,6 @@ import java.io.StreamCorruptedException;
  */
 public class SpUtil {
 
-    public static final String APP_DATA = "my_data";
     private static SpUtil mSpUtil;
     private static SharedPreferences sPrefs;
 

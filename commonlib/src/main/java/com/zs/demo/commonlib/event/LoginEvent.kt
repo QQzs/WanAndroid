@@ -14,6 +14,8 @@ class LoginEvent{
     var mFlag: String? = null
     var mLogin: Boolean = true
 
+    constructor()
+
     constructor(mFlag: String?) {
         this.mFlag = mFlag
     }

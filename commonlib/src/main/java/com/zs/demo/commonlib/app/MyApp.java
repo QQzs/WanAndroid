@@ -23,7 +23,7 @@ public class MyApp extends Application {
         super.onCreate();
         mApplication = this;
         initArouter();
-        SpUtil.init(this,SpUtil.APP_DATA);
+        SpUtil.init(this,Constant.APP_DATA);
     }
 
     public static MyApp getAppContext(){
