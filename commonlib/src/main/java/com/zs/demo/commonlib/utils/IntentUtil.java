@@ -16,6 +16,14 @@ import com.zs.demo.commonlib.app.RouterPath;
  */
 public class IntentUtil {
 
+    public static boolean isUserLogin(){
+        if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))){
+            return false;
+        } else{
+            return true;
+        }
+    }
+
     public static boolean isLogin(String ... flag){
         if (TextUtils.isEmpty(SpUtil.getString(Constant.APP_USER_ID,null))){
             turnToLogin(flag);

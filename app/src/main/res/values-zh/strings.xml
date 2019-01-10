@@ -44,18 +44,5 @@
     <string name="not_login">未登录</string>
     <string name="goto_login">点击登录</string>
 
-    <!-- article -->
-    <string name="loading">正在加载中…</string>
-    <string name="browser_title">用系统浏览器打开</string>
-    <string name="hot_key">大家都在搜</string>
-    <string name="common_use">常用网站</string>
-
-    <!-- navigation -->
-    <string name="my_bookmark">我的书签</string>
-    <string name="my_like">我喜欢的</string>
-    <string name="my_about">关于我们</string>
-    <string name="outside_title">归为站外文章</string>
-    <string name="type_null">类别为空</string>
-
 
 </resources>

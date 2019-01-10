@@ -58,8 +58,10 @@ dependencies {
     //    annotationProcessor "com.alibaba:arouter-compiler:$arouterCompilerVersion"
     implementation project(':commonlib')
     implementation project(':loginlib')
-    implementation project(':modulearticle')
-    implementation project(':moduletype')
-    implementation project(':modulehot')
-    implementation project(':moduletask')
+    if(!rootProject.ext.isModule){
+        implementation project(':modulearticle')
+        implementation project(':moduletype')
+        implementation project(':modulehot')
+        implementation project(':moduletask')
+    }
 }

@@ -5,6 +5,11 @@
 buildscript {
 
     ext {
+        /**
+         * true:  打开组件化，可模块化开发
+         * false: 关闭组件化，整体开发
+         */
+        isModule = false
 
         compileSdkVersion = 27
         minSdkVersion = 16
