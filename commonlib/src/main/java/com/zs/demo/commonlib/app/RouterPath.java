@@ -12,6 +12,7 @@ public class RouterPath {
 
     public static final String MAIN_ACTIVITY = "/main/mainActivity";
 
+    public static final String COMMON_SERVICE = "/common/service/StartBackService";
     public static final String COMMON_WEBVIEW = "/common/activity/WebViewActivity";
     public static final String COMMON_PAGE_ACTIVITY = "/common/activity/PageActivity";
 

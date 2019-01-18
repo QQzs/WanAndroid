@@ -15,6 +15,7 @@ import com.zs.demo.commonlib.bean.type.TreeBean
 import com.zs.demo.commonlib.event.LoginEvent
 import com.zs.demo.commonlib.utils.FieldUtil
 import com.zs.demo.commonlib.utils.IntentUtil
+import com.zs.demo.commonlib.utils.LogUtil
 import com.zs.demo.commonlib.utils.SpUtil
 import com.zs.demo.modulearticle.ArticleFragment
 import com.zs.demo.modulehot.HotFragment
@@ -93,6 +94,8 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
+
+        LogUtil.logShow("initData")
 
         fragment1 = ARouter.getInstance().build(RouterPath.ARTICLE_FRAGMENT).navigation() as ArticleFragment?
         fragment2 = ARouter.getInstance().build(RouterPath.TYPE_FRAGMENT).navigation() as TypeFragment?

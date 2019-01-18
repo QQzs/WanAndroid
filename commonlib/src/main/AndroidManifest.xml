@@ -17,6 +17,8 @@
         </activity>
         <activity android:name="com.zs.demo.commonlib.activity.PageActivity"></activity>
 
+        <service android:name=".app.StartBackService"/>
+
     </application>
 
 </manifest>
