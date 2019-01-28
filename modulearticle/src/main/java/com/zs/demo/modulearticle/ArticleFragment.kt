@@ -1,5 +1,6 @@
 package com.zs.demo.modulearticle
 
+import android.support.v4.app.Fragment
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
@@ -42,6 +43,13 @@ class ArticleFragment : BaseFragment() , ArticleView, ItemClickListener{
 
     var mPresenter: HomePresenter? = null
     var mArticleAdapter: ArticleAdapter? = null
+
+    companion object {
+        fun getArtileFragment() : Fragment?{
+            return ARouter.getInstance().build(RouterPath.ARTICLE_FRAGMENT).navigation() as ArticleFragment?
+        }
+    }
+
 
     override fun setLayoutId(): Int {
         return R.layout.fragment_article_layout
