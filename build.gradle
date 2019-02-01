@@ -1,7 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 
-
 buildscript {
 
     ext {
@@ -33,6 +32,7 @@ buildscript {
     }
 
     repositories {
+        maven { url "https://jitpack.io" }
         google()
         jcenter()
     }
@@ -47,9 +47,10 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url "https://jitpack.io" }
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
+
     }
 }
 
