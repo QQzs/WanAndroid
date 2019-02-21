@@ -58,8 +58,8 @@ public class RequestApi {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseurl)
                 .client(getOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())   // 默认转换器
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())        // 数据转换器
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // 网络请求转换器
                 .build();
         return retrofit;
     }
