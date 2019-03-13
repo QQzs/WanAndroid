@@ -28,7 +28,7 @@ public class RequestApi {
     private final static int CONNECT_TIMEOUT = 20;
     private final static int READ_TIMEOUT = 10;
 
-    public static final String BASE_WAN_ANDROID = "http://www.wanandroid.com/";
+    public static final String BASE_WAN_ANDROID = "https://www.wanandroid.com/";
 
     private static RequestApi mRetrofitApi;
     private HttpLoggingInterceptor mLoggingInterceptor;
@@ -59,7 +59,7 @@ public class RequestApi {
                 .baseUrl(baseurl)
                 .client(getOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())        // 数据转换器
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // 网络请求转换器
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // 适配器
                 .build();
         return retrofit;
     }
