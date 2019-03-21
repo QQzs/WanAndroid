@@ -73,12 +73,6 @@ public abstract class BaseFragment extends BaseRxFragment {
 	 */
 	protected abstract int setLayoutId();
 
-	//获得fragment中的控件
-	public <T extends View> T findViewById(int id) {
-		if (contentView != null)
-		 return (T) getContentView().findViewById(id);
-		return null;
-	}
 
 	@Override
 	public void onDetach() {
