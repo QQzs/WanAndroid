@@ -1,4 +1,4 @@
-if (rootProject.ext.isModule){
+if (rootProject.ext.isModuleType){
     apply plugin: 'com.android.application'
 }else{
     apply plugin: 'com.android.library'
@@ -36,7 +36,7 @@ android {
 
     sourceSets {
         main {
-            if (rootProject.ext.isModule) {
+            if (rootProject.ext.isModuleType) {
                 manifest.srcFile 'src/main/module/AndroidManifest.xml'
             } else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'

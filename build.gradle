@@ -9,6 +9,10 @@ buildscript {
          * false: 关闭组件化，整体开发
          */
         isModule = false
+        isModuleArticle = false
+        isModuleType = false
+        isModuleHot = false
+        isModuleTask = false
 
         compileSdkVersion = 27
         minSdkVersion = 16

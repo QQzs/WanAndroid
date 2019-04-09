@@ -7,6 +7,7 @@ import com.alibaba.android.arouter.launcher.ARouter
 import com.zs.demo.commonlib.adapter.ArticleAdapter
 import com.zs.demo.commonlib.app.RouterPath
 import com.zs.demo.commonlib.base.BaseFragment
+import com.zs.demo.commonlib.bean.type.TreeBean
 import com.zs.demo.commonlib.event.LoginEvent
 import com.zs.demo.commonlib.listener.ItemClickListener
 import com.zs.demo.commonlib.mvp.home.HomePresenter
@@ -25,6 +26,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.jetbrains.anko.toast
+import java.io.Serializable
 
 /**
  * Created by zs
@@ -89,6 +91,17 @@ class ArticleFragment : BaseFragment() , ArticleView, ItemClickListener{
         bannerList?.run {
             bannerList.mapTo(items){BannerViewData(it.title,it.imagePath,it.url)}
             mHeadView?.banner_page?.initData(items)
+            mHeadView?.banner_page?.setOnBannerListener { position, obj ->
+                if (IntentUtil.isLogin(RouterPath.COMMON_PAGE_ACTIVITY)){
+                    var titles = mutableListOf<TreeBean.Children>()
+                    titles.add(TreeBean.Children(0,getString(R.string.taskNotDo)))
+                    titles.add(TreeBean.Children(1,getString(R.string.taskToDo)))
+                    ARouter.getInstance().build(RouterPath.COMMON_PAGE_ACTIVITY)
+                            .withString(FieldUtil.TYPE , "task")
+                            .withSerializable(FieldUtil.TITLE_DATE , titles as Serializable)
+                            .navigation()
+                }
+            }
         }
     }
 

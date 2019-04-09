@@ -17,9 +17,6 @@ import com.zs.demo.commonlib.utils.FieldUtil
 import com.zs.demo.commonlib.utils.IntentUtil
 import com.zs.demo.commonlib.utils.LogUtil
 import com.zs.demo.commonlib.utils.SpUtil
-import com.zs.demo.modulearticle.ArticleFragment
-import com.zs.demo.modulehot.HotFragment
-import com.zs.demo.moduletype.TypeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
 import org.greenrobot.eventbus.EventBus
@@ -29,9 +26,9 @@ import java.io.Serializable
 
 class MainActivity : BaseActivity() {
 
-    private var fragment1: ArticleFragment? = null
-    private var fragment2: TypeFragment? = null
-    private var fragment3: HotFragment? = null
+    private var fragment1: Fragment? = null
+    private var fragment2: Fragment? = null
+    private var fragment3: Fragment? = null
     private var lastFragment: Fragment? = null
 
     override fun setLayoutId(): Int {
@@ -97,9 +94,9 @@ class MainActivity : BaseActivity() {
 
         LogUtil.logShow("initData")
 
-        fragment1 = ARouter.getInstance().build(RouterPath.ARTICLE_FRAGMENT).navigation() as ArticleFragment?
-        fragment2 = ARouter.getInstance().build(RouterPath.TYPE_FRAGMENT).navigation() as TypeFragment?
-        fragment3 = ARouter.getInstance().build(RouterPath.HOT_FRAGMENT).navigation() as HotFragment?
+        fragment1 = ARouter.getInstance().build(RouterPath.ARTICLE_FRAGMENT).navigation() as Fragment?
+        fragment2 = ARouter.getInstance().build(RouterPath.TYPE_FRAGMENT).navigation() as Fragment?
+        fragment3 = ARouter.getInstance().build(RouterPath.HOT_FRAGMENT).navigation() as Fragment?
 
         switchContent(fragment1)
         EventBus.getDefault().register(this)
