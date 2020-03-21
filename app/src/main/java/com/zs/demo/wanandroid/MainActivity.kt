@@ -165,9 +165,9 @@ class MainActivity : BaseActivity() {
             drawerLayout.closeDrawer(GravityCompat.START)
         }
         if (to != null && lastFragment != to) {
-            if (lastFragment != null) {
+            lastFragment?.let {
                 val transaction = supportFragmentManager?.beginTransaction()
-                transaction?.hide(lastFragment)?.commitAllowingStateLoss()
+                transaction?.hide(it)?.commitAllowingStateLoss()
             }
             lastFragment = to
             val transaction = supportFragmentManager.beginTransaction()

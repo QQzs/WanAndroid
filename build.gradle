@@ -14,17 +14,17 @@ buildscript {
         isModuleHot = false
         isModuleTask = false
 
-        compileSdkVersion = 27
+        compileSdkVersion = 28
         minSdkVersion = 16
-        targetSdkVersion = 27
+        targetSdkVersion = 28
         versionCode = 1
         versionName = "1.0"
 
         arouterVersion = '1.4.1'
         arouterCompilerVersion = '1.2.2'
 
-        supportVersion = "27.1.1"
-        kotlinVersion = '1.2.21'
+        supportVersion = "28.0.0"
+        kotlinVersion = '1.3.10'
         ankoVersion = '0.10.3'
         retrofitVersion = '2.3.0'
         adapterVersion = "2.9.35"
@@ -41,7 +41,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.android.tools.build:gradle:3.5.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
         // NOTE: Do not place your application dependencies here; they belong

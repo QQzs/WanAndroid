@@ -92,15 +92,19 @@ class ArticleFragment : BaseFragment() , ArticleView, ItemClickListener{
             bannerList.mapTo(items){BannerViewData(it.title,it.imagePath,it.url)}
             mHeadView?.banner_page?.initData(items)
             mHeadView?.banner_page?.setOnBannerListener { position, obj ->
-                if (IntentUtil.isLogin(RouterPath.COMMON_PAGE_ACTIVITY)){
-                    var titles = mutableListOf<TreeBean.Children>()
-                    titles.add(TreeBean.Children(0,getString(R.string.taskNotDo)))
-                    titles.add(TreeBean.Children(1,getString(R.string.taskToDo)))
-                    ARouter.getInstance().build(RouterPath.COMMON_PAGE_ACTIVITY)
-                            .withString(FieldUtil.TYPE , "task")
-                            .withSerializable(FieldUtil.TITLE_DATE , titles as Serializable)
-                            .navigation()
-                }
+                obj as BannerViewData
+                ARouter.getInstance().build(RouterPath.COMMON_WEBVIEW)
+                        .withString(FieldUtil.WEB_URL , obj.bannerUrl)
+                        .navigation()
+//                if (IntentUtil.isLogin(RouterPath.COMMON_PAGE_ACTIVITY)){
+//                    var titles = mutableListOf<TreeBean.Children>()
+//                    titles.add(TreeBean.Children(0,getString(R.string.taskNotDo)))
+//                    titles.add(TreeBean.Children(1,getString(R.string.taskToDo)))
+//                    ARouter.getInstance().build(RouterPath.COMMON_PAGE_ACTIVITY)
+//                            .withString(FieldUtil.TYPE , "task")
+//                            .withSerializable(FieldUtil.TITLE_DATE , titles as Serializable)
+//                            .navigation()
+//                }
             }
         }
     }

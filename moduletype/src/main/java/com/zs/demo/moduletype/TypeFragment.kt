@@ -53,12 +53,12 @@ class TypeFragment: BaseFragment(), TypeView {
         mRightLayoutManager = recycler_tree_type?.layoutManager as LinearLayoutManager
         recycler_tree_type?.addOnScrollListener(object : RecyclerView.OnScrollListener(){
 
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 mTitleHeight = tv_type_title?.height?:0
             }
 
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 var view = mRightLayoutManager?.findViewByPosition(mCurrentPosition + 1)
                 if (view != null && view.top < mTitleHeight){
